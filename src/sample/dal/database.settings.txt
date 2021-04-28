@@ -1,0 +1,4 @@
+Server=10.176.111.31
+Database=ArlaFoodsDB
+User=CSe20A_19
+Password=ThiimErDejlig
