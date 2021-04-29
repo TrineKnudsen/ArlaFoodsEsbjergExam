@@ -4,10 +4,7 @@ import arlaScreens.be.Department;
 import arlaScreens.dal.JDBCConnectionPool;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class LoginDAO {
 
@@ -33,14 +30,16 @@ public class LoginDAO {
     }
 
     public Department depLogin(String username, String password) throws SQLException{
+        String sql = "SELECT Department.depName, Department.id " +
+                "FROM Department " +
+                "INNER JOIN " +
+                "[Login] ON Department.depLoginId = [Login].id " +
+                "WHERE username = ? AND password = ?;";
         try (Connection connection = connectionPool.checkOut()){
-            String sql = "SELECT Department.depName, Department.id\n" +
-                    "FROM Department\n" +
-                    "INNER JOIN\n" +
-                    "[Login] ON Department.depLoginId = [Login].id\n" +
-                    "WHERE username = '" +username+ "' AND password = '" +password+ "'";
-            Statement statement = connection.createStatement();
-            statement.execute(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            statement.execute();
 
             Department dep = null;
             ResultSet resultSet = statement.getResultSet();

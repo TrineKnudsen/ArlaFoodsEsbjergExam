@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Controller {
+public class LogisticsController {
 
     public void handleBtn(ActionEvent event){
         try {

@@ -6,6 +6,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class DatabaseConnector {
@@ -21,7 +22,7 @@ public class DatabaseConnector {
         ds = new SQLServerDataSource();
         ds.setServerName(databaseProperties.getProperty("Server"));
         ds.setDatabaseName(databaseProperties.getProperty("Database"));
-        ds.setUser(databaseProperties.getProperty("Department"));
+        ds.setUser(databaseProperties.getProperty("User"));
         ds.setPassword(databaseProperties.getProperty("Password"));
     }
 
@@ -29,4 +30,14 @@ public class DatabaseConnector {
     {
         return ds.getConnection();
     }
+
+    public static void main(String[]args) throws SQLException, IOException {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        Connection connection = databaseConnector.getConnection();
+
+        System.out.print("Is it open? " + !connection.isClosed());
+
+        connection.close();
+    }
+
 }

@@ -25,6 +25,10 @@ public class MainController implements Initializable {
     private TextField userField;
     @FXML
     private PasswordField passField;
+    @FXML
+    private TextField userField1;
+    @FXML
+    private PasswordField passField1;
 
 
     @Override
@@ -42,25 +46,45 @@ public class MainController implements Initializable {
         String password = passField.getText().trim();
         boolean validLogin = loginModel.checkAdminLogin(username, password);
 
-        if (validLogin == true){
+        if (validLogin == true) {
             adminView(event);
         } else System.out.println("Not valid login");
     }
 
-    public void adminView(ActionEvent event){
+    public void adminView(ActionEvent event) {
         try {
             Parent MainParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepAdmin.fxml"));
             Scene MainScene = new Scene(MainParent);
             Stage addMovieStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             addMovieStage.setScene(MainScene);
             addMovieStage.show();
-        } catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    public void handleDepLogin(ActionEvent event){
+    public void handleDepLogin(ActionEvent event) throws IOException, SQLException {
+        String username = userField1.getText().trim();
+        String password = passField1.getText().trim();
 
+        int depId = loginModel.depLogin(username, password).getDepId();
+
+        switch (depId) {
+            case 2:
+                Parent MainParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepLogistics.fxml"));
+                Scene MainScene = new Scene(MainParent);
+                Stage logStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                logStage.setScene(MainScene);
+                logStage.show();
+                break;
+            case 3:
+                Parent MainParent2 = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepSales.fxml"));
+                Scene MainScene2 = new Scene(MainParent2);
+                Stage salesStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                salesStage.setScene(MainScene2);
+                salesStage.show();
+                break;
+        }
     }
 
 }
