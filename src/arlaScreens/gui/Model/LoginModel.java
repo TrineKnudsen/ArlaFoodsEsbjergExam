@@ -1,5 +1,6 @@
 package arlaScreens.gui.Model;
 
+import arlaScreens.be.Department;
 import arlaScreens.bll.ArlaFoodsLogicFacade;
 import arlaScreens.bll.ArlaFoodsManager;
 
@@ -14,7 +15,11 @@ public class LoginModel {
         logicFacade = new ArlaFoodsManager();
     }
 
-    public boolean checkLogin(String username, String password) throws SQLException {
+    public boolean checkAdminLogin(String username, String password) throws SQLException {
         return logicFacade.checkLogin(username, password);
+    }
+
+    public Department depLogin(String username, String password) throws SQLException {
+        return logicFacade.depLogin(username, password);
     }
 }

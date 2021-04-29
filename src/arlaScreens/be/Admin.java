@@ -1,16 +1,14 @@
 package arlaScreens.be;
 
-public class Admin extends Person {
+public class Admin {
 
-    public boolean isAdmin;
-    public String username;
-    public String password;
+    private int id;
+    private String name;
+    private boolean isAdmin;
+    private String username;
+    private String password;
 
-    public Admin(int id, int depId, String fullName, boolean isAdmin, String username, String password) {
-        super(id, depId, fullName, isAdmin);
-        this.username = username;
-        this.password = password;
-    }
+
 
     public boolean isAdmin() {
         return isAdmin;

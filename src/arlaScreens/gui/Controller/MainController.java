@@ -1,7 +1,5 @@
 package arlaScreens.gui.Controller;
 
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,7 +40,7 @@ public class MainController implements Initializable {
     public void handleLogin(ActionEvent event) throws SQLException {
         String username = userField.getText().trim();
         String password = passField.getText().trim();
-        boolean validLogin = loginModel.checkLogin(username, password);
+        boolean validLogin = loginModel.checkAdminLogin(username, password);
 
         if (validLogin == true){
             adminView(event);
@@ -51,7 +49,7 @@ public class MainController implements Initializable {
 
     public void adminView(ActionEvent event){
         try {
-            Parent MainParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/Admin.fxml"));
+            Parent MainParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepAdmin.fxml"));
             Scene MainScene = new Scene(MainParent);
             Stage addMovieStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             addMovieStage.setScene(MainScene);
@@ -59,6 +57,9 @@ public class MainController implements Initializable {
         } catch (IOException ex){
             ex.printStackTrace();
         }
+    }
+
+    public void handleDepLogin(ActionEvent event){
 
     }
 

@@ -1,5 +1,6 @@
 package arlaScreens.bll;
 
+import arlaScreens.be.Department;
 import arlaScreens.dal.dao.LoginDAO;
 
 import java.io.IOException;
@@ -16,5 +17,10 @@ public class ArlaFoodsManager implements ArlaFoodsLogicFacade {
     @Override
     public boolean checkLogin(String username, String password) throws SQLException {
         return loginDAO.checkLogin(username, password);
+    }
+
+    @Override
+    public Department depLogin(String username, String password) throws SQLException {
+        return loginDAO.depLogin(username, password);
     }
 }

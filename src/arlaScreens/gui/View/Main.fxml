@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
@@ -10,26 +9,36 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.Controller.MainController">
-    <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-            <children>
-                <Label layoutX="74.0" layoutY="22.0" text="Choose your department" />
-                <ListView layoutX="48.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" />
-            </children></AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-            <children>
-                <Label layoutX="114.0" layoutY="23.0" text="Admin Login" />
-                <Label layoutX="35.0" layoutY="236.0" text="Username" />
-                <Label layoutX="37.0" layoutY="295.0" text="Password" />
-                <PasswordField fx:id="passField" layoutX="98.0" layoutY="291.0" />
-                <TextField fx:id="userField" layoutX="98.0" layoutY="232.0" />
-                <Button layoutX="201.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" />
-                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="48.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../../../../../Desktop/Arla%20bitch.png" />
-                    </image>
-                </ImageView>
-            </children></AnchorPane>
-    </items>
-</SplitPane>
+<AnchorPane styleClass="anchor" stylesheets="@../../../Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.Controller.MainController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" styleClass="bgImg">
+         <image>
+            <Image url="@../../pictures/ArlaLogo.png" />
+         </image>
+      </ImageView>
+      <SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: Transparent;">
+          <items>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                  <children>
+                      <Label layoutX="89.0" layoutY="21.0" text="Department Login" />
+                  <Label layoutX="35.0" layoutY="236.0" text="Username" />
+                  <TextField fx:id="userField1" layoutX="101.0" layoutY="232.0" />
+                  <TextField fx:id="userField11" layoutX="101.0" layoutY="289.0" />
+                  <Button layoutX="204.0" layoutY="322.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" />
+                  <Label layoutX="43.0" layoutY="293.0" text="Password" />
+                  </children>
+            </AnchorPane>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                  <children>
+                      <Label layoutX="114.0" layoutY="23.0" text="Admin Login" />
+                      <Label layoutX="35.0" layoutY="236.0" text="Username" />
+                      <Label layoutX="37.0" layoutY="295.0" text="Password" />
+                      <PasswordField fx:id="passField" layoutX="98.0" layoutY="291.0" />
+                      <TextField fx:id="userField" layoutX="98.0" layoutY="232.0" />
+                  <Button layoutX="204.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" />
+                  </children>
+            </AnchorPane>
+          </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
