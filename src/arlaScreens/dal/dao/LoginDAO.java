@@ -1,6 +1,6 @@
-package sample.dal.dao;
+package arlaScreens.dal.dao;
 
-import sample.dal.JDBCConnectionPool;
+import arlaScreens.dal.JDBCConnectionPool;
 
 import java.io.IOException;
 import java.sql.Connection;

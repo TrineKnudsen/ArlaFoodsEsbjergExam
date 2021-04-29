@@ -1,4 +1,4 @@
-package sample.dal;
+package arlaScreens.dal;
 
 import java.util.Enumeration;
 import java.util.Hashtable;

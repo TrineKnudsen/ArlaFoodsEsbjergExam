@@ -1,4 +1,4 @@
-package sample.be;
+package arlaScreens.be;
 
 public class Person {
 

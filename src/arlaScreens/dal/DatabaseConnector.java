@@ -1,4 +1,4 @@
-package sample.dal;
+package arlaScreens.dal;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;

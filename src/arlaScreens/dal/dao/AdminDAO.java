@@ -1,12 +1,8 @@
-package sample.dal.dao;
+package arlaScreens.dal.dao;
 
-import sample.be.Admin;
-import sample.dal.JDBCConnectionPool;
+import arlaScreens.dal.JDBCConnectionPool;
 
 import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AdminDAO {
 

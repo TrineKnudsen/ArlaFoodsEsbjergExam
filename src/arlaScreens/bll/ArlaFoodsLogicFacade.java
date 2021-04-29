@@ -1,4 +1,4 @@
-package sample.bll;
+package arlaScreens.bll;
 
 public interface ArlaFoodsLogicFacade {
 }
