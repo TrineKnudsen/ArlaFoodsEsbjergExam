@@ -1,8 +1,15 @@
 package arlaScreens.dal.dao;
 
+import arlaScreens.be.Department;
 import arlaScreens.dal.JDBCConnectionPool;
+import javafx.beans.property.ReadOnlySetProperty;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminDAO {
 
@@ -12,9 +19,9 @@ public class AdminDAO {
         connectionPool = JDBCConnectionPool.getInstance();
     }
 
+
     /*public List<Admin> getAllAdmins() throws IOException {
         ArrayList<Admin> allAdmins = new ArrayList<>();
-
     }
 
     public Admin createAdmin(String username, String password) throws SQLException {
