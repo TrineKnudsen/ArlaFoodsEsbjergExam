@@ -11,7 +11,7 @@ import java.util.Properties;
 public class DatabaseConnector {
 
 
-    private static final String PROP_FILE = "src/sample/dal/database.settings";
+    private static final String PROP_FILE = "src/arlaScreens/dal/database.settings.txt";
     private SQLServerDataSource ds;
 
     public DatabaseConnector() throws IOException
@@ -29,5 +29,4 @@ public class DatabaseConnector {
     {
         return ds.getConnection();
     }
-
 }

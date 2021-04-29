@@ -10,7 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.Controller.Controller">
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.Controller.MainController">
     <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
             <children>
@@ -22,9 +22,9 @@
                 <Label layoutX="114.0" layoutY="23.0" text="Admin Login" />
                 <Label layoutX="35.0" layoutY="236.0" text="Username" />
                 <Label layoutX="37.0" layoutY="295.0" text="Password" />
-                <PasswordField layoutX="98.0" layoutY="291.0" />
-                <TextField layoutX="98.0" layoutY="232.0" />
-                <Button layoutX="201.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleBtn" text="Login" />
+                <PasswordField fx:id="passField" layoutX="98.0" layoutY="291.0" />
+                <TextField fx:id="userField" layoutX="98.0" layoutY="232.0" />
+                <Button layoutX="201.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleLogin" text="Login" />
                 <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="48.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../../../../../../../Desktop/Arla%20bitch.png" />
