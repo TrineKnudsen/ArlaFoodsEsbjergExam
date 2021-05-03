@@ -44,7 +44,7 @@ public class DepartmentDAO {
         }
     }
 
-    public Department addDep(String username, String password, String depName) throws SQLException {
+    public Department createDep(String username, String password, String depName) throws SQLException {
         String sql = "INSERT INTO Login(username, password) VALUES(?,?);";
         String sql2 = "INSERT INTO Department(depName, depLoginId) VALUES(?, (SELECT MAX(id) FROM [Login]));";
         try (Connection con = connectionPool.checkOut()) {

@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class Model {
+public class DepartmentModel {
 
     private ArlaFoodsLogicFacade logicFacade;
 
     private ObservableList<Department> allDeps;
 
-    public Model() throws IOException, SQLException {
+    public DepartmentModel() throws IOException, SQLException {
         logicFacade = new ArlaFoodsManager();
 
         allDeps = FXCollections.observableArrayList();
@@ -31,8 +31,8 @@ public class Model {
         logicFacade.updateDep(chosenDep, updatedDep);
     }
 
-    public Department addDep(String username, String password, String depName) throws SQLException {
-        return logicFacade.addDep(username, password, depName);
+    public Department createDep(String username, String password, String depName) throws SQLException {
+        return logicFacade.createDep(username, password, depName);
     }
 
 }

@@ -15,5 +15,5 @@ public interface ArlaFoodsLogicFacade {
 
     void updateDep(Department chosenDep, String updatedDep) throws SQLException;
 
-    Department addDep(String username, String password, String depName) throws SQLException;
+    Department createDep(String username, String password, String depName) throws SQLException;
 }

@@ -1,7 +1,7 @@
 package arlaScreens.gui.Controller;
 
 import arlaScreens.be.Department;
-import arlaScreens.gui.Model.Model;
+import arlaScreens.gui.Model.DepartmentModel;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.ObservableList;
@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
 
-    private Model model;
+    private DepartmentModel departmentModel;
     ObservableList<Department> allDep;
 
     @FXML
@@ -34,9 +34,9 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            model = new Model();
+            departmentModel = new DepartmentModel();
 
-            allDep = model.getAllDep();
+            allDep = departmentModel.getAllDep();
             deplst.getItems().addAll(allDep);
         } catch (IOException | SQLException exception) {
             exception.printStackTrace();
@@ -47,17 +47,17 @@ public class AdminController implements Initializable {
         Department chosenDep = deplst.getSelectionModel().getSelectedItem();
         String updatedDep = nameField.getText().trim();
 
-        model.updateDep(chosenDep, updatedDep);
-        allDep = model.getAllDep();
+        departmentModel.updateDep(chosenDep, updatedDep);
+        allDep = departmentModel.getAllDep();
         deplst.getItems().addAll(allDep);
     }
 
-    public void handleAddDep(ActionEvent event) throws SQLException {
+    public void handleCreateDep(ActionEvent event) throws SQLException {
         String name = newNameField.getText().trim();
         String username = userField.getText().trim();
         String password = passField.getText().trim();
 
-        Department dep = model.addDep(username, password, name);
+        Department dep = departmentModel.createDep(username, password, name);
         allDep.add(dep);
         deplst.setItems(allDep);
     }

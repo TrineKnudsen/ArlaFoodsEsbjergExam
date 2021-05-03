@@ -27,7 +27,7 @@
                         <Insets right="5.0" top="25.0" />
                     </VBox.margin>
                 </ListView>
-                <Button mnemonicParsing="false" onAction="#handleAddDep" text="Add Employee">
+                <Button mnemonicParsing="false" onAction="#handleCreateDep" text="Add Employee">
                     <VBox.margin>
                         <Insets top="5.0" />
                     </VBox.margin>
