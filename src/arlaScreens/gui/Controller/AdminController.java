@@ -60,6 +60,5 @@ public class AdminController implements Initializable {
         Department dep = model.addDep(username, password, name);
         allDep.add(dep);
         deplst.setItems(allDep);
-
     }
 }
