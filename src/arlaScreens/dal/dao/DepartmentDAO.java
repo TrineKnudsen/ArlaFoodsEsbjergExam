@@ -45,24 +45,25 @@ public class DepartmentDAO {
     }
 
     public Department addDep(String username, String password, String depName) throws SQLException {
+        String sql = "INSERT INTO Login(username, password) VALUES(?,?);";
+        String sql2 = "INSERT INTO Department(depName, depLoginId) VALUES(?, (SELECT MAX(id) FROM [Login]));";
         try (Connection con = connectionPool.checkOut()) {
-            PreparedStatement st = con.prepareStatement("INSERT INTO Login(username, password) VALUES(?,?);");
+            PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, username);
             st.setString(2, password);
-
-            PreparedStatement st2 = con.prepareStatement("INSERT INTO Department(depName, depLoginId) VALUES(?, (SELECT MAX(id) FROM [Login]));");
-            st2.setString(1, depName);
-
             st.executeUpdate();
+
+            PreparedStatement st2 = con.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+            st2.setString(1, depName);
             st2.executeUpdate();
 
             Department dep = null;
-            ResultSet rs = st.getGeneratedKeys();
-            if (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("depName");
+            ResultSet rs = st2.getGeneratedKeys();
+            int id= 0;
+            while (rs.next()){
+                id = rs.getInt(1);
 
-                dep = new Department(id, name);
+                dep = new Department(id, depName);
             }
             return dep;
         }

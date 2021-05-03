@@ -57,6 +57,9 @@ public class AdminController implements Initializable {
         String username = userField.getText().trim();
         String password = passField.getText().trim();
 
-        model.addDep(username, password, name);
+        Department dep = model.addDep(username, password, name);
+        allDep.add(dep);
+        deplst.setItems(allDep);
+
     }
 }
