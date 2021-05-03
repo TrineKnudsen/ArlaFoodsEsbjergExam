@@ -31,4 +31,8 @@ public class Model {
         logicFacade.updateDep(chosenDep, updatedDep);
     }
 
+    public Department addDep(String username, String password, String depName) throws SQLException {
+        return logicFacade.addDep(username, password, depName);
+    }
+
 }

@@ -37,4 +37,9 @@ public class ArlaFoodsManager implements ArlaFoodsLogicFacade {
     public void updateDep(Department chosenDep, String updatedDep) throws SQLException {
         depDAO.updateDep(chosenDep, updatedDep);
     }
+
+    @Override
+    public Department addDep(String username, String password, String depName) throws SQLException {
+        return depDAO.addDep(username, password, depName);
+    }
 }

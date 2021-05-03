@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,9 +21,15 @@ public class AdminController implements Initializable {
     ObservableList<Department> allDep;
 
     @FXML
-    JFXListView<Department> deplst;
+    private JFXListView<Department> deplst;
     @FXML
-    JFXTextField nameField;
+    private JFXTextField nameField;
+    @FXML
+    private TextField newNameField;
+    @FXML
+    private TextField userField;
+    @FXML
+    private TextField passField;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -37,12 +44,19 @@ public class AdminController implements Initializable {
     }
 
     public void updateDep(ActionEvent event) throws SQLException {
-        allDep.clear();
         Department chosenDep = deplst.getSelectionModel().getSelectedItem();
         String updatedDep = nameField.getText().trim();
 
         model.updateDep(chosenDep, updatedDep);
+        allDep = model.getAllDep();
         deplst.getItems().addAll(allDep);
-        deplst.setItems(allDep);
+    }
+
+    public void handleAddDep(ActionEvent event) throws SQLException {
+        String name = newNameField.getText().trim();
+        String username = userField.getText().trim();
+        String password = passField.getText().trim();
+
+        model.addDep(username, password, name);
     }
 }
