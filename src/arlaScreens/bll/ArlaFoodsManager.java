@@ -1,6 +1,8 @@
 package arlaScreens.bll;
 
+import arlaScreens.be.Admin;
 import arlaScreens.be.Department;
+import arlaScreens.dal.dao.AdminDAO;
 import arlaScreens.dal.dao.DepartmentDAO;
 import arlaScreens.dal.dao.LoginDAO;
 
@@ -8,19 +10,21 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ArlaFoodsManager implements ArlaFoodsLogicFacade {
+public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
 
-    LoginDAO loginDAO;
-    DepartmentDAO depDAO;
+    private LoginDAO loginDAO;
+    private DepartmentDAO depDAO;
+    private AdminDAO adminDAO;
 
     public ArlaFoodsManager() throws IOException {
         loginDAO = new LoginDAO();
         depDAO = new DepartmentDAO();
+        adminDAO = new AdminDAO();
     }
 
     @Override
     public boolean checkLogin(String username, String password) throws SQLException {
-        return loginDAO.checkLogin(username, password);
+        return loginDAO.checkAdminLogin(username, password);
     }
 
     @Override
@@ -41,5 +45,10 @@ public class ArlaFoodsManager implements ArlaFoodsLogicFacade {
     @Override
     public Department createDep(String username, String password, String depName) throws SQLException {
         return depDAO.createDep(username, password, depName);
+    }
+
+    @Override
+    public Admin createAdmin(String username, String password) throws SQLException {
+        return adminDAO.createAdmin(username, password);
     }
 }

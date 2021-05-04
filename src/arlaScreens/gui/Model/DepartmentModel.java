@@ -1,18 +1,17 @@
 package arlaScreens.gui.Model;
 
 import arlaScreens.be.Department;
-import arlaScreens.bll.ArlaFoodsLogicFacade;
+import arlaScreens.bll.IArlaFoodsLogicFacade;
 import arlaScreens.bll.ArlaFoodsManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 public class DepartmentModel {
 
-    private ArlaFoodsLogicFacade logicFacade;
+    private IArlaFoodsLogicFacade logicFacade;
 
     private ObservableList<Department> allDeps;
 

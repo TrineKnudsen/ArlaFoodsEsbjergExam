@@ -14,19 +14,22 @@ public class LoginDAO {
         connectionPool = JDBCConnectionPool.getInstance();
     }
 
-    public boolean checkLogin(String username, String password) throws SQLException {
+    public boolean checkAdminLogin(String username, String password) throws SQLException {
         try (Connection connection = connectionPool.checkOut()) {
             String sql = "SELECT id FROM Login where username='" + username + "' AND password='" + password + "'";
             Statement statement = connection.createStatement();
-            statement.execute(sql);
 
-            ResultSet resultSet = statement.getResultSet();
-            if (resultSet.next()) {
-                return true;
-            } else {
-                return false;
-            }
-        }
+            if(statement.execute(sql)){
+               ResultSet resultSet = statement.getResultSet();
+             if (resultSet.next()) {
+                 System.out.println("Login successful");
+                 return true;
+             } else {
+                 System.out.println("Login failed");
+             }
+                  return false;
+               }
+        } return true;
     }
 
     public Department depLogin(String username, String password) throws SQLException{

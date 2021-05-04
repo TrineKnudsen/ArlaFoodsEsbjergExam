@@ -1,7 +1,7 @@
 package arlaScreens.gui.Model;
 
 import arlaScreens.be.Department;
-import arlaScreens.bll.ArlaFoodsLogicFacade;
+import arlaScreens.bll.IArlaFoodsLogicFacade;
 import arlaScreens.bll.ArlaFoodsManager;
 
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class LoginModel {
 
-    private ArlaFoodsLogicFacade logicFacade;
+    private IArlaFoodsLogicFacade logicFacade;
 
     public LoginModel() throws IOException {
         logicFacade = new ArlaFoodsManager();
