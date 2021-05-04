@@ -2,9 +2,11 @@ package arlaScreens.bll;
 
 import arlaScreens.be.Admin;
 import arlaScreens.be.Department;
+import arlaScreens.be.ScreenCFG;
 import arlaScreens.dal.dao.AdminDAO;
 import arlaScreens.dal.dao.DepartmentDAO;
 import arlaScreens.dal.dao.LoginDAO;
+import arlaScreens.dal.dao.ScreenConfigDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,11 +17,13 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
     private LoginDAO loginDAO;
     private DepartmentDAO depDAO;
     private AdminDAO adminDAO;
+    private ScreenConfigDAO cfgDAO;
 
     public ArlaFoodsManager() throws IOException {
         loginDAO = new LoginDAO();
         depDAO = new DepartmentDAO();
         adminDAO = new AdminDAO();
+        cfgDAO = new ScreenConfigDAO();
     }
 
     @Override
@@ -50,5 +54,10 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
     @Override
     public Admin createAdmin(String username, String password) throws SQLException {
         return adminDAO.createAdmin(username, password);
+    }
+
+    @Override
+    public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String imgUrl) throws SQLException {
+        return cfgDAO.createCFG(depId, rowIndex, colIndex, imgUrl);
     }
 }

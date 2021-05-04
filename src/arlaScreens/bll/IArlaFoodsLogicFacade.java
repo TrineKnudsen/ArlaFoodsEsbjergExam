@@ -2,6 +2,7 @@ package arlaScreens.bll;
 
 import arlaScreens.be.Admin;
 import arlaScreens.be.Department;
+import arlaScreens.be.ScreenCFG;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,4 +20,7 @@ public interface IArlaFoodsLogicFacade {
     Department createDep(String username, String password, String depName) throws SQLException;
 
     Admin createAdmin(String username, String password) throws SQLException;
+
+    ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String imgUrl) throws SQLException;
+
 }

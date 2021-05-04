@@ -16,7 +16,7 @@ public class LoginDAO {
 
     public boolean checkAdminLogin(String username, String password) throws SQLException {
         try (Connection connection = connectionPool.checkOut()) {
-            String sql = "SELECT id FROM Login where username='" + username + "' AND password='" + password + "'";
+            String sql = "SELECT username, password FROM [Admin] where username='" + username + "' AND password='" + password + "'";
             Statement statement = connection.createStatement();
 
             if(statement.execute(sql)){

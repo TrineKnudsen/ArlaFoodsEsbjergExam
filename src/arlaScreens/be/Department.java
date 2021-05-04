@@ -2,16 +2,20 @@ package arlaScreens.be;
 
 public class Department {
 
-    private int depId;
+    private int id;
     private String depName;
 
-    public Department(int depId, String depName) {
-        this.depId = depId;
+    public Department(int id, String depName) {
+        this.id = id;
         this.depName = depName;
     }
 
-    public int getDepId() {
-        return depId;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDepName() {
@@ -26,4 +30,5 @@ public class Department {
     public String toString() {
         return depName;
     }
+
 }
