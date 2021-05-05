@@ -23,4 +23,6 @@ public interface IArlaFoodsLogicFacade {
 
     ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String imgUrl) throws SQLException;
 
+    List<ScreenCFG> getScreenCFG(int depId) throws SQLException;
+
 }

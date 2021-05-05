@@ -1,7 +1,5 @@
 package arlaScreens.be;
 
-import javax.swing.text.html.ImageView;
-
 public class ScreenCFG {
 
     private int rowIndex;
@@ -37,5 +35,4 @@ public class ScreenCFG {
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
-
 }

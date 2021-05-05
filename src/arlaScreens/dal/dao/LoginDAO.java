@@ -1,6 +1,7 @@
 package arlaScreens.dal.dao;
 
 import arlaScreens.be.Department;
+import arlaScreens.be.ScreenCFG;
 import arlaScreens.dal.JDBCConnectionPool;
 
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class LoginDAO {
                  System.out.println("Login successful");
                  return true;
              } else {
-                 System.out.println("Login failed");
+                 System.out.println("Admin Login failed");
              }
                   return false;
                }
@@ -33,23 +34,30 @@ public class LoginDAO {
     }
 
     public Department depLogin(String username, String password) throws SQLException{
-        String sql = "SELECT Department.depName, Department.id " +
+        String sql = "SELECT Department.depName, Department.id, ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex " +
                 "FROM Department " +
                 "INNER JOIN " +
-                "[Login] ON Department.depLoginId = [Login].id " +
-                "WHERE username = ? AND password = ?;";
+                "ScreenCFG ON Department.id = ScreenCFG.depId " +
+                "WHERE Username = ? AND Password = ?;";
         try (Connection connection = connectionPool.checkOut()){
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
             statement.setString(2, password);
             statement.execute();
 
+            ScreenCFG screenCFG = null;
             Department dep = null;
             ResultSet resultSet = statement.getResultSet();
             while (resultSet.next()){
+                int rowIndex = resultSet.getInt("RowIndex");
+                int columnIndex = resultSet.getInt("ColumnIndex");
+                String url = resultSet.getString("url");
+                screenCFG = new ScreenCFG(rowIndex, columnIndex, url);
+
+
                 int depId = resultSet.getInt("id");
                 String depName = resultSet.getString("depName");
-                dep = new Department(depId, depName);
+                dep = new Department(depId, depName, screenCFG);
             } return dep;
         }
     }

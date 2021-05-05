@@ -1,6 +1,7 @@
 package arlaScreens.dal.dao;
 
 import arlaScreens.be.Department;
+import arlaScreens.be.ScreenCFG;
 import arlaScreens.dal.JDBCConnectionPool;
 
 import java.io.IOException;
@@ -20,13 +21,22 @@ public class DepartmentDAO {
         List<Department> allDeps = new ArrayList<>();
         Connection connection = connectionPool.checkOut();
         try (Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Department");
+            ResultSet resultSet = statement.executeQuery("SELECT Department.id, Department.depName, ScreenCFG.id, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, ScreenCFG.url " +
+                    "FROM Department INNER JOIN ScreenCFG ON Department.id = ScreenCFG.depId");
 
+            ScreenCFG screenCFG = null;
             Department dep = null;
             while (resultSet.next()) {
+                int columnIndex = resultSet.getInt("ColumnIndex");
+                int rowIndex = resultSet.getInt("RowIndex");
+                String url = resultSet.getString("url");
+                screenCFG = new ScreenCFG(rowIndex, columnIndex, url);
+
                 int id = resultSet.getInt("id");
                 String depName = resultSet.getString("depName");
-                dep = new Department(id, depName);
+
+
+                dep = new Department(id, depName, screenCFG);
                 allDeps.add(dep);
             }
             return allDeps;
@@ -63,7 +73,7 @@ public class DepartmentDAO {
             while (rs.next()){
                 id = rs.getInt(1);
 
-                dep = new Department(id, depName);
+                dep = new Department(id, depName, null);
             }
             return dep;
         }

@@ -4,10 +4,12 @@ public class Department {
 
     private int id;
     private String depName;
+    private ScreenCFG screenCFG;
 
-    public Department(int id, String depName) {
+    public Department(int id, String depName, ScreenCFG screenCFG) {
         this.id = id;
         this.depName = depName;
+        this.screenCFG = screenCFG;
     }
 
     public int getId() {
@@ -24,6 +26,14 @@ public class Department {
 
     public void setDepName(String depName) {
         this.depName = depName;
+    }
+
+    public ScreenCFG getScreenCFG() {
+        return screenCFG;
+    }
+
+    public void setScreenCFG(ScreenCFG screenCFG) {
+        this.screenCFG = screenCFG;
     }
 
     @Override

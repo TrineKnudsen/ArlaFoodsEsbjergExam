@@ -1,5 +1,6 @@
 package arlaScreens.gui.Controller;
 
+import arlaScreens.be.Department;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import arlaScreens.gui.Model.LoginModel;
 
@@ -26,6 +29,10 @@ public class MainController implements Initializable {
     public TextField txtFieldUsername;
     @FXML
     private LoginModel loginModel;
+    @FXML
+    private GridPane gridPane;
+    @FXML
+    private AnchorPane anchor;
 
 
     @Override
@@ -39,22 +46,25 @@ public class MainController implements Initializable {
 
 
     public void handleBtnLogin(ActionEvent event) throws IOException, SQLException {
-        if(loginModel.checkAdminLogin(txtFieldUsername.getText().trim(), txtFieldPassword.getText().trim())){
+        if (loginModel.checkAdminLogin(txtFieldUsername.getText().trim(), txtFieldPassword.getText().trim())) {
             Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepAdmin.fxml"));
             Scene mainWindowScene = new Scene(mainWindowParent);
             Stage adminStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             adminStage.setScene(mainWindowScene);
             adminStage.setTitle("Admin controls");
             adminStage.show();
-        }
+        } else handleDepLogin(event);
+        System.out.printf("Dep Login succesfull");
+    }
+
+
 //        String username = txtFieldUsername.getText().trim();
 //        String password = txtFieldPassword.getText().trim();
 //        boolean validLogin = loginModel.checkAdminLogin(username, password);
 //
 //        if (validLogin) {
 //            adminView(event);
-//        } else System.out.println("Username or password incorrect");
-    }
+//        } else System.out.println("Username or password incorrect"); }
 
 //    public void adminView(ActionEvent event) {
 //        try{
@@ -68,32 +78,25 @@ public class MainController implements Initializable {
 //        }
 //    }
 
-//    public void handleDepLogin(ActionEvent event) throws IOException, SQLException {
-//        String username = userField1.getText().trim();
-//        String password = passField1.getText().trim();
-//
-//        int depId = loginModel.depLogin(username, password).getDepId();
-//
-//        switch (depId) {
-//            case 2:
-//                Parent MainParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepLogistics.fxml"));
-//                Scene MainScene = new Scene(MainParent);
-//                Stage logStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//                logStage.setScene(MainScene);
-//                logStage.show();
-//                break;
-//            case 3:
-//                Parent MainParent2 = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepSales.fxml"));
-//                Scene MainScene2 = new Scene(MainParent2);
-//                Stage salesStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//                salesStage.setScene(MainScene2);
-//                salesStage.show();
-//                break;
-//        }
-//    }
+        public void handleDepLogin(ActionEvent event) throws IOException, SQLException {
+            String username = txtFieldUsername.getText().trim();
+            String password = txtFieldPassword.getText().trim();
 
-    public void handleBtnExit(ActionEvent actionEvent) {
-        Platform.exit();
-        System.exit(0);
+            Department loggedInDep = loginModel.depLogin(username, password);
+
+            switch (loggedInDep.getId()) {
+                case 2:
+                    Parent MainParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepLogistics.fxml"));
+                    Scene MainScene = new Scene(MainParent);
+                    Stage logStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    logStage.setScene(MainScene);
+                    logStage.show();
+                    break;
+            }
+        }
+
+        public void handleBtnExit (ActionEvent actionEvent){
+            Platform.exit();
+            System.exit(0);
+        }
     }
-}
