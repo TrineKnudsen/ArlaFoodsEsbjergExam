@@ -11,8 +11,10 @@ import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -24,7 +26,7 @@ public class LogisticsController implements Initializable {
     @FXML
     private GridPane grid;
     @FXML
-    private AnchorPane anchor;
+    private AnchorPane anchorpane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -34,17 +36,15 @@ public class LogisticsController implements Initializable {
             screenCFGList.addAll(depModel.getScreenCFGS(2));
             grid = new GridPane();
 
-
-            for(ScreenCFG screenconfig : screenCFGList) {
-                ImageView imageView = new ImageView();
-                List<ImageView> imageViewList = new ArrayList<>();
-                for (ImageView imageview : imageViewList) {
-                    GridPane.setConstraints(imageView, screenconfig.getImgUrl(), screenconfig.getColIndex(), screenconfig.getRowIndex());
-                }
-
-                grid.getChildren().addAll(GridPane.setConstraints(new ImageView(new Image(screenconfig.getImgUrl())), screenconfig.getColIndex(), screenconfig.getRowIndex()));
+            for (ScreenCFG screenCFG : screenCFGList) {
+                ImageView imageView = new ImageView(new Image(screenCFG.getImgUrl()));
+                GridPane.setConstraints(imageView, screenCFG.getColIndex(), screenCFG.getRowIndex());
+                grid.getChildren().addAll(imageView);
+                imageView.setFitWidth(100);
+                imageView.setFitHeight(100);
             }
-            System.out.println(screenCFGList.size());
+
+            anchorpane.getChildren().add(grid);
         }
         catch(IOException exception){
             exception.printStackTrace();
@@ -52,8 +52,6 @@ public class LogisticsController implements Initializable {
             throwables.printStackTrace();
         }
         }
-
-
 
 
     /**public void handleBtn(ActionEvent event){

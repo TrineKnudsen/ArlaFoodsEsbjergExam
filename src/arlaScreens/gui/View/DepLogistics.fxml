@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 
-<AnchorPane fx:id="anchor" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.Controller.LogisticsController">
+<AnchorPane fx:id="anchorpane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.Controller.LogisticsController">
    <children>
       <GridPane fx:id="grid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.79998779296875" minWidth="10.0" prefWidth="296.7999755859375" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="471.20001220703125" minWidth="10.0" prefWidth="304.00002441406247" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
