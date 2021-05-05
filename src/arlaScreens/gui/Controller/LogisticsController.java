@@ -1,7 +1,7 @@
 package arlaScreens.gui.Controller;
 
 import arlaScreens.be.ScreenCFG;
-import arlaScreens.gui.model.DepartmentModel;
+import arlaScreens.gui.Model.DepartmentModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;

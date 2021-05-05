@@ -1,7 +1,9 @@
 package arlaScreens.gui.Controller;
 
+import arlaScreens.be.Department;
 import arlaScreens.be.User;
-import arlaScreens.gui.model.DepartmentModel;
+import arlaScreens.bll.util.UserError;
+import arlaScreens.gui.Model.DepartmentModel;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.ObservableList;
@@ -22,6 +24,7 @@ import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
 
+    private final String ERROR_HEADER = "Error occured!";
     private DepartmentModel departmentModel;
     ObservableList<User> allDep;
 
@@ -83,5 +86,20 @@ public class AdminController implements Initializable {
         adminStage.setScene(mainWindowScene);
         adminStage.setTitle("Admin controls - new department");
         adminStage.show();
+    }
+
+    public void handlebtnDelete(ActionEvent event) {
+        Department depToDelete = deplst.getSelectionModel().getSelectedItem();
+        try {
+            if (depToDelete != null) {
+                departmentModel.deleteDep(depToDelete);
+                deplst.getItems().remove(depToDelete);
+            } else {
+                String message = "Choose the department you wish to delete";
+                UserError.displayError(ERROR_HEADER, message);
+            }
+        } catch (Exception e) {
+            UserError.displayError(ERROR_HEADER, e.getMessage());
+        }
     }
 }

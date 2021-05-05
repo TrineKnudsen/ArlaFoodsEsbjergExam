@@ -1,5 +1,6 @@
 package arlaScreens.dal.dao;
 
+import arlaScreens.be.Department;
 import arlaScreens.be.User;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.dal.JDBCConnectionPool;
@@ -77,6 +78,13 @@ public class DepartmentDAO {
                 dep = new User(id, depName, 0, null);
             }
             return dep;
+        }
+    }
+
+    public void deleteDepartment (Department depToDelete) throws SQLException {
+        try (Connection con = connectionPool.checkOut()){
+            PreparedStatement statement = con.prepareStatement("DELETE FROM Department WHERE id =?;");
+            statement.setInt(1, depToDelete.getId());
         }
     }
 }

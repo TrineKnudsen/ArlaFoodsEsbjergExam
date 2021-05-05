@@ -28,4 +28,5 @@ public interface IArlaFoodsLogicFacade {
 
     Admin getAdminLogin(String username, String password) throws SQLException;
 
+
 }

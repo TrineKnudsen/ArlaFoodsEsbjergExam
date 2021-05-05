@@ -1,5 +1,6 @@
-package arlaScreens.gui.model;
+package arlaScreens.gui.Model;
 
+import arlaScreens.be.Department;
 import arlaScreens.be.User;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.bll.IArlaFoodsLogicFacade;
@@ -42,5 +43,8 @@ public class DepartmentModel {
         screenCFGS = new ArrayList<>();
         screenCFGS.addAll(logicFacade.getScreenCFG(depId));
         return screenCFGS;
+    }
+
+    public void deleteDep(Department depToDelete) {
     }
 }

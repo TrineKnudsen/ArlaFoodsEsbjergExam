@@ -37,11 +37,6 @@
                         <Insets top="10.0" />
                     </VBox.margin>
                 </Button>
-                <Button mnemonicParsing="false" text="Delete Employee">
-                    <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin>
-                </Button>
             </children>
         </VBox>
         <Label layoutX="271.0" layoutY="19.0" text="Welcome!" AnchorPane.topAnchor="8.0">
@@ -59,11 +54,19 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-            <JFXListView fx:id="deplst" prefHeight="229.0" prefWidth="212.0" />
+            <JFXListView fx:id="deplst" prefHeight="229.0" prefWidth="212.0">
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin></JFXListView>
             <JFXTextField fx:id="nameField" prefHeight="26.0" prefWidth="134.0" />
                 <Button mnemonicParsing="false" text="Edit ">
                     <VBox.margin>
                         <Insets left="5.0" top="5.0" />
+                    </VBox.margin>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#handlebtnDelete" text="Delete department">
+                    <VBox.margin>
+                        <Insets left="5.0" top="10.0" />
                     </VBox.margin>
                 </Button>
             </children>
