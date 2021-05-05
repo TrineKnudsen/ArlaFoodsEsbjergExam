@@ -1,4 +1,4 @@
-package arlaScreens.gui.Model;
+package arlaScreens.gui.model;
 
 import arlaScreens.be.Department;
 import arlaScreens.bll.IArlaFoodsLogicFacade;

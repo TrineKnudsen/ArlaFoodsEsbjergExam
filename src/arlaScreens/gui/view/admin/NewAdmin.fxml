@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxWidth="300.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.admin.NewAdminController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: .5;">
+         <image>
+            <Image url="@../../../../pictures/ArlaLogo.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="25.0" layoutY="356.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="25.0" prefWidth="50.0" text="Back" />
+      <TextField fx:id="txtFieldUsername" layoutX="75.0" layoutY="220.0" prefHeight="25.0" prefWidth="150.0" promptText="Username" />
+      <PasswordField fx:id="txtFieldPass1" layoutX="75.0" layoutY="270.0" prefHeight="25.0" prefWidth="150.0" promptText="Password" />
+      <PasswordField fx:id="txtFieldPass2" layoutX="75.0" layoutY="300.0" prefHeight="25.0" prefWidth="150.0" promptText="Type password again" />
+      <Button layoutX="225.0" layoutY="356.0" mnemonicParsing="false" onAction="#handleAddNewAdmin" prefHeight="25.0" prefWidth="50.0" text="Add" />
+   </children>
+</AnchorPane>

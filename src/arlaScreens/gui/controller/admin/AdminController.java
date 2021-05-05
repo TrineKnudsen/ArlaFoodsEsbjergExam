@@ -1,14 +1,19 @@
-package arlaScreens.gui.Controller;
+package arlaScreens.gui.controller.admin;
 
 import arlaScreens.be.Department;
-import arlaScreens.gui.Model.DepartmentModel;
+import arlaScreens.gui.model.DepartmentModel;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -37,7 +42,7 @@ public class AdminController implements Initializable {
             departmentModel = new DepartmentModel();
 
             allDep = departmentModel.getAllDep();
-            deplst.getItems().addAll(allDep);
+//            deplst.getItems().addAll(allDep);
         } catch (IOException | SQLException exception) {
             exception.printStackTrace();
         }
@@ -60,5 +65,23 @@ public class AdminController implements Initializable {
         Department dep = departmentModel.createDep(username, password, name);
         allDep.add(dep);
         deplst.setItems(allDep);
+    }
+
+    public void handleAddNewAdmin(ActionEvent actionEvent) throws IOException {
+        Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/view/admin/NewAdmin.fxml"));
+        Scene mainWindowScene = new Scene(mainWindowParent);
+        Stage adminStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        adminStage.setScene(mainWindowScene);
+        adminStage.setTitle("Admin controls - new admin");
+        adminStage.show();
+    }
+
+    public void handleAddNewDepartment(ActionEvent actionEvent) throws IOException {
+        Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/view/admin/NewDepartment.fxml"));
+        Scene mainWindowScene = new Scene(mainWindowParent);
+        Stage adminStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        adminStage.setScene(mainWindowScene);
+        adminStage.setTitle("Admin controls - new department");
+        adminStage.show();
     }
 }
