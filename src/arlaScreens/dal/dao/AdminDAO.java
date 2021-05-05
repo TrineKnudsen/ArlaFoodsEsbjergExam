@@ -29,7 +29,7 @@ public class AdminDAO {
 //    }
 
     public Admin createAdmin(String username, String password) throws SQLException {
-        String sql = "INSERT INTO AdminLogin (username, password) VALUES (?,?);";
+        String sql = "INSERT INTO [Admin] (username, password) VALUES (?,?);";
         Connection con = connectionPool.checkOut();
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, username);

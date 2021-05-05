@@ -30,7 +30,8 @@ public class NewAdminController {
             adminModel.createAdmin(txtFieldUsername.getText(), txtFieldPass1.getText());
             error.info("Admin successfully added to database");
         }
-        error.error("Passwords don't match");
+        else {error.error("Passwords don't match");
+        }
     }
 
     public void handleBack(ActionEvent actionEvent) {
