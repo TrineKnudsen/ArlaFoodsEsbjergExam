@@ -1,10 +1,8 @@
 package arlaScreens.dal.dao;
 
-import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.dal.JDBCConnectionPool;
 
-import javax.xml.transform.Result;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;

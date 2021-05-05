@@ -1,6 +1,8 @@
 package arlaScreens.gui.model;
 
+import arlaScreens.be.Admin;
 import arlaScreens.be.Department;
+import arlaScreens.be.User;
 import arlaScreens.bll.IArlaFoodsLogicFacade;
 import arlaScreens.bll.ArlaFoodsManager;
 
@@ -19,7 +21,11 @@ public class LoginModel {
         return logicFacade.checkLogin(username, password);
     }
 
-    public Department depLogin(String username, String password) throws SQLException {
-        return logicFacade.depLogin(username, password);
+    public User getUserLogin(String username, String password) throws SQLException {
+        return logicFacade.getUserLogin(username, password);
+    }
+
+    public Admin getAdminLogin(String username, String password) throws SQLException {
+        return logicFacade.getAdminLogin(username, password);
     }
 }

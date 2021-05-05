@@ -1,6 +1,7 @@
 package arlaScreens.gui.controller;
 
-import arlaScreens.be.Department;
+import arlaScreens.be.Admin;
+import arlaScreens.be.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,18 +45,28 @@ public class MainController implements Initializable {
         }
     }
 
-
     public void handleBtnLogin(ActionEvent event) throws IOException, SQLException {
-        if (loginModel.checkAdminLogin(txtFieldUsername.getText().trim(), txtFieldPassword.getText().trim())) {
-            Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/view/DepLogistics.fxml"));
+        String username = txtFieldUsername.getText().trim();
+        String password = txtFieldPassword.getText().trim();
+
+        User user = loginModel.getUserLogin(username, password);
+        Admin admin = loginModel.getAdminLogin(username, password);
+
+        if (user != null && admin == null){
+            Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepLogistics.fxml"));
+            Scene mainWindowScene = new Scene(mainWindowParent);
+            Stage adminStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            adminStage.setScene(mainWindowScene);
+            adminStage.setTitle("Department");
+            adminStage.show();
+        } else if (user == null && admin != null) {
+            Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepAdmin.fxml"));
             Scene mainWindowScene = new Scene(mainWindowParent);
             Stage adminStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             adminStage.setScene(mainWindowScene);
             adminStage.setTitle("Admin Controls");
             adminStage.show();
-        } else
-            handleDepLogin(event);
-        System.out.printf("Dep Login successful");
+        }
     }
 
     public void handleAdminControls(ActionEvent actionEvent) throws IOException {
@@ -65,23 +76,6 @@ public class MainController implements Initializable {
         adminStage.setScene(mainWindowScene);
         adminStage.setTitle("Admin controls");
         adminStage.show();
-    }
-
-    public void handleDepLogin(ActionEvent event) throws IOException, SQLException {
-        String username = txtFieldUsername.getText().trim();
-        String password = txtFieldPassword.getText().trim();
-
-        Department loggedInDep = loginModel.depLogin(username, password);
-
-        switch (loggedInDep.getId()) {
-            case 2:
-                Parent MainParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/view/DepLogistics.fxml"));
-                Scene MainScene = new Scene(MainParent);
-                Stage logStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                logStage.setScene(MainScene);
-                logStage.show();
-                break;
-        }
     }
 
     public void handleBtnExit (ActionEvent actionEvent){

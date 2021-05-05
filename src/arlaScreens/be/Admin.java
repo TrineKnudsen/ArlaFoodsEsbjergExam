@@ -1,20 +1,16 @@
 package arlaScreens.be;
 
-public class Admin {
+public class Admin extends Department{
 
     private int id;
     private String username;
     private String password;
 
-    public Admin(int id, String username, String password) {
-        this.id = id;
+    public Admin(int id, String name, int type, String username, String password) {
+        super(id, name, type);
         this.username = username;
         this.password = password;
     }
-
-    public int getId() { return id; }
-
-    public void setId(int id) { this.id = id; }
 
     public String getUsername() {
         return username;

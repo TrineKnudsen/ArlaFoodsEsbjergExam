@@ -1,4 +1,4 @@
-package arlaScreens.gui.controller.admin;
+package arlaScreens.gui.Controller;
 
 import arlaScreens.bll.ArlaFoodsManager;
 import arlaScreens.bll.IArlaFoodsLogicFacade;

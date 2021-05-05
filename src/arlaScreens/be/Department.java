@@ -2,43 +2,38 @@ package arlaScreens.be;
 
 public class Department {
 
-    private int id;
-    private String depName;
-    private ScreenCFG screenCFG;
+    int id;
+    String name;
+    int type;
 
-    public Department(int id, String depName, ScreenCFG screenCFG) {
+    public Department(int id, String name, int type) {
         this.id = id;
-        this.depName = depName;
-        this.screenCFG = screenCFG;
+        this.name = name;
+        this.type = type;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getName() {
+        return name;
     }
 
-    public String getDepName() {
-        return depName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setDepName(String depName) {
-        this.depName = depName;
+    public int getType(){
+        return type;
     }
 
-    public ScreenCFG getScreenCFG() {
-        return screenCFG;
-    }
-
-    public void setScreenCFG(ScreenCFG screenCFG) {
-        this.screenCFG = screenCFG;
+    public void setType(int type){
+        this.type = type;
     }
 
     @Override
     public String toString() {
-        return depName;
+        return name;
     }
-
 }

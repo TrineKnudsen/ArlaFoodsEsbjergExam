@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.Controller.AdminController">
     <children>
         <VBox layoutX="377.0" layoutY="32.0" prefHeight="368.0" prefWidth="224.0">
             <children>
@@ -27,7 +27,7 @@
                         <Insets right="5.0" top="25.0" />
                     </VBox.margin>
                 </ListView>
-                <Button mnemonicParsing="false" onAction= text="Add Employee">
+                <Button mnemonicParsing="false" text="Add Employee">
                     <VBox.margin>
                         <Insets top="5.0" />
                     </VBox.margin>
@@ -61,7 +61,7 @@
                 </Label>
             <JFXListView fx:id="deplst" prefHeight="229.0" prefWidth="212.0" />
             <JFXTextField fx:id="nameField" prefHeight="26.0" prefWidth="134.0" />
-                <Button mnemonicParsing="false" onAction= text="Edit ">
+                <Button mnemonicParsing="false" text="Edit ">
                     <VBox.margin>
                         <Insets left="5.0" top="5.0" />
                     </VBox.margin>

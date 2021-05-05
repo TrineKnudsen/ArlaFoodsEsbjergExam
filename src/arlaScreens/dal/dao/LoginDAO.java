@@ -1,6 +1,8 @@
 package arlaScreens.dal.dao;
 
+import arlaScreens.be.Admin;
 import arlaScreens.be.Department;
+import arlaScreens.be.User;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.dal.JDBCConnectionPool;
 
@@ -17,7 +19,7 @@ public class LoginDAO {
 
     public boolean checkAdminLogin(String username, String password) throws SQLException {
         try (Connection connection = connectionPool.checkOut()) {
-            String sql = "SELECT username, password FROM [Admin] where username='" + username + "' AND password='" + password + "'";
+            String sql = "SELECT Username, Password FROM [Admin] where Username='" + username + "' AND Password='" + password + "'";
             Statement statement = connection.createStatement();
 
             if(statement.execute(sql)){
@@ -33,22 +35,22 @@ public class LoginDAO {
         } return true;
     }
 
-    public Department depLogin(String username, String password) throws SQLException{
-        String sql = "SELECT Department.depName, Department.id, ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex " +
+    public User getUserLogin(String username, String password) throws SQLException{
+        String sql = "SELECT Department.depName, Department.id, ScreenCFG.url, Department.IsAdmin, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex " +
                 "FROM Department " +
                 "INNER JOIN " +
                 "ScreenCFG ON Department.id = ScreenCFG.depId " +
                 "WHERE Username = ? AND Password = ?;";
-        try (Connection connection = connectionPool.checkOut()){
+        try (Connection connection = connectionPool.checkOut()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
             statement.setString(2, password);
             statement.execute();
 
             ScreenCFG screenCFG = null;
-            Department dep = null;
+            User user = null;
             ResultSet resultSet = statement.getResultSet();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int rowIndex = resultSet.getInt("RowIndex");
                 int columnIndex = resultSet.getInt("ColumnIndex");
                 String url = resultSet.getString("url");
@@ -56,9 +58,31 @@ public class LoginDAO {
 
 
                 int depId = resultSet.getInt("id");
+                int type = resultSet.getInt("IsAdmin");
                 String depName = resultSet.getString("depName");
-                dep = new Department(depId, depName, screenCFG);
-            } return dep;
+                user = new User(depId, depName, type, screenCFG);
+            }return user;
+        }
+    }
+
+    public Admin getAdminLogin(String username, String password) throws SQLException {
+        String sqlAdmin = "SELECT id, IsAdmin FROM Admin WHERE Username = ? AND Password = ?";
+        try (Connection connection = connectionPool.checkOut()) {
+            PreparedStatement statement1 = connection.prepareStatement(sqlAdmin);
+            statement1.setString(1, username);
+            statement1.setString(2, password);
+            statement1.execute();
+
+            Admin admin = null;
+
+            ResultSet resultSetAdmin = statement1.getResultSet();
+
+            while (resultSetAdmin.next()) {
+                int id = resultSetAdmin.getInt("id");
+                int type = resultSetAdmin.getInt("ISAdmin");
+                admin = new Admin(id, "Admin", type, username, password);
+            }
+            return admin;
         }
     }
 }

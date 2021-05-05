@@ -37,10 +37,12 @@ public class AdminDAO {
             ps.executeUpdate();
             ResultSet resultSet = ps.getGeneratedKeys();
             int id = 0;
+            int type = 0;
             if (resultSet.next()) {
                 id = resultSet.getInt(1);
+                type = resultSet.getInt("IsAmin");
             }
-            Admin admin = new Admin(id, username, password);
+            Admin admin = new Admin(id, "Admin", type, username, password);
             return admin;
         } catch (SQLException e){
             throw new SQLException("Failed to create Admin", e);

@@ -1,6 +1,6 @@
 package arlaScreens.gui.model;
 
-import arlaScreens.be.Department;
+import arlaScreens.be.User;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.bll.IArlaFoodsLogicFacade;
 import arlaScreens.bll.ArlaFoodsManager;
@@ -16,7 +16,7 @@ public class DepartmentModel {
 
     private IArlaFoodsLogicFacade logicFacade;
 
-    private ObservableList<Department> allDeps;
+    private ObservableList<User> allDeps;
     private List<ScreenCFG> screenCFGS;
 
     public DepartmentModel() throws IOException, SQLException {
@@ -26,15 +26,15 @@ public class DepartmentModel {
         allDeps.addAll(logicFacade.getAllDep());
     }
 
-    public ObservableList<Department> getAllDep() throws SQLException {
+    public ObservableList<User> getAllDep() throws SQLException {
         return allDeps;
     }
 
-    public void updateDep(Department chosenDep, String updatedDep) throws SQLException {
+    public void updateDep(User chosenDep, String updatedDep) throws SQLException {
         logicFacade.updateDep(chosenDep, updatedDep);
     }
 
-    public Department createDep(String username, String password, String depName) throws SQLException {
+    public User createDep(String username, String password, String depName) throws SQLException {
         return logicFacade.createDep(username, password, depName);
     }
 

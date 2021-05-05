@@ -1,4 +1,4 @@
-package arlaScreens.gui.controller;
+package arlaScreens.gui.Controller;
 
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.gui.model.DepartmentModel;
@@ -11,10 +11,8 @@ import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 

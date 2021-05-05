@@ -2,6 +2,7 @@ package arlaScreens.bll;
 
 import arlaScreens.be.Admin;
 import arlaScreens.be.Department;
+import arlaScreens.be.User;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.dal.dao.AdminDAO;
 import arlaScreens.dal.dao.DepartmentDAO;
@@ -32,22 +33,17 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
     }
 
     @Override
-    public Department depLogin(String username, String password) throws SQLException {
-        return loginDAO.depLogin(username, password);
-    }
-
-    @Override
-    public List<Department> getAllDep() throws SQLException {
+    public List<User> getAllDep() throws SQLException {
         return depDAO.getAllDep();
     }
 
     @Override
-    public void updateDep(Department chosenDep, String updatedDep) throws SQLException {
+    public void updateDep(User chosenDep, String updatedDep) throws SQLException {
         depDAO.updateDep(chosenDep, updatedDep);
     }
 
     @Override
-    public Department createDep(String username, String password, String depName) throws SQLException {
+    public User createDep(String username, String password, String depName) throws SQLException {
         return depDAO.createDep(username, password, depName);
     }
 
@@ -64,5 +60,16 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
     @Override
     public List<ScreenCFG> getScreenCFG(int depId) throws SQLException {
         return cfgDAO.getCFG(depId);
+    }
+
+
+    @Override
+    public Admin getAdminLogin(String username, String password) throws SQLException {
+        return loginDAO.getAdminLogin(username, password);
+    }
+
+    @Override
+    public User getUserLogin(String username, String password) throws SQLException {
+        return loginDAO.getUserLogin(username, password);
     }
 }
