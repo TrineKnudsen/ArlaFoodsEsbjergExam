@@ -1,7 +1,7 @@
-package arlaScreens.gui.controller;
+package arlaScreens.gui.Controller;
 
 import arlaScreens.be.ScreenCFG;
-import arlaScreens.gui.model.DepartmentModel;
+import arlaScreens.gui.Model.DepartmentModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
@@ -11,8 +11,10 @@ import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -24,36 +26,32 @@ public class LogisticsController implements Initializable {
     @FXML
     private GridPane grid;
     @FXML
-    private AnchorPane anchor;
+    private AnchorPane anchorpane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        try {
-//            depModel = new DepartmentModel();
-//            screenCFGList = new ArrayList<>();
-//            screenCFGList.addAll(depModel.getScreenCFGS(2));
-//            grid = new GridPane();
+        try {
+            depModel = new DepartmentModel();
+            screenCFGList = new ArrayList<>();
+            screenCFGList.addAll(depModel.getScreenCFGS(2));
+            grid = new GridPane();
 
+            for (ScreenCFG screenCFG : screenCFGList) {
+                ImageView imageView = new ImageView(new Image(screenCFG.getImgUrl()));
+                GridPane.setConstraints(imageView, screenCFG.getColIndex(), screenCFG.getRowIndex());
+                grid.getChildren().addAll(imageView);
+                imageView.setFitWidth(100);
+                imageView.setFitHeight(100);
+            }
 
-//            for(ScreenCFG screenconfig : screenCFGList) {
-//                ImageView imageView = new ImageView();
-//                List<ImageView> imageViewList = new ArrayList<>();
-//                for (ImageView imageview : imageViewList) {
-//                    GridPane.setConstraints(imageView, screenconfig.getImgUrl(), screenconfig.getColIndex(), screenconfig.getRowIndex());
-//                }
-//
-//                grid.getChildren().addAll(GridPane.setConstraints(new ImageView(new Image(screenconfig.getImgUrl())), screenconfig.getColIndex(), screenconfig.getRowIndex()));
-//            }
-//            System.out.println(screenCFGList.size());
-//        }
-//        catch(IOException exception){
-//            exception.printStackTrace();
-//        } catch(SQLException throwables){
-//            throwables.printStackTrace();
-//        }
-//        }
-
-
+            anchorpane.getChildren().add(grid);
+        }
+        catch(IOException exception){
+            exception.printStackTrace();
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        }
 
 
     /**public void handleBtn(ActionEvent event){
@@ -68,4 +66,4 @@ public class LogisticsController implements Initializable {
         }
 
     }**/
-}}
+}
