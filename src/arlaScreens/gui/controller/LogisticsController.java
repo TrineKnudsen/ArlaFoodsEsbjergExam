@@ -4,10 +4,16 @@ import arlaScreens.be.ScreenCFG;
 import arlaScreens.gui.model.DepartmentModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Dimension2D;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -35,7 +41,7 @@ public class LogisticsController implements Initializable {
 
             for (ScreenCFG screenCFG : screenCFGList) {
                 ImageView imageView = new ImageView(new Image(screenCFG.getImgUrl()));
-
+                GridPane.setConstraints(imageView, screenCFG.getColIndex(), screenCFG.getRowIndex());
                 GridPane.setConstraints(imageView, screenCFG.getColIndex(), screenCFG.getRowIndex());
                 grid.getChildren().addAll(imageView);
                 imageView.setFitHeight(200);

@@ -58,8 +58,8 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
     }
 
     @Override
-    public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String imgUrl) throws SQLException {
-        return cfgDAO.createCFG(depId, rowIndex, colIndex, imgUrl);
+    public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String fileName, String imgUrl) throws SQLException {
+        return cfgDAO.createCFG(depId, rowIndex, colIndex, fileName, imgUrl);
     }
 
     @Override
