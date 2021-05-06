@@ -27,14 +27,9 @@
                         <Insets right="5.0" top="25.0" />
                     </VBox.margin>
                 </ListView>
-                <Button mnemonicParsing="false" text="Add Employee">
+                <Button mnemonicParsing="false" onAction="#handleCreateDep" text="Add department">
                     <VBox.margin>
                         <Insets top="5.0" />
-                    </VBox.margin>
-                </Button>
-                <Button mnemonicParsing="false" text="Edit Employee">
-                    <VBox.margin>
-                        <Insets top="10.0" />
                     </VBox.margin>
                 </Button>
             </children>
@@ -59,7 +54,7 @@
                   <Insets left="5.0" />
                </VBox.margin></JFXListView>
             <JFXTextField fx:id="nameField" prefHeight="26.0" prefWidth="134.0" />
-                <Button mnemonicParsing="false" text="Edit ">
+                <Button mnemonicParsing="false" onAction="#updateDep" text="Edit ">
                     <VBox.margin>
                         <Insets left="5.0" top="5.0" />
                     </VBox.margin>
