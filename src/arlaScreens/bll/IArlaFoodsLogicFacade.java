@@ -18,6 +18,8 @@ public interface IArlaFoodsLogicFacade {
 
     User createDep(String username, String password, String depName) throws SQLException;
 
+    Department deleteDep(Department department) throws SQLException;
+
     Admin createAdmin(String username, String password) throws SQLException;
 
     ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String imgUrl) throws SQLException;

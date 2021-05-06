@@ -39,12 +39,15 @@ public class DepartmentModel {
         return logicFacade.createDep(username, password, depName);
     }
 
+    public Department deleteDep(Department depToDelete) throws SQLException {
+        return logicFacade.deleteDep(depToDelete);
+    }
+
     public List<ScreenCFG> getScreenCFGS(int depId) throws SQLException {
         screenCFGS = new ArrayList<>();
         screenCFGS.addAll(logicFacade.getScreenCFG(depId));
         return screenCFGS;
     }
 
-    public void deleteDep(Department depToDelete) {
-    }
+
 }

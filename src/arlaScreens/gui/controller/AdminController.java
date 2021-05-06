@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
 
-    private final String ERROR_HEADER = "Error occured!";
+    private final String ERROR_HEADER = "Error occurred!";
     private DepartmentModel departmentModel;
     ObservableList<User> allDep;
 
@@ -49,15 +49,6 @@ public class AdminController implements Initializable {
         } catch (IOException | SQLException exception) {
             exception.printStackTrace();
         }
-    }
-
-    public void updateDep(ActionEvent event) throws SQLException {
-        User chosenDep = deplst.getSelectionModel().getSelectedItem();
-        String updatedDep = nameField.getText().trim();
-
-        departmentModel.updateDep(chosenDep, updatedDep);
-        allDep = departmentModel.getAllDep();
-        deplst.getItems().addAll(allDep);
     }
 
     public void handleCreateDep(ActionEvent event) throws SQLException {
@@ -88,7 +79,18 @@ public class AdminController implements Initializable {
         adminStage.show();
     }
 
-    public void handlebtnDelete(ActionEvent event) {
+
+
+    public void handleUpdateDepartment(ActionEvent actionEvent) throws SQLException {
+        User chosenDep = deplst.getSelectionModel().getSelectedItem();
+        String updatedDep = nameField.getText().trim();
+
+        departmentModel.updateDep(chosenDep, updatedDep);
+        allDep = departmentModel.getAllDep();
+        deplst.getItems().addAll(allDep);
+    }
+
+    public void handleDeleteDepartment(ActionEvent actionEvent) {
         Department depToDelete = deplst.getSelectionModel().getSelectedItem();
         try {
             if (depToDelete != null) {

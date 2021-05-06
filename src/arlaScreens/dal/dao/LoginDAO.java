@@ -4,7 +4,9 @@ import arlaScreens.be.Admin;
 import arlaScreens.be.Department;
 import arlaScreens.be.User;
 import arlaScreens.be.ScreenCFG;
+import arlaScreens.bll.util.CustomError;
 import arlaScreens.dal.JDBCConnectionPool;
+
 
 import java.io.IOException;
 import java.sql.*;
@@ -12,6 +14,8 @@ import java.sql.*;
 public class LoginDAO {
 
     private final JDBCConnectionPool connectionPool;
+
+    private CustomError error = new CustomError();
 
     public LoginDAO() throws IOException {
         connectionPool = JDBCConnectionPool.getInstance();
@@ -73,6 +77,7 @@ public class LoginDAO {
                 int id = resultSetAdmin.getInt("id");
                 int type = resultSetAdmin.getInt("ISAdmin");
                 admin = new Admin(id, "Admin", type, username, password);
+                error.info("Login successful");
             }
             return admin;
         }

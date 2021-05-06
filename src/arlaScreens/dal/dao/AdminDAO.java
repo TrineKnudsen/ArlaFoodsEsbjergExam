@@ -17,17 +17,6 @@ public class AdminDAO {
     }
 
 
-//    public List<Admin> getAllAdmins() throws IOException {
-//
-//        ArrayList<Admin> allAdmins = new ArrayList<>();
-//
-//        try(Connection connection = connectionPool.checkOut()) {
-//            String sql = "SELECT * FROM Admin;";
-//            Statement statement = connection.createStatement();
-//            if (statement.execute(sql))
-//        }
-//    }
-
     public Admin createAdmin(String username, String password) throws SQLException {
         String sql = "INSERT INTO [Admin] (username, password) VALUES (?,?);";
         Connection con = connectionPool.checkOut();

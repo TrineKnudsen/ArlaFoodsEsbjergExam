@@ -36,4 +36,7 @@ public class NewAdminController {
     public void handleBack(ActionEvent actionEvent) {
 
     }
+
+    public void handleAddNewDepartment(ActionEvent actionEvent) {
+    }
 }

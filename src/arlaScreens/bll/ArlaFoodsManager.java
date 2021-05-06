@@ -16,13 +16,13 @@ import java.util.List;
 public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
 
     private LoginDAO loginDAO;
-    private DepartmentDAO depDAO;
+    private DepartmentDAO departmentDAO;
     private AdminDAO adminDAO;
     private ScreenConfigDAO cfgDAO;
 
     public ArlaFoodsManager() throws IOException {
         loginDAO = new LoginDAO();
-        depDAO = new DepartmentDAO();
+        departmentDAO = new DepartmentDAO();
         adminDAO = new AdminDAO();
         cfgDAO = new ScreenConfigDAO();
     }
@@ -34,17 +34,22 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
 
     @Override
     public List<User> getAllDep() throws SQLException {
-        return depDAO.getAllDep();
+        return departmentDAO.getAllDep();
     }
 
     @Override
     public void updateDep(User chosenDep, String updatedDep) throws SQLException {
-        depDAO.updateDep(chosenDep, updatedDep);
+        departmentDAO.updateDep(chosenDep, updatedDep);
     }
 
     @Override
     public User createDep(String username, String password, String depName) throws SQLException {
-        return depDAO.createDep(username, password, depName);
+        return departmentDAO.createDep(username, password, depName);
+    }
+
+    @Override
+    public Department deleteDep(Department department) throws SQLException {
+        return departmentDAO.deleteDepartment(department);
     }
 
     @Override

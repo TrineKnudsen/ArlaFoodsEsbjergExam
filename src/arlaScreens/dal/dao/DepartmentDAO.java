@@ -76,10 +76,17 @@ public class DepartmentDAO {
         }
     }
 
-    public void deleteDepartment (Department depToDelete) throws SQLException {
+    public Department deleteDepartment (Department depToDelete) throws SQLException {
         try (Connection con = connectionPool.checkOut()){
             PreparedStatement statement = con.prepareStatement("DELETE FROM Department WHERE id =?;");
             statement.setInt(1, depToDelete.getId());
+            if(statement.executeUpdate() != 1) {
+                throw new Exception("Could not delete department"+ depToDelete.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return null;
     }
+
 }
