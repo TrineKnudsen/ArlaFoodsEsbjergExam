@@ -51,10 +51,14 @@ public class MainController implements Initializable {
         Department user = loginModel.getUserLogin(username, password);
         Department admin = loginModel.getAdminLogin(username, password);
 
-        if (user != null && user.getId() == 2){
-            getScreen(event, "/arlaScreens/gui/view/DepLogistics.fxml", user.getName());
-        } else if (admin != null && admin.getName() == "Admin") {
-            getScreen(event, "/arlaScreens/gui/view/DepAdmin.fxml", admin.getName());
+        if (user != null && user.getId() == 2) {
+            getScreen(event, "/arlaScreens/gui/view/dep/Dep1.fxml", user.getName());
+        } else if (user != null && user.getId() == 16) {
+            getScreen(event, "/arlaScreens/gui/view/dep/Dep16.fxml", user.getName());
+        } else if (user != null && user.getId() == 18) {
+            getScreen(event, "/arlaScreens/gui/view/dep/Dep18.fxml", user.getName());
+        } else if (admin != null && admin.getId() == 16) {
+            getScreen(event, "/arlaScreens/gui/view/admin/DepAdmin.fxml", "Admin");
         }
     }
 

@@ -49,7 +49,7 @@ public class LoginDAO {
             statement.setString(2, password);
             statement.execute();
 
-            Department user = null;
+            User user = null;
             ResultSet resultSet = statement.getResultSet();
             while (resultSet.next()) {
                 int depId = resultSet.getInt("id");
@@ -69,7 +69,7 @@ public class LoginDAO {
             statement1.setString(2, password);
             statement1.execute();
 
-            Department admin = null;
+            Admin admin = null;
 
             ResultSet resultSetAdmin = statement1.getResultSet();
 

@@ -1,19 +1,14 @@
-package arlaScreens.gui.controller;
+package arlaScreens.gui.controller.dep;
 
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.gui.model.DepartmentModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Dimension2D;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -21,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class LogisticsController implements Initializable {
+public class Dep1Controller implements Initializable {
 
     DepartmentModel depModel;
     List<ScreenCFG> screenCFGList;
