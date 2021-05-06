@@ -1,7 +1,7 @@
 package arlaScreens.gui.controller;
 
-import arlaScreens.be.Admin;
-import arlaScreens.be.User;
+import arlaScreens.be.Department;
+import arlaScreens.gui.model.LoginModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import arlaScreens.gui.model.LoginModel;
 
 import java.io.IOException;
 import java.net.URL;
@@ -49,24 +48,23 @@ public class MainController implements Initializable {
         String username = txtFieldUsername.getText().trim();
         String password = txtFieldPassword.getText().trim();
 
-        User user = loginModel.getUserLogin(username, password);
-        Admin admin = loginModel.getAdminLogin(username, password);
+        Department user = loginModel.getUserLogin(username, password);
+        Department admin = loginModel.getAdminLogin(username, password);
 
-        if (user != null && admin == null){
-            Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepLogistics.fxml"));
-            Scene mainWindowScene = new Scene(mainWindowParent);
-            Stage adminStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            adminStage.setScene(mainWindowScene);
-            adminStage.setTitle("Department");
-            adminStage.show();
-        } else if (user == null && admin != null) {
-            Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepAdmin.fxml"));
-            Scene mainWindowScene = new Scene(mainWindowParent);
-            Stage adminStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            adminStage.setScene(mainWindowScene);
-            adminStage.setTitle("Admin Controls");
-            adminStage.show();
+        if (user != null && user.getId() == 2){
+            getScreen(event, "/arlaScreens/gui/view/DepLogistics.fxml", user.getName());
+        } else if (admin != null && admin.getName() == "Admin") {
+            getScreen(event, "/arlaScreens/gui/view/DepAdmin.fxml", admin.getName());
         }
+    }
+
+    public void getScreen(ActionEvent event, String view, String title) throws IOException {
+        Parent mainwindow = FXMLLoader.load(getClass().getResource(view));
+        Scene mainWinsowScene = new Scene(mainwindow);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(mainWinsowScene);
+        stage.setTitle(title);
+        stage.show();
     }
 
     public void handleAdminControls(ActionEvent actionEvent) throws IOException {

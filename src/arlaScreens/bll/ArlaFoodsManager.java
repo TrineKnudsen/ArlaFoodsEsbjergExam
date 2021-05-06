@@ -64,12 +64,12 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
 
 
     @Override
-    public Admin getAdminLogin(String username, String password) throws SQLException {
+    public Department getAdminLogin(String username, String password) throws SQLException {
         return loginDAO.getAdminLogin(username, password);
     }
 
     @Override
-    public User getUserLogin(String username, String password) throws SQLException {
+    public Department getUserLogin(String username, String password) throws SQLException {
         return loginDAO.getUserLogin(username, password);
     }
 }

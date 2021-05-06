@@ -35,37 +35,29 @@ public class LoginDAO {
         } return true;
     }
 
-    public User getUserLogin(String username, String password) throws SQLException{
-        String sql = "SELECT Department.depName, Department.id, ScreenCFG.url, Department.IsAdmin, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex " +
+    public Department getUserLogin(String username, String password) throws SQLException{
+        String sql = "SELECT id, depName, IsAdmin " +
                 "FROM Department " +
-                "INNER JOIN " +
-                "ScreenCFG ON Department.id = ScreenCFG.depId " +
-                "WHERE Username = ? AND Password = ?;";
+                "WHERE Username = ? AND Password = ?";
         try (Connection connection = connectionPool.checkOut()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
             statement.setString(2, password);
             statement.execute();
 
-            ScreenCFG screenCFG = null;
-            User user = null;
+            Department user = null;
             ResultSet resultSet = statement.getResultSet();
             while (resultSet.next()) {
-                int rowIndex = resultSet.getInt("RowIndex");
-                int columnIndex = resultSet.getInt("ColumnIndex");
-                String url = resultSet.getString("url");
-                screenCFG = new ScreenCFG(rowIndex, columnIndex, url);
-
-
                 int depId = resultSet.getInt("id");
                 int type = resultSet.getInt("IsAdmin");
                 String depName = resultSet.getString("depName");
-                user = new User(depId, depName, type, screenCFG);
-            }return user;
+                user = new User(depId, depName, type);
+            }
+            return user;
         }
     }
 
-    public Admin getAdminLogin(String username, String password) throws SQLException {
+    public Department getAdminLogin(String username, String password) throws SQLException {
         String sqlAdmin = "SELECT id, IsAdmin FROM Admin WHERE Username = ? AND Password = ?";
         try (Connection connection = connectionPool.checkOut()) {
             PreparedStatement statement1 = connection.prepareStatement(sqlAdmin);
@@ -73,7 +65,7 @@ public class LoginDAO {
             statement1.setString(2, password);
             statement1.execute();
 
-            Admin admin = null;
+            Department admin = null;
 
             ResultSet resultSetAdmin = statement1.getResultSet();
 

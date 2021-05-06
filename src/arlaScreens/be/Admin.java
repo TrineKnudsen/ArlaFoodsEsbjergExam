@@ -5,6 +5,7 @@ public class Admin extends Department{
     private int id;
     private String username;
     private String password;
+    String name = "Admin";
 
     public Admin(int id, String name, int type, String username, String password) {
         super(id, name, type);

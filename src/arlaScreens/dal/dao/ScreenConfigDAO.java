@@ -1,6 +1,7 @@
 package arlaScreens.dal.dao;
 
 import arlaScreens.be.ScreenCFG;
+import arlaScreens.be.User;
 import arlaScreens.dal.JDBCConnectionPool;
 
 import java.io.IOException;
@@ -18,7 +19,11 @@ public class ScreenConfigDAO {
 
     public List<ScreenCFG> getCFG(int depId) throws SQLException{
         List<ScreenCFG> screenCFGList = new ArrayList<>();
-        String sql = "SELECT url, ColumnIndex, RowIndex FROM ScreenCFG WHERE depId = ?;";
+        String sql = "SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, Department.id, Department.depName, Department.IsAdmin " +
+                "FROM ScreenCFG " +
+                "INNER JOIN Department " +
+                "ON ScreenCFG.depId = Department.id " +
+                "WHERE depId = ?";
 
         try (Connection con = connectionPool.checkOut()){
             PreparedStatement st = con.prepareStatement(sql);
@@ -27,11 +32,16 @@ public class ScreenConfigDAO {
 
             ResultSet rs = st.getResultSet();
             while (rs.next()){
+
+                int id = rs.getInt("id");
+                String name = rs.getString("depName");
+                int type = rs.getInt("IsAdmin");
                 int rowIndex = rs.getInt("RowIndex");
                 int colIndex = rs.getInt("ColumnIndex");
                 String url = rs.getString("url");
 
-                ScreenCFG screenCFG = new ScreenCFG(rowIndex, colIndex, url);
+                User user = new User(id, name, type);
+                ScreenCFG screenCFG = new ScreenCFG(rowIndex, colIndex, url, user);
                 screenCFGList.add(screenCFG);
             }
             return screenCFGList;
@@ -51,7 +61,7 @@ public class ScreenConfigDAO {
 
             ResultSet rs = ps.getGeneratedKeys();
 
-            ScreenCFG screenCFG = new ScreenCFG(rowIndex, colIndex, imgUrl);
+            ScreenCFG screenCFG = new ScreenCFG(rowIndex, colIndex, imgUrl, null);
             return screenCFG;
         } catch (SQLException exception) {
             throw new SQLException("Could not create ScreenCFG", exception);

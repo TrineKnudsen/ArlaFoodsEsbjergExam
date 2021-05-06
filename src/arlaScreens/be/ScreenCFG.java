@@ -5,11 +5,13 @@ public class ScreenCFG {
     private int rowIndex;
     private int colIndex;
     private String imgUrl;
+    private User user;
 
-    public ScreenCFG(int rowIndex, int colIndex, String imgUrl) {
+    public ScreenCFG(int rowIndex, int colIndex, String imgUrl, User user) {
         this.rowIndex = rowIndex;
         this.colIndex = colIndex;
         this.imgUrl = imgUrl;
+        this.user = user;
     }
 
     public int getRowIndex() {
@@ -34,5 +36,13 @@ public class ScreenCFG {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

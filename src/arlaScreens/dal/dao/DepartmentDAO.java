@@ -22,23 +22,18 @@ public class DepartmentDAO {
         List<User> allDeps = new ArrayList<>();
         Connection connection = connectionPool.checkOut();
         try (Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT Department.id, Department.depName, Department.IsAdmin, ScreenCFG.id, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, ScreenCFG.url " +
-                    "FROM Department INNER JOIN ScreenCFG ON Department.id = ScreenCFG.depId");
+            ResultSet resultSet = statement.executeQuery("SELECT id, depName, IsAdmin " +
+                    "FROM Department");
 
             ScreenCFG screenCFG = null;
             User dep = null;
             while (resultSet.next()) {
-                int columnIndex = resultSet.getInt("ColumnIndex");
-                int rowIndex = resultSet.getInt("RowIndex");
-                String url = resultSet.getString("url");
                 int type = resultSet.getInt("IsAdmin");
-                screenCFG = new ScreenCFG(rowIndex, columnIndex, url);
-
                 int id = resultSet.getInt("id");
                 String depName = resultSet.getString("depName");
 
 
-                dep = new User(id, depName, type, screenCFG);
+                dep = new User(id, depName, type);
                 allDeps.add(dep);
             }
             return allDeps;
@@ -75,7 +70,7 @@ public class DepartmentDAO {
             while (rs.next()){
                 id = rs.getInt(1);
 
-                dep = new User(id, depName, 0, null);
+                dep = new User(id, depName, 0);
             }
             return dep;
         }

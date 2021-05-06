@@ -3,7 +3,7 @@ package arlaScreens.gui.controller;
 import arlaScreens.be.Department;
 import arlaScreens.be.User;
 import arlaScreens.bll.util.UserError;
-import arlaScreens.gui.Model.DepartmentModel;
+import arlaScreens.gui.model.DepartmentModel;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.ObservableList;
@@ -45,7 +45,7 @@ public class AdminController implements Initializable {
             departmentModel = new DepartmentModel();
 
             allDep = departmentModel.getAllDep();
-//            deplst.getItems().addAll(allDep);
+            deplst.getItems().addAll(allDep);
         } catch (IOException | SQLException exception) {
             exception.printStackTrace();
         }
