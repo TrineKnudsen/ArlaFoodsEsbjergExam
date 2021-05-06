@@ -19,7 +19,7 @@ public class ScreenConfigDAO {
 
     public List<ScreenCFG> getCFG(int depId) throws SQLException{
         List<ScreenCFG> screenCFGList = new ArrayList<>();
-        String sql = "SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, Department.id, Department.depName, Department.IsAdmin " +
+        String sql = "SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, ScreenCFG.FileType, Department.id, Department.depName, Department.IsAdmin " +
                 "FROM ScreenCFG " +
                 "INNER JOIN Department " +
                 "ON ScreenCFG.depId = Department.id " +
@@ -39,17 +39,18 @@ public class ScreenConfigDAO {
                 int rowIndex = rs.getInt("RowIndex");
                 int colIndex = rs.getInt("ColumnIndex");
                 String url = rs.getString("url");
+                String fileName = rs.getString("FileType");
 
                 User user = new User(id, name, type);
-                ScreenCFG screenCFG = new ScreenCFG(rowIndex, colIndex, url, user);
+                ScreenCFG screenCFG = new ScreenCFG(rowIndex, colIndex, url, fileName, user);
                 screenCFGList.add(screenCFG);
             }
             return screenCFGList;
         }
     }
 
-    public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String imgUrl) throws SQLException {
-        String sql = "INSERT INTO ScreenCFG (rowIndex, colIndex, imgUrl) VALUES(?,?,?) where depId = ?;";
+    public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String fileName, String imgUrl) throws SQLException {
+        String sql = "INSERT INTO ScreenCFG (rowIndex, colIndex, imgUrl, FileType) VALUES(?,?,?) where depId = ?;";
         Connection con = connectionPool.checkOut();
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -57,11 +58,10 @@ public class ScreenConfigDAO {
             ps.setInt(2, colIndex);
             ps.setString(3, imgUrl);
             ps.setInt(4, depId);
+            ps.setString(5, fileName);
             ps.executeUpdate();
 
-            ResultSet rs = ps.getGeneratedKeys();
-
-            ScreenCFG screenCFG = new ScreenCFG(rowIndex, colIndex, imgUrl, null);
+            ScreenCFG screenCFG = new ScreenCFG(rowIndex, colIndex, fileName, imgUrl, null);
             return screenCFG;
         } catch (SQLException exception) {
             throw new SQLException("Could not create ScreenCFG", exception);
