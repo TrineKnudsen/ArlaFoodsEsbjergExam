@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxWidth="300.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.Controller.NewAdminController">
+<AnchorPane maxWidth="300.0" minWidth="300.0" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.NewAdminController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: .5;">
          <image>

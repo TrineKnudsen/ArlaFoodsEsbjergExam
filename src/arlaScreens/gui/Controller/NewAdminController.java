@@ -1,4 +1,4 @@
-package arlaScreens.gui.Controller;
+package arlaScreens.gui.controller;
 
 import arlaScreens.bll.ArlaFoodsManager;
 import arlaScreens.bll.IArlaFoodsLogicFacade;
@@ -26,14 +26,18 @@ public class NewAdminController {
 
 
     public void handleAddNewAdmin(ActionEvent actionEvent) throws SQLException {
-        if(txtFieldPass1.getText().trim().equalsIgnoreCase(txtFieldPass2.getText().trim())) {
-            adminModel.createAdmin(txtFieldUsername.getText(), txtFieldPass1.getText());
-            error.info("Admin successfully added to database");
+        if (txtFieldUsername.getText().isEmpty()) {
+            error.error("Enter a username");
         }
-        else {error.error("Passwords don't match");
+        else if (txtFieldPass1.getText().trim().equalsIgnoreCase(txtFieldPass2.getText().trim()) && !txtFieldUsername.getText().isEmpty() && !txtFieldPass1.getText().isEmpty()) {
+            adminModel.createAdmin(txtFieldUsername.getText(), txtFieldPass1.getText());
+        }
+        else {
+            error.error("Passwords don't match");
         }
     }
 
     public void handleBack(ActionEvent actionEvent) {
+
     }
 }

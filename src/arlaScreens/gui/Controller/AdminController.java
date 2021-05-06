@@ -1,4 +1,4 @@
-package arlaScreens.gui.Controller;
+package arlaScreens.gui.controller;
 
 import arlaScreens.be.Department;
 import arlaScreens.be.User;
