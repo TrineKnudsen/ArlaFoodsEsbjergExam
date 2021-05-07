@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchor" maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="300.0" prefWidth="300.0" styleClass="anchor" stylesheets="@../../../Main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.MainController">
+<AnchorPane fx:id="anchor" maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="300.0" prefWidth="300.0" styleClass="anchor" stylesheets="@../../../Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.MainController">
    <children>
         <AnchorPane layoutX="35.0" maxHeight="400.0" maxWidth="300.0" minHeight="400.0" minWidth="200.0" prefWidth="230.0">
             <children>
@@ -20,7 +20,6 @@
                   <Image url="@../../../pictures/ArlaLogo.png" />
                </image>
             </ImageView>
-            <Button layoutX="164.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleAdminControls" text="Admin" />
             </children>
       </AnchorPane>
    </children>

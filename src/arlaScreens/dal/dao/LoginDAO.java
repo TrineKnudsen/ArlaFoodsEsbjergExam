@@ -3,10 +3,8 @@ package arlaScreens.dal.dao;
 import arlaScreens.be.Admin;
 import arlaScreens.be.Department;
 import arlaScreens.be.User;
-import arlaScreens.be.ScreenCFG;
 import arlaScreens.bll.util.CustomError;
 import arlaScreens.dal.JDBCConnectionPool;
-
 
 import java.io.IOException;
 import java.sql.*;
@@ -77,7 +75,6 @@ public class LoginDAO {
                 int id = resultSetAdmin.getInt("id");
                 int type = resultSetAdmin.getInt("ISAdmin");
                 admin = new Admin(id, "Admin", type, username, password);
-                error.info("Login successful");
             }
             return admin;
         }

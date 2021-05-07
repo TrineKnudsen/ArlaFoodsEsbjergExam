@@ -33,11 +33,6 @@ public class AdminDAO {
             }
             Admin admin = new Admin(id, "Admin", type, username, password);
             return admin;
-        } catch (SQLException e){
-            throw new SQLException("Failed to create Admin", e);
-        } finally {
-            connectionPool.checkIn(con);
         }
     }
-
 }

@@ -84,6 +84,4 @@ public class MainController implements Initializable {
         Platform.exit();
         System.exit(0);
     }
-
-
 }

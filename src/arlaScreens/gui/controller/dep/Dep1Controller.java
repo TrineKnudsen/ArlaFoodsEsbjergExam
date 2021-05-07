@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,30 +40,28 @@ public class Dep1Controller implements Initializable {
                 GridPane.setConstraints(imageView, screenCFG.getColIndex(), screenCFG.getRowIndex());
                 GridPane.setConstraints(imageView, screenCFG.getColIndex(), screenCFG.getRowIndex());
                 grid.getChildren().addAll(imageView);
-                imageView.setFitHeight(200);
-                imageView.setFitWidth(300);
+                grid.setPrefSize(Window.getWindows().size(), Window.getWindows().size());
+                imageView.setFitHeight(450);
+                imageView.setFitWidth(800);
             }
 
             anchorpane.getChildren().add(grid);
-        }
-        catch(IOException exception){
+        } catch (IOException exception) {
             exception.printStackTrace();
-        } catch(SQLException throwables){
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        }
-
+    }
 
     /**public void handleBtn(ActionEvent event){
-        try {
-            Parent MainParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepAdmin.fxml"));
-            Scene MainScene = new Scene(MainParent);
-            Stage addMovieStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            addMovieStage.setScene(MainScene);
-            addMovieStage.show();
-        } catch (IOException ex){
-            ex.printStackTrace();
-        }
-
-    }**/
+     try {
+     Parent MainParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepAdmin.fxml"));
+     Scene MainScene = new Scene(MainParent);
+     Stage addMovieStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+     addMovieStage.setScene(MainScene);
+     addMovieStage.show();
+     } catch (IOException ex){
+     ex.printStackTrace();
+     }
+     }**/
 }
