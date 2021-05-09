@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -38,6 +39,8 @@ public class AdminController implements Initializable {
     private TextField userField;
     @FXML
     private TextField passField;
+
+    public AnchorPane arlaAnchorPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -104,4 +107,20 @@ public class AdminController implements Initializable {
             UserError.displayError(ERROR_HEADER, e.getMessage());
         }
     }
+
+    public void handleLogout(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/arlaScreens/gui/view/Main.fxml"));
+        Parent main = loader.load();
+        Scene mainScene = new Scene(main);
+        Stage window = (Stage)arlaAnchorPane.getScene().getWindow();
+        window.setScene(mainScene);
+        window.show();
+    }
+
+    public void handleExit(ActionEvent actionEvent) {
+
+    }
+
+
 }

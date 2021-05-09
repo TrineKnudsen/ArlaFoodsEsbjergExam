@@ -29,7 +29,7 @@ public class AdminDAO {
             int type = 0;
             if (resultSet.next()) {
                 id = resultSet.getInt(1);
-                type = resultSet.getInt("IsAmin");
+                type = resultSet.getInt("IsAdmin");
             }
             Admin admin = new Admin(id, "Admin", type, username, password);
             return admin;

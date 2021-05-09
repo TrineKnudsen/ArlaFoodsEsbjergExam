@@ -10,11 +10,6 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.admin.NewAdminController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="300.0" pickOnBounds="true">
-         <image>
-            <Image url="@../../../../pictures/doge_touching_glasses.jpg" />
-         </image>
-      </ImageView>
       <Label layoutX="80.0" layoutY="14.0" text="Add new">
          <font>
             <Font size="36.0" />
