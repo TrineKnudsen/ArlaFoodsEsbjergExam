@@ -61,7 +61,7 @@ public class AdminController implements Initializable {
         admin.getName();
     }
 
-    public void handleCreateDep(ActionEvent event) throws SQLException {
+    public void handleadd(ActionEvent event) throws SQLException {
         String name = newNameField.getText().trim();
         String username = userField.getText().trim();
         String password = passField.getText().trim();
@@ -71,7 +71,7 @@ public class AdminController implements Initializable {
         deplst.setItems(allDep);
     }
 
-    public void handleAddNewAdmin(ActionEvent actionEvent) throws IOException {
+    public void handleCreateDep(ActionEvent actionEvent) throws IOException {
         Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/view/admin/NewAdmin.fxml"));
         Scene mainWindowScene = new Scene(mainWindowParent);
         Stage adminStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

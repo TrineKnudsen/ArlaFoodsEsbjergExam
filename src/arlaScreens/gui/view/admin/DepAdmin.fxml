@@ -48,7 +48,7 @@
                </VBox.margin></JFXTextField>
             <ButtonBar prefHeight="40.0" prefWidth="285.0">
               <buttons>
-                  <Button maxWidth="0.0" minWidth="20.0" mnemonicParsing="false" prefHeight="26.0" text="Edit name">
+                  <Button maxWidth="0.0" minWidth="20.0" mnemonicParsing="false" onAction="#handleUpdateDepartment" prefHeight="26.0" text="Edit name">
                      <padding>
                         <Insets right="3.0" />
                      </padding>
@@ -61,11 +61,6 @@
             </ButtonBar>
             <ButtonBar buttonMinWidth="100.0" prefHeight="40.0" prefWidth="300.0">
               <buttons>
-                      <Button minWidth="54.0" mnemonicParsing="false" onAction="#handleCreateDep" prefHeight="26.0" prefWidth="138.0" text="Add department">
-                     <padding>
-                        <Insets left="5.0" right="5.0" />
-                     </padding>
-                      </Button>
                       <Button mnemonicParsing="false" onAction="#handleDeleteDepartment" text="Delete department" />
               </buttons>
                <VBox.margin>
@@ -73,13 +68,12 @@
                </VBox.margin>
             </ButtonBar>
             <ButtonBar buttonMinWidth="20.0" maxWidth="250.0" prefHeight="40.0" prefWidth="290.0">
-              <buttons>
-                <Button mnemonicParsing="false" onAction="#handleAddNewAdmin" text="Add admin" />
-                  <Button mnemonicParsing="false" text="Button" />
-              </buttons>
                <VBox.margin>
                   <Insets right="62.0" />
                </VBox.margin>
+               <buttons>
+                  <Button mnemonicParsing="false" onAction="#handleCreateDep" prefHeight="26.0" prefWidth="154.0" text="Add department or admin" />
+               </buttons>
             </ButtonBar>
             </children>
         </VBox>

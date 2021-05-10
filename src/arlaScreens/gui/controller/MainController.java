@@ -1,9 +1,8 @@
 package arlaScreens.gui.controller;
 
-import arlaScreens.be.Admin;
 import arlaScreens.be.Department;
 import arlaScreens.gui.controller.admin.AdminController;
-import arlaScreens.gui.controller.dep.Dep1Controller;
+import arlaScreens.gui.controller.dep.DepController;
 import arlaScreens.gui.model.LoginModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -17,7 +16,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,8 +24,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
-
-    private Department dep;
 
     @FXML
     public PasswordField txtFieldPassword;
@@ -58,8 +54,8 @@ public class MainController implements Initializable {
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
             Parent root = loader.load(getClass().getResource("/arlaScreens/gui/view/dep/Dep1.fxml").openStream());
-            Dep1Controller dep1Controller = (Dep1Controller)loader.getController();
-            dep1Controller.getDep(dep);
+            DepController depController = (DepController)loader.getController();
+            depController.getDep(dep);
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();

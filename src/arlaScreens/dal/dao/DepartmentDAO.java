@@ -52,32 +52,23 @@ public class DepartmentDAO {
         }
     }
 
-//    public User createDep(String username, String password, String depName) throws SQLException {
-//        String sql = "INSERT INTO Login(username, password) VALUES(?,?);";
-//        String sql2 = "INSERT INTO Department(depName, depLoginId) VALUES(?, (SELECT MAX(id) FROM [Login]));";
-//        try (Connection con = connectionPool.checkOut()) {
-//            PreparedStatement st = con.prepareStatement(sql);
-//            st.setString(1, username);
-//            st.setString(2, password);
-//            st.executeUpdate();
-//
-//            PreparedStatement st2 = con.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
-//            st2.setString(1, depName);
-//            st2.executeUpdate();
-//
-//            User dep = null;
-//            ResultSet rs = st2.getGeneratedKeys();
-//            int id= 0;
-//            while (rs.next()){
-//                id = rs.getInt(1);
-//
-//                dep = new User(id, depName, 0);
-//            }
-//            return dep;
-//        }
-//    }
-
     public User createDep(String username, String password, String depName) throws SQLException {
+        int id = getNextAvailableDepartmentID();
+        String sql = "INSERT INTO Department(id, Username, Password, depName) VALUES(?,?,?,?);";
+        try (Connection con = connectionPool.checkOut()) {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setInt(1, id);
+            st.setString(2, username);
+            st.setString(3, password);
+            st.setString(4, depName);
+            st.executeUpdate();
+
+            User dep = new User(id, depName, 0);
+            return dep;
+        }
+    }
+
+    /**public User createDep(String username, String password, String depName) throws SQLException {
         String sql = "INSERT INTO Login(username, password) VALUES(?,?);";
         String sql2 = "INSERT INTO Department(depName, depLoginId) VALUES(?, (SELECT MAX(id) FROM [Login]));";
         try (Connection con = connectionPool.checkOut()) {
@@ -100,7 +91,7 @@ public class DepartmentDAO {
 //            }
             return new User(id, depName, 0);
         }
-    }
+    }**/
 
     private int getNextAvailableDepartmentID() throws SQLException {
         List<User> allDepartments = getAllDep();

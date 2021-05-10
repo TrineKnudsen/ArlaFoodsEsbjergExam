@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class Dep1Controller implements Initializable {
+public class DepController implements Initializable {
 
     DepartmentModel depModel;
     List<ScreenCFG> screenCFGList;

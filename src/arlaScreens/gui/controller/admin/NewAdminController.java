@@ -2,11 +2,15 @@ package arlaScreens.gui.controller.admin;
 
 import arlaScreens.bll.util.CustomError;
 import arlaScreens.gui.model.AdminModel;
+import arlaScreens.gui.model.DepartmentModel;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -14,28 +18,39 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class NewAdminController {
-    public TextField txtFieldUsername;
-    public TextField txtFieldPass1;
-    public TextField txtFieldPass2;
+
+    @FXML
+    private TextField txtFieldUsername;
+    @FXML
+    private TextField depNameTxt;
+    @FXML
+    private PasswordField passwordTxt;
+    @FXML
+    private PasswordField password2Txt;
+    @FXML
+    private CheckBox checkAdminBox;
+
     private AdminModel adminModel;
+    private DepartmentModel departmentModel;
     private CustomError error = new CustomError();
 
-    public NewAdminController() throws IOException {
+    public NewAdminController() throws IOException, SQLException {
         adminModel = new AdminModel();
+        departmentModel= new DepartmentModel();
     }
 
+    public void handleSaveUser(ActionEvent actionEvent) throws SQLException, IOException {
+        String depName = depNameTxt.getText().trim();
+        String username = txtFieldUsername.getText().trim();
+        String password1 = passwordTxt.getText().trim();
+        String password2 = password2Txt.getText().trim();
 
-
-    public void handleAddNewAdmin(ActionEvent actionEvent) throws SQLException {
-        if (txtFieldUsername.getText().isEmpty()) {
-            error.error("Enter a username");
+        if (username != null && password1.equalsIgnoreCase(password2) && checkAdminBox.isSelected()) {
+            adminModel.createAdmin(username, password1);
+        }  else if (depName != null && username != null && password1.equalsIgnoreCase(password2) && !checkAdminBox.isSelected()) {
+            departmentModel.createDep(username, password1, depName);
         }
-        else if (txtFieldPass1.getText().trim().equalsIgnoreCase(txtFieldPass2.getText().trim()) && !txtFieldUsername.getText().isEmpty() && !txtFieldPass1.getText().isEmpty()) {
-            adminModel.createAdmin(txtFieldUsername.getText(), txtFieldPass1.getText());
-        }
-        else {
-            error.error("Passwords don't match");
-        }
+        handleBack(actionEvent);
     }
 
     public void handleBack(ActionEvent actionEvent) throws IOException {
