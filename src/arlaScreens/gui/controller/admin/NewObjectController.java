@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class NewAdminController {
+public class NewObjectController {
 
     @FXML
     private TextField txtFieldUsername;
@@ -34,7 +34,7 @@ public class NewAdminController {
     private DepartmentModel departmentModel;
     private CustomError error = new CustomError();
 
-    public NewAdminController() throws IOException, SQLException {
+    public NewObjectController() throws IOException, SQLException {
         adminModel = new AdminModel();
         departmentModel= new DepartmentModel();
     }

@@ -72,7 +72,7 @@ public class AdminController implements Initializable {
     }
 
     public void handleCreateDep(ActionEvent actionEvent) throws IOException {
-        Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/view/admin/NewAdmin.fxml"));
+        Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/view/admin/NewObject.fxml"));
         Scene mainWindowScene = new Scene(mainWindowParent);
         Stage adminStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         adminStage.setScene(mainWindowScene);
