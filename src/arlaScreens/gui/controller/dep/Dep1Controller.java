@@ -1,9 +1,11 @@
 package arlaScreens.gui.controller.dep;
 
+import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.gui.model.DepartmentModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -11,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
 
 import java.io.IOException;
+import java.lang.module.Configuration;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,13 +29,21 @@ public class Dep1Controller implements Initializable {
     private GridPane grid;
     @FXML
     private AnchorPane anchorpane;
+    @FXML
+    private Label depname;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+    public void getDep(Department dep) throws SQLException {
         try {
             depModel = new DepartmentModel();
             screenCFGList = new ArrayList<>();
-            screenCFGList.addAll(depModel.getScreenCFGS(2));
+            depname.setText(dep.getName());
+            screenCFGList.addAll(depModel.getScreenCFGS(dep.getId()));
+
             grid = new GridPane();
 
             for (ScreenCFG screenCFG : screenCFGList) {
@@ -51,6 +62,7 @@ public class Dep1Controller implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
     }
 
     /**public void handleBtn(ActionEvent event){

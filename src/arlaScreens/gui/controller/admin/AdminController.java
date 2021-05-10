@@ -54,6 +54,10 @@ public class AdminController implements Initializable {
         }
     }
 
+    public void getAdmin(Department admin){
+        admin.getName();
+    }
+
     public void handleCreateDep(ActionEvent event) throws SQLException {
         String name = newNameField.getText().trim();
         String username = userField.getText().trim();

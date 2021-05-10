@@ -1,5 +1,6 @@
 package arlaScreens.gui.model;
 
+import arlaScreens.be.Admin;
 import arlaScreens.be.Department;
 import arlaScreens.bll.IArlaFoodsLogicFacade;
 import arlaScreens.bll.ArlaFoodsManager;

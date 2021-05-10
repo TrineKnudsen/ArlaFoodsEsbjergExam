@@ -1,6 +1,9 @@
 package arlaScreens.gui.controller;
 
+import arlaScreens.be.Admin;
 import arlaScreens.be.Department;
+import arlaScreens.gui.controller.admin.AdminController;
+import arlaScreens.gui.controller.dep.Dep1Controller;
 import arlaScreens.gui.model.LoginModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -14,6 +17,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,6 +26,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+
+    private Department dep;
 
     @FXML
     public PasswordField txtFieldPassword;
@@ -45,20 +51,28 @@ public class MainController implements Initializable {
     }
 
     public void handleBtnLogin(ActionEvent event) throws IOException, SQLException {
-        String username = txtFieldUsername.getText().trim();
-        String password = txtFieldPassword.getText().trim();
-
-        Department user = loginModel.getUserLogin(username, password);
-        Department admin = loginModel.getAdminLogin(username, password);
-
-        if (user != null && user.getId() == 2) {
-            getScreen(event, "/arlaScreens/gui/view/dep/Dep1.fxml", user.getName());
-        } else if (user != null && user.getId() == 16) {
-            getScreen(event, "/arlaScreens/gui/view/dep/Dep16.fxml", user.getName());
-        } else if (user != null && user.getId() == 18) {
-            getScreen(event, "/arlaScreens/gui/view/dep/Dep18.fxml", user.getName());
-        } else if (admin != null && admin.getId() == 16) {
-            getScreen(event, "/arlaScreens/gui/view/admin/DepAdmin.fxml", "Admin");
+        Department dep = loginModel.getUserLogin(txtFieldUsername.getText().trim(), txtFieldPassword.getText().trim());
+        Department admin = loginModel.getAdminLogin(txtFieldUsername.getText().trim(), txtFieldPassword.getText().trim());
+        if (dep != null){
+            ((Node)event.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            Parent root = loader.load(getClass().getResource("/arlaScreens/gui/view/dep/Dep1.fxml").openStream());
+            Dep1Controller dep1Controller = (Dep1Controller)loader.getController();
+            dep1Controller.getDep(dep);
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } else {
+            ((Node)event.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            Parent root = loader.load(getClass().getResource("/arlaScreens/gui/view/admin/DepAdmin.fxml").openStream());
+            AdminController adminController = loader.getController();
+            adminController.getAdmin(admin);
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
         }
     }
 
