@@ -3,7 +3,12 @@ package arlaScreens.gui.controller.admin;
 import arlaScreens.bll.util.CustomError;
 import arlaScreens.gui.model.AdminModel;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -33,10 +38,14 @@ public class NewAdminController {
         }
     }
 
-    public void handleBack(ActionEvent actionEvent) {
+    public void handleBack(ActionEvent actionEvent) throws IOException {
+        Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlascreens/gui/view/admin/DepAdmin.fxml"));
+        Scene mainWindowScene = new Scene(mainWindowParent);
+        Stage depAdmin = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        depAdmin.setScene(mainWindowScene);
+        depAdmin.setTitle("Admin");
+        depAdmin.show();
 
     }
 
-    public void handleAddNewDepartment(ActionEvent actionEvent) {
-    }
 }

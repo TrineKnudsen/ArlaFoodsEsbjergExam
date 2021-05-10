@@ -6,6 +6,7 @@ import arlaScreens.bll.util.UserError;
 import arlaScreens.gui.model.DepartmentModel;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
 
+
     private final String ERROR_HEADER = "Error occurred!";
     private DepartmentModel departmentModel;
     ObservableList<User> allDep;
@@ -39,8 +41,9 @@ public class AdminController implements Initializable {
     private TextField userField;
     @FXML
     private TextField passField;
+    @FXML
+    public AnchorPane anchor;
 
-    public AnchorPane arlaAnchorPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -115,15 +118,17 @@ public class AdminController implements Initializable {
     public void handleLogout(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/arlaScreens/gui/view/Main.fxml"));
-        Parent main = loader.load();
-        Scene mainScene = new Scene(main);
-        Stage window = (Stage)arlaAnchorPane.getScene().getWindow();
+        Parent mainWindowParent = loader.load();
+        Scene mainScene = new Scene(mainWindowParent);
+        Stage window = (Stage) anchor.getScene().getWindow();
         window.setScene(mainScene);
+        window.setTitle("Arla Foods-Esbjerg");
         window.show();
     }
 
     public void handleExit(ActionEvent actionEvent) {
-
+        Platform.exit();
+        System.exit(0);
     }
 
 

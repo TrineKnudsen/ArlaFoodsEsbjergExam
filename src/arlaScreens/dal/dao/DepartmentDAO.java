@@ -8,6 +8,7 @@ import arlaScreens.dal.JDBCConnectionPool;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class DepartmentDAO {
@@ -51,6 +52,31 @@ public class DepartmentDAO {
         }
     }
 
+//    public User createDep(String username, String password, String depName) throws SQLException {
+//        String sql = "INSERT INTO Login(username, password) VALUES(?,?);";
+//        String sql2 = "INSERT INTO Department(depName, depLoginId) VALUES(?, (SELECT MAX(id) FROM [Login]));";
+//        try (Connection con = connectionPool.checkOut()) {
+//            PreparedStatement st = con.prepareStatement(sql);
+//            st.setString(1, username);
+//            st.setString(2, password);
+//            st.executeUpdate();
+//
+//            PreparedStatement st2 = con.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+//            st2.setString(1, depName);
+//            st2.executeUpdate();
+//
+//            User dep = null;
+//            ResultSet rs = st2.getGeneratedKeys();
+//            int id= 0;
+//            while (rs.next()){
+//                id = rs.getInt(1);
+//
+//                dep = new User(id, depName, 0);
+//            }
+//            return dep;
+//        }
+//    }
+
     public User createDep(String username, String password, String depName) throws SQLException {
         String sql = "INSERT INTO Login(username, password) VALUES(?,?);";
         String sql2 = "INSERT INTO Department(depName, depLoginId) VALUES(?, (SELECT MAX(id) FROM [Login]));";
@@ -64,16 +90,33 @@ public class DepartmentDAO {
             st2.setString(1, depName);
             st2.executeUpdate();
 
-            User dep = null;
-            ResultSet rs = st2.getGeneratedKeys();
-            int id= 0;
-            while (rs.next()){
-                id = rs.getInt(1);
-
-                dep = new User(id, depName, 0);
-            }
-            return dep;
+//            User dep = null;
+//            ResultSet rs = st2.getGeneratedKeys();
+            int id = getNextAvailableDepartmentID();
+//            while (rs.next()){
+//                id = rs.getInt(1);
+//
+//                dep = new User(id, depName, 0);
+//            }
+            return new User(id, depName, 0);
         }
+    }
+
+    private int getNextAvailableDepartmentID() throws SQLException {
+        List<User> allDepartments = getAllDep();
+        if (allDepartments == null || allDepartments.isEmpty()) {
+            return 1;
+        }
+        allDepartments.sort(Comparator.comparingInt(Department::getId));
+        int id = allDepartments.get(0).getId();
+        for (int i = 0; i < allDepartments.size(); i++) {
+            if (allDepartments.get(i).getId() <= id) {
+                id++;
+            } else {
+                return id;
+            }
+        }
+        return id;
     }
 
     public Department deleteDepartment (Department depToDelete) throws SQLException {

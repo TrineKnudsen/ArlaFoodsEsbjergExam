@@ -85,14 +85,6 @@ public class MainController implements Initializable {
         stage.show();
     }
 
-    public void handleAdminControls(ActionEvent actionEvent) throws IOException {
-        Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/view/admin/AdminControls.fxml"));
-        Scene mainWindowScene = new Scene(mainWindowParent);
-        Stage adminStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        adminStage.setScene(mainWindowScene);
-        adminStage.setTitle("Admin controls");
-        adminStage.show();
-    }
 
     public void handleBtnExit (ActionEvent actionEvent){
         Platform.exit();
