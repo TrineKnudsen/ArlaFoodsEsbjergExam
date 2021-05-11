@@ -1,6 +1,5 @@
 package arlaScreens.dal.dao;
 
-import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.be.User;
 import arlaScreens.dal.JDBCConnectionPool;
@@ -18,7 +17,7 @@ public class ScreenConfigDAO {
         connectionPool = JDBCConnectionPool.getInstance();
     }
 
-    public List<ScreenCFG> getCFG(int depId) throws SQLException{
+    public List<ScreenCFG> getCFG(int depId) throws SQLException {
         List<ScreenCFG> screenCFGList = new ArrayList<>();
         String sql = "SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, ScreenCFG.FileType, Department.id, Department.depName, Department.IsAdmin " +
                 "FROM ScreenCFG " +
@@ -26,13 +25,13 @@ public class ScreenConfigDAO {
                 "ON ScreenCFG.depId = Department.id " +
                 "WHERE depId = ?";
 
-        try (Connection con = connectionPool.checkOut()){
+        try (Connection con = connectionPool.checkOut()) {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, depId);
             st.execute();
 
             ResultSet rs = st.getResultSet();
-            while (rs.next()){
+            while (rs.next()) {
 
                 int id = rs.getInt("id");
                 String name = rs.getString("depName");
@@ -51,23 +50,38 @@ public class ScreenConfigDAO {
     }
 
     public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String fileName, String imgUrl) throws SQLException {
-        String sql = "INSERT INTO ScreenCFG (rowIndex, colIndex, imgUrl, FileType) VALUES(?,?,?) where depId = ?;";
-        Connection con = connectionPool.checkOut();
+        try (Connection con = connectionPool.checkOut()) {
+            PreparedStatement st1 = con.prepareStatement("INSERT INTO ScreenCFG(depId, RowIndex, ColumnIndex, url, FileType) VALUES(?,?,?,?,?");
+            st1.setInt(1, depId);
+            st1.setInt(2, rowIndex);
+            st1.setInt(3, colIndex);
+            st1.setString(4, imgUrl);
+            st1.setString(5, fileName);
+            st1.execute();
 
-        try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setInt(1, rowIndex);
-            ps.setInt(2, colIndex);
-            ps.setString(3, imgUrl);
-            ps.setInt(4, depId);
-            ps.setString(5, fileName);
-            ps.executeUpdate();
+            PreparedStatement st2 = con.prepareStatement("SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, ScreenCFG.FileType, Department.id, Department.depName, Department.IsAdmin " +
+                    "FROM ScreenCFG " +
+                    "INNER JOIN Department " +
+                    "ON ScreenCFG.depId = Department.id " +
+                    "WHERE depId = ?");
 
-            ScreenCFG screenCFG = new ScreenCFG(rowIndex, colIndex, fileName, imgUrl, null);
+            st1.setInt(1, depId);
+
+            ScreenCFG screenCFG = null;
+            st2.execute();
+            ResultSet rs = st2.getResultSet();
+            while (rs.next()) {
+                String name = rs.getString("depName");
+                int type = rs.getInt("IsAdmin");
+                int rrowIndex = rs.getInt("RowIndex");
+                int ccolIndex = rs.getInt("ColumnIndex");
+                String uimgUrl = rs.getString("url");
+                String ffileName = rs.getString("FileType");
+
+                User user = new User(depId, name, type);
+                screenCFG = new ScreenCFG(rrowIndex, ccolIndex, ffileName, uimgUrl, user);
+            }
             return screenCFG;
-        } catch (SQLException exception) {
-            throw new SQLException("Could not create ScreenCFG", exception);
-        } finally {
-            connectionPool.checkIn(con);
         }
     }
 }

@@ -102,7 +102,7 @@ public class AdminController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             Parent root = loader.load(getClass().getResource("/arlaScreens/gui/view/admin/EditCFG.fxml").openStream());
             CFGController cfgController = loader.getController();
-            cfgController.getDepartment(chosenDep);
+            cfgController.setDepartment(chosenDep);
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
