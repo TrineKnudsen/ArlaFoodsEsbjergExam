@@ -4,7 +4,6 @@ import arlaScreens.be.Department;
 import arlaScreens.be.User;
 import arlaScreens.bll.util.UserError;
 import arlaScreens.gui.model.DepartmentModel;
-import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -15,6 +14,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -31,11 +33,13 @@ public class AdminController implements Initializable {
     ObservableList<User> allDep;
 
     @FXML
-    private JFXListView<User> deplst;
-    @FXML
     private JFXTextField nameField;
     @FXML
-    public AnchorPane anchor;
+    private AnchorPane anchor;
+    @FXML
+    private TableView<User> deplst;
+    @FXML
+    private TableColumn<User, String> nameColumn;
 
 
     @Override
@@ -44,7 +48,8 @@ public class AdminController implements Initializable {
             departmentModel = new DepartmentModel();
 
             allDep = departmentModel.getAllDep();
-            deplst.getItems().addAll(allDep);
+            deplst.setItems(allDep);
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         } catch (IOException | SQLException exception) {
             exception.printStackTrace();
         }
@@ -64,16 +69,17 @@ public class AdminController implements Initializable {
     }
 
     public void handleUpdateDepartment(ActionEvent actionEvent) throws SQLException {
-        User chosenDep = deplst.getSelectionModel().getSelectedItem();
+        int chosenDep = deplst.getSelectionModel().getSelectedItem().getId();
         String updatedDep = nameField.getText().trim();
 
-        departmentModel.updateDep(chosenDep, updatedDep);
-        allDep = departmentModel.getAllDep();
-        deplst.getItems().addAll(allDep);
+        if (updatedDep != null){
+            departmentModel.updateDep(chosenDep, updatedDep);
+        }
+
     }
 
     public void handleDeleteDepartment(ActionEvent actionEvent) {
-        Department depToDelete = deplst.getSelectionModel().getSelectedItem();
+        User depToDelete = deplst.getSelectionModel().getSelectedItem();
         try {
             if (depToDelete != null) {
                 departmentModel.deleteDep(depToDelete);
@@ -90,15 +96,17 @@ public class AdminController implements Initializable {
     public void handleOpenCFG(ActionEvent event) throws IOException {
         Department chosenDep = deplst.getSelectionModel().getSelectedItem();
 
-        ((Node)event.getSource()).getScene().getWindow().hide();
-        Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader();
-        Parent root = loader.load(getClass().getResource("/arlaScreens/gui/view/admin/EditCFG.fxml"));
-        CFGController cfgController = new CFGController(chosenDep);
-        loader.setController(cfgController);
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        if (chosenDep != null) {
+            ((Node)event.getSource()).getScene().getWindow().hide();
+            Stage primaryStage = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            Parent root = loader.load(getClass().getResource("/arlaScreens/gui/view/admin/EditCFG.fxml").openStream());
+            CFGController cfgController = loader.getController();
+            cfgController.getDepartment(chosenDep);
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
     }
 
     public void handleLogout(ActionEvent actionEvent) throws IOException {

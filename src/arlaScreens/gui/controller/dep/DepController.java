@@ -13,7 +13,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
 
 import java.io.IOException;
-import java.lang.module.Configuration;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class DepController implements Initializable {
 
     }
 
-    public void getDep(Department dep) throws SQLException {
+    public void getDep(Department dep) {
         try {
             depModel = new DepartmentModel();
             screenCFGList = new ArrayList<>();
@@ -64,7 +63,6 @@ public class DepController implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 
     /**public void handleBtn(ActionEvent event){

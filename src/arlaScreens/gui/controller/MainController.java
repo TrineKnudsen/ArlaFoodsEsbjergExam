@@ -49,6 +49,7 @@ public class MainController implements Initializable {
     public void handleBtnLogin(ActionEvent event) throws IOException, SQLException {
         Department dep = loginModel.getUserLogin(txtFieldUsername.getText().trim(), txtFieldPassword.getText().trim());
         Department admin = loginModel.getAdminLogin(txtFieldUsername.getText().trim(), txtFieldPassword.getText().trim());
+
         if (dep != null){
             ((Node)event.getSource()).getScene().getWindow().hide();
             Stage primaryStage = new Stage();
@@ -70,15 +71,6 @@ public class MainController implements Initializable {
             primaryStage.setScene(scene);
             primaryStage.show();
         }
-    }
-
-    public void getScreen(ActionEvent event, String view, String title) throws IOException {
-        Parent mainwindow = FXMLLoader.load(getClass().getResource(view));
-        Scene mainWinsowScene = new Scene(mainwindow);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(mainWinsowScene);
-        stage.setTitle(title);
-        stage.show();
     }
 
     public void handleBtnExit (ActionEvent actionEvent){

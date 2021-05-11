@@ -14,7 +14,7 @@ public interface IArlaFoodsLogicFacade {
 
     List<User> getAllDep() throws SQLException;
 
-    void updateDep(User chosenDep, String updatedDep) throws SQLException;
+    void updateDep(int chosenDep, String updatedDep) throws SQLException;
 
     User createDep(String username, String password, String depName) throws SQLException;
 

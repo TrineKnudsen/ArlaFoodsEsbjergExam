@@ -41,12 +41,12 @@ public class DepartmentDAO {
         }
     }
 
-    public void updateDep(User chosenUser, String updatedName) throws SQLException {
+    public void updateDep(int chosenUser, String updatedName) throws SQLException {
         try (Connection con = connectionPool.checkOut()) {
-            String sql = "UPDATE Department SET depName = ? WHERE depName = ?;";
+            String sql = "UPDATE Department SET depName = ? WHERE id = ?;";
             PreparedStatement preparedStatement = con.prepareStatement(sql);
-            preparedStatement.setString(2, String.valueOf(chosenUser));
-            preparedStatement.setString(1, String.valueOf(updatedName));
+            preparedStatement.setString(1, updatedName);
+            preparedStatement.setInt(2, chosenUser);
 
             preparedStatement.execute();
         }

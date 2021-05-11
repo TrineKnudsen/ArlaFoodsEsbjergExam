@@ -31,7 +31,7 @@ public class DepartmentModel {
         return allDeps;
     }
 
-    public void updateDep(User chosenDep, String updatedDep) throws SQLException {
+    public void updateDep(int chosenDep, String updatedDep) throws SQLException {
         logicFacade.updateDep(chosenDep, updatedDep);
     }
 

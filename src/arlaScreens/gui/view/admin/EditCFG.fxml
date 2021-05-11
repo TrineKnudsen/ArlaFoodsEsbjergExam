@@ -7,14 +7,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.admin.CFGController">
    <children>
-      <TextField fx:id="columnField" layoutX="151.0" layoutY="131.0" />
-      <TextField fx:id="rowField" layoutX="151.0" layoutY="188.0" />
-      <Label layoutX="56.0" layoutY="135.0" text="Column" />
-      <Label layoutX="56.0" layoutY="192.0" text="Row" />
-      <TextField fx:id="fileNameField" layoutX="151.0" layoutY="246.0" />
-      <Label layoutX="54.0" layoutY="250.0" text="File name" />
-      <Label fx:id="deplbl" layoutX="145.0" layoutY="48.0" prefHeight="18.0" prefWidth="149.0" />
-      <Button layoutX="151.0" layoutY="303.0" mnemonicParsing="false" onAction="#handleOpenFile" prefHeight="26.0" prefWidth="149.0" text="Choose file" />
-      <Button fx:id="chosenFile" layoutX="373.0" layoutY="303.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="26.0" prefWidth="149.0" text="Save configuration" />
+      <TextField fx:id="columnField" layoutX="43.0" layoutY="99.0" promptText="Column" />
+      <TextField fx:id="rowField" layoutX="43.0" layoutY="154.0" promptText="Row" />
+      <TextField fx:id="fileNameField" layoutX="43.0" layoutY="208.0" promptText="File name" />
+      <Button fx:id="chosenFile" layoutX="43.0" layoutY="260.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" text="Choose file" />
+      <Button layoutX="250.0" layoutY="260.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="128.0" text="Save configuration" />
+      <Label fx:id="deplbl" layoutX="43.0" layoutY="39.0" prefHeight="18.0" prefWidth="128.0" />
    </children>
 </AnchorPane>
