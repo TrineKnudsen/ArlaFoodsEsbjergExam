@@ -43,6 +43,7 @@ public class DepController implements Initializable {
             screenCFGList = new ArrayList<>();
             depname.setText(dep.getName());
             screenCFGList.addAll(depModel.getScreenCFGS(dep.getId()));
+            anchorpane.setPrefSize(Window.getWindows().size()-50, Window.getWindows().size()-50);
 
             grid = new GridPane();
 
@@ -51,12 +52,13 @@ public class DepController implements Initializable {
                 GridPane.setConstraints(imageView, screenCFG.getColIndex(), screenCFG.getRowIndex());
                 GridPane.setConstraints(imageView, screenCFG.getColIndex(), screenCFG.getRowIndex());
                 grid.getChildren().addAll(imageView);
-                grid.setPrefSize(Window.getWindows().size(), Window.getWindows().size());
-                imageView.setFitHeight(450);
-                imageView.setFitWidth(800);
+                imageView.setFitHeight(400);
+                imageView.setFitWidth(790);
             }
 
+            anchorpane.setPrefSize(Window.getWindows().size()-50, Window.getWindows().size()-50);
             anchorpane.getChildren().add(grid);
+            grid.setGridLinesVisible(true);
         } catch (IOException exception) {
             exception.printStackTrace();
         } catch (SQLException throwables) {

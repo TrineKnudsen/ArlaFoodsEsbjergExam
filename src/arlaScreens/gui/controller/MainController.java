@@ -81,7 +81,6 @@ public class MainController implements Initializable {
         stage.show();
     }
 
-
     public void handleBtnExit (ActionEvent actionEvent){
         Platform.exit();
         System.exit(0);

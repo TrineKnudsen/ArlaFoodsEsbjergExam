@@ -62,5 +62,4 @@ public class NewObjectController {
         depAdmin.show();
 
     }
-
 }

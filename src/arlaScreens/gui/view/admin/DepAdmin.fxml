@@ -46,22 +46,19 @@
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin></JFXTextField>
-            <ButtonBar prefHeight="40.0" prefWidth="285.0">
-              <buttons>
-                  <Button maxWidth="0.0" minWidth="20.0" mnemonicParsing="false" onAction="#handleUpdateDepartment" prefHeight="26.0" text="Edit name">
-                     <padding>
-                        <Insets right="3.0" />
-                     </padding>
-                  </Button>
-                  <Button mnemonicParsing="false" text="Edit view" />
-              </buttons>
-               <VBox.margin>
-                  <Insets right="62.0" top="10.0" />
-               </VBox.margin>
-            </ButtonBar>
             <ButtonBar buttonMinWidth="100.0" prefHeight="40.0" prefWidth="300.0">
               <buttons>
                       <Button mnemonicParsing="false" onAction="#handleDeleteDepartment" text="Delete department" />
+                  <ButtonBar prefHeight="40.0" prefWidth="285.0">
+                    <buttons>
+                        <Button maxWidth="0.0" minWidth="20.0" mnemonicParsing="false" onAction="#handleUpdateDepartment" prefHeight="26.0" text="Edit name">
+                           <padding>
+                              <Insets right="3.0" />
+                           </padding>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#handleOpenCFG" text="Edit view" />
+                    </buttons>
+                  </ButtonBar>
               </buttons>
                <VBox.margin>
                   <Insets right="15.0" />

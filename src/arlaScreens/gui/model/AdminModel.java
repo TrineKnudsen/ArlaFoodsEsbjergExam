@@ -1,5 +1,6 @@
 package arlaScreens.gui.model;
 
+import arlaScreens.be.ScreenCFG;
 import arlaScreens.bll.ArlaFoodsManager;
 import arlaScreens.bll.IArlaFoodsLogicFacade;
 
@@ -16,5 +17,9 @@ public class AdminModel {
 
     public void createAdmin(String username, String password) throws SQLException {
         logicFacade.createAdmin(username, password);
+    }
+
+    public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String fileName, String imgUrl) throws SQLException {
+        return logicFacade.createCFG(depId, rowIndex, colIndex, fileName, imgUrl);
     }
 }

@@ -1,5 +1,6 @@
 package arlaScreens.dal.dao;
 
+import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.be.User;
 import arlaScreens.dal.JDBCConnectionPool;

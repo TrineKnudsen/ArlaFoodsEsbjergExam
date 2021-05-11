@@ -15,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -36,12 +35,6 @@ public class AdminController implements Initializable {
     @FXML
     private JFXTextField nameField;
     @FXML
-    private TextField newNameField;
-    @FXML
-    private TextField userField;
-    @FXML
-    private TextField passField;
-    @FXML
     public AnchorPane anchor;
 
 
@@ -61,16 +54,6 @@ public class AdminController implements Initializable {
         admin.getName();
     }
 
-    public void handleadd(ActionEvent event) throws SQLException {
-        String name = newNameField.getText().trim();
-        String username = userField.getText().trim();
-        String password = passField.getText().trim();
-
-        User dep = departmentModel.createDep(username, password, name);
-        allDep.add(dep);
-        deplst.setItems(allDep);
-    }
-
     public void handleCreateDep(ActionEvent actionEvent) throws IOException {
         Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/view/admin/NewObject.fxml"));
         Scene mainWindowScene = new Scene(mainWindowParent);
@@ -79,17 +62,6 @@ public class AdminController implements Initializable {
         adminStage.setTitle("Admin controls - new admin");
         adminStage.show();
     }
-
-    public void handleAddNewDepartment(ActionEvent actionEvent) throws IOException {
-        Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/view/admin/NewDepartment.fxml"));
-        Scene mainWindowScene = new Scene(mainWindowParent);
-        Stage adminStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        adminStage.setScene(mainWindowScene);
-        adminStage.setTitle("Admin controls - new department");
-        adminStage.show();
-    }
-
-
 
     public void handleUpdateDepartment(ActionEvent actionEvent) throws SQLException {
         User chosenDep = deplst.getSelectionModel().getSelectedItem();
@@ -115,6 +87,20 @@ public class AdminController implements Initializable {
         }
     }
 
+    public void handleOpenCFG(ActionEvent event) throws IOException {
+        Department chosenDep = deplst.getSelectionModel().getSelectedItem();
+
+        ((Node)event.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        Parent root = loader.load(getClass().getResource("/arlaScreens/gui/view/admin/EditCFG.fxml"));
+        CFGController cfgController = new CFGController(chosenDep);
+        loader.setController(cfgController);
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
     public void handleLogout(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/arlaScreens/gui/view/Main.fxml"));
@@ -130,6 +116,4 @@ public class AdminController implements Initializable {
         Platform.exit();
         System.exit(0);
     }
-
-
 }
