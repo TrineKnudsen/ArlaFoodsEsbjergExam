@@ -19,7 +19,7 @@ public class AdminModel {
         logicFacade.createAdmin(username, password);
     }
 
-    public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String fileName, String imgUrl) throws SQLException {
-        return logicFacade.createCFG(depId, rowIndex, colIndex, fileName, imgUrl);
+    public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String imgUrl, String fileName) throws SQLException {
+        return logicFacade.createCFG(depId, rowIndex, colIndex, imgUrl, fileName);
     }
 }

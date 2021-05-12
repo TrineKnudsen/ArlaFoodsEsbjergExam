@@ -22,7 +22,7 @@ public interface IArlaFoodsLogicFacade {
 
     Admin createAdmin(String username, String password) throws SQLException;
 
-    ScreenCFG createCFG(int depId, int rowIndex, int colIndex,String fileName, String imgUrl) throws SQLException;
+    ScreenCFG createCFG(int depId, int rowIndex, int colIndex,String imgUrl,String fileName) throws SQLException;
 
     List<ScreenCFG> getScreenCFG(int depId) throws SQLException;
 

@@ -10,8 +10,8 @@
       <TextField fx:id="columnField" layoutX="43.0" layoutY="99.0" promptText="Column" />
       <TextField fx:id="rowField" layoutX="43.0" layoutY="154.0" promptText="Row" />
       <TextField fx:id="fileNameField" layoutX="43.0" layoutY="208.0" promptText="File name" />
-      <Button fx:id="chosenFile" layoutX="43.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleChoosefile" prefHeight="26.0" prefWidth="268.0" text="Choose file" />
-      <Button layoutX="376.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="26.0" prefWidth="128.0" text="Save configuration" />
+      <Button fx:id="chosenFile" layoutX="43.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleChoosefile" prefHeight="26.0" prefWidth="487.0" text="Choose file" />
+      <Button layoutX="338.0" layoutY="180.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="26.0" prefWidth="128.0" text="Save configuration" />
       <Label fx:id="deplbl" layoutX="43.0" layoutY="39.0" prefHeight="18.0" prefWidth="128.0" />
       <Label fx:id="lblid" layoutX="279.0" layoutY="22.0" text="Label" />
    </children>

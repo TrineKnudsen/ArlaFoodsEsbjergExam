@@ -49,15 +49,16 @@ public class ScreenConfigDAO {
         }
     }
 
-    public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String fileName, String imgUrl) throws SQLException {
+    public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String imgUrl, String fileName) throws SQLException {
         try (Connection con = connectionPool.checkOut()) {
-            PreparedStatement st1 = con.prepareStatement("INSERT INTO ScreenCFG(depId, RowIndex, ColumnIndex, url, FileType) VALUES(?,?,?,?,?");
+            PreparedStatement st1 = con.prepareStatement("INSERT INTO ScreenCFG(depId, RowIndex, "
+                    +"ColumnIndex, [url], FileType) VALUES(?,?,?,?,?)");
             st1.setInt(1, depId);
             st1.setInt(2, rowIndex);
             st1.setInt(3, colIndex);
             st1.setString(4, imgUrl);
             st1.setString(5, fileName);
-            st1.execute();
+            st1.executeUpdate();
 
             PreparedStatement st2 = con.prepareStatement("SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, ScreenCFG.FileType, Department.id, Department.depName, Department.IsAdmin " +
                     "FROM ScreenCFG " +
@@ -65,7 +66,7 @@ public class ScreenConfigDAO {
                     "ON ScreenCFG.depId = Department.id " +
                     "WHERE depId = ?");
 
-            st1.setInt(1, depId);
+            st2.setInt(1, depId);
 
             ScreenCFG screenCFG = null;
             st2.execute();
@@ -73,13 +74,13 @@ public class ScreenConfigDAO {
             while (rs.next()) {
                 String name = rs.getString("depName");
                 int type = rs.getInt("IsAdmin");
-                int rrowIndex = rs.getInt("RowIndex");
-                int ccolIndex = rs.getInt("ColumnIndex");
-                String uimgUrl = rs.getString("url");
-                String ffileName = rs.getString("FileType");
+                rowIndex = rs.getInt("RowIndex");
+                colIndex = rs.getInt("ColumnIndex");
+                imgUrl = rs.getString("url");
+                fileName = rs.getString("FileType");
 
                 User user = new User(depId, name, type);
-                screenCFG = new ScreenCFG(rrowIndex, ccolIndex, ffileName, uimgUrl, user);
+                screenCFG = new ScreenCFG(rowIndex, colIndex, imgUrl, fileName, user);
             }
             return screenCFG;
         }

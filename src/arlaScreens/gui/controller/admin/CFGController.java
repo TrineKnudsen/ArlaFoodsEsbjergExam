@@ -55,11 +55,11 @@ public class CFGController implements Initializable {
     }
 
     public void handleChoosefile(ActionEvent event){
-    FileChooser fileChooser = new FileChooser();
-            fileChooser.setInitialDirectory(new File("src/pictures/" )); //Sets the directory to the desktop
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("src/pictures/" )); //Sets the directory to the desktop
 
-            fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("Files",  "*.png", "*.jpg"));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Files",  "*.png", "*.jpg"));
     File selectedFile = fileChooser.showOpenDialog(null);
             if (selectedFile != null) {
                 chosenFile.setText(String.valueOf(selectedFile));
@@ -71,9 +71,11 @@ public class CFGController implements Initializable {
         String selectedFile = chosenFile.getText().trim();
         int row = Integer.parseInt(rowField.getText().trim());
         int column = Integer.parseInt(columnField.getText().trim());
+        String url = chosenFile.getText().trim();
+        String filetype = fileNameField.getText().trim();
 
         if (selectedFile != null){
-            adminModel.createCFG(getDepartment().getId(), row, column, fileNameField.getText().trim(), chosenFile.getText().trim());
+            adminModel.createCFG(dep.getId(), row, column, url, filetype);
         }
     }
 }
