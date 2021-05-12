@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -13,12 +12,11 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="689.0" stylesheets="@../../../../Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.admin.AdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="689.0" styleClass="bgImg" stylesheets="@../../../../Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.admin.AdminController">
     <children>
-        <ImageView fitHeight="445.0" fitWidth="689.0" pickOnBounds="true" preserveRatio="true" styleClass="bgImg">
+        <ImageView fitHeight="445.0" fitWidth="689.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.3;" styleClass="bgImg">
             <image>
                 <Image url="@/pictures/ArlaLogo.png" />
             </image>
@@ -28,52 +26,6 @@
                 <Font size="20.0" />
             </font>
         </Label>
-        <VBox layoutX="14.0" layoutY="53.0" prefHeight="368.0" prefWidth="290.0">
-            <children>
-                <Label text="Department">
-                    <VBox.margin>
-                        <Insets left="115.0" top="7.0" />
-                    </VBox.margin>
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Label>
-            <TableView fx:id="deplst" prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                <TableColumn fx:id="nameColumn" prefWidth="289.6000122070312" text="Department" />
-              </columns>
-            </TableView>
-            <JFXTextField fx:id="nameField" prefHeight="26.0" prefWidth="134.0">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin></JFXTextField>
-            <ButtonBar buttonMinWidth="100.0" prefHeight="40.0" prefWidth="300.0">
-              <buttons>
-                      <Button mnemonicParsing="false" onAction="#handleDeleteDepartment" text="Delete department" />
-                  <ButtonBar prefHeight="40.0" prefWidth="285.0">
-                    <buttons>
-                        <Button maxWidth="0.0" minWidth="20.0" mnemonicParsing="false" onAction="#handleUpdateDepartment" prefHeight="26.0" text="Edit name">
-                           <padding>
-                              <Insets right="3.0" />
-                           </padding>
-                        </Button>
-                    </buttons>
-                  </ButtonBar>
-              </buttons>
-               <VBox.margin>
-                  <Insets right="15.0" />
-               </VBox.margin>
-            </ButtonBar>
-            <ButtonBar buttonMinWidth="20.0" maxWidth="250.0" prefHeight="40.0" prefWidth="290.0">
-               <VBox.margin>
-                  <Insets right="62.0" />
-               </VBox.margin>
-               <buttons>
-                  <Button mnemonicParsing="false" onAction="#handleCreateDep" prefHeight="26.0" prefWidth="154.0" text="Add department or admin" />
-               </buttons>
-            </ButtonBar>
-            </children>
-        </VBox>
       <MenuBar layoutY="2.0">
         <menus>
           <Menu mnemonicParsing="false" text="More">
@@ -84,6 +36,19 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Button layoutX="416.0" layoutY="142.0" mnemonicParsing="false" onAction="#handleOpenCFG" text="Edit view" />
+      <TableView fx:id="deplst" layoutX="14.0" layoutY="67.0" prefHeight="200.0" prefWidth="310.0">
+        <columns>
+          <TableColumn fx:id="nameColumn" prefWidth="289.6000122070312" text="Department" />
+        </columns>
+      </TableView>
+      <Button layoutX="264.0" layoutY="274.0" maxWidth="63.0" minWidth="20.0" mnemonicParsing="false" onAction="#handleUpdateDepartment" prefHeight="26.0" prefWidth="63.0" text="Edit name">
+         <padding>
+            <Insets right="3.0" />
+         </padding>
+      </Button>
+      <Button layoutX="14.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleOpenCFG" text="Edit view" />
+          <Button layoutX="14.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleDeleteDepartment" prefHeight="26.0" prefWidth="169.0" text="Delete department" />
+      <Button layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleCreateDep" prefHeight="26.0" prefWidth="170.0" text="Add department or admin" />
+      <JFXTextField fx:id="nameField" layoutX="14.0" layoutY="274.0" prefHeight="26.0" prefWidth="223.0" promptText="New department name" />
     </children>
 </AnchorPane>
