@@ -62,7 +62,7 @@ public class CFGController implements Initializable {
                 new FileChooser.ExtensionFilter("Files",  "*.png", "*.jpg"));
     File selectedFile = fileChooser.showOpenDialog(null);
             if (selectedFile != null) {
-                chosenFile.setText(String.valueOf(selectedFile));
+                chosenFile.setText("\\pictures\\" + selectedFile.getName());
             }
         lblid.setText(String.valueOf(getDepartment().getId()));
     }
