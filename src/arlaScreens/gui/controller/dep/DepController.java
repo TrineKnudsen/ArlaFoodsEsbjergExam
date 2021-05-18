@@ -4,8 +4,6 @@ import arlaScreens.be.DataPoint;
 import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.gui.model.DepartmentModel;
-import arlaScreens.gui.model.FileModel;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -26,10 +24,9 @@ import java.util.ResourceBundle;
 
 public class DepController implements Initializable {
 
-    FileModel fileModel;
     DepartmentModel depModel;
     List<ScreenCFG> screenCFGList;
-    ObservableList<DataPoint> dataPoints;
+    List<DataPoint> dataPoints;
 
     @FXML
     private GridPane grid;
@@ -46,7 +43,6 @@ public class DepController implements Initializable {
     public void getDep(Department dep) {
         try {
             depModel = new DepartmentModel();
-            fileModel = new FileModel();
             screenCFGList = new ArrayList<>();
             depname.setText(dep.getName());
             screenCFGList.addAll(depModel.getScreenCFGS(dep.getId()));
@@ -56,12 +52,11 @@ public class DepController implements Initializable {
 
             for (ScreenCFG screenCFG : screenCFGList) {
                 AnchorPane anchorPane = new AnchorPane();
-                anchorPane.getChildren().add(buildBarChart());
+                anchorPane.getChildren().add(buildBarChart(screenCFG));
                 //ImageView imageView = new ImageView(new Image((InputStream) screenCFG.getImgUrl()));
                 GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
                 GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
                 grid.getChildren().addAll(anchorPane);
-                anchorPane.setPrefSize(400,790);
             }
 
             anchorpane.setPrefSize(Window.getWindows().size() - 50, Window.getWindows().size() - 50);
@@ -74,8 +69,8 @@ public class DepController implements Initializable {
         }
     }
 
-    private BarChart buildBarChart(){
-        dataPoints = fileModel.getExcelData();
+    private BarChart buildBarChart(ScreenCFG screenCFG){
+        dataPoints = screenCFG.getDataPoints();
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Workdays");
 

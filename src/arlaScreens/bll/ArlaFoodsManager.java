@@ -63,15 +63,9 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
         return cfgDAO.getCFG(depId);
     }
 
-
     @Override
     public Department getAdminLogin(String username, String password) throws SQLException {
         return loginDAO.getAdminLogin(username, password);
-    }
-
-    @Override
-    public List<DataPoint> getExcelFile() throws IOException {
-        return fileReaderDAO.getExcelFile();
     }
 
     @Override

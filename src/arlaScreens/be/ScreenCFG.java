@@ -1,22 +1,32 @@
 package arlaScreens.be;
 
-import org.apache.poi.ss.usermodel.Workbook;
+import java.util.List;
 
 public class ScreenCFG {
 
     private int rowIndex;
     private int colIndex;
-    private String imgUrl;
+    private String url;
+    private List<DataPoint> dataPoints;
     private String fileName;
     private User user;
 
-    public ScreenCFG(int rowIndex, int colIndex, String imgUrl, String fileName, User user) {
+    public ScreenCFG(int rowIndex, int colIndex, List<DataPoint> dataPoints, String fileName, User user) {
         this.rowIndex = rowIndex;
         this.colIndex = colIndex;
-        this.imgUrl = imgUrl;
+        this.dataPoints = dataPoints;
         this.user = user;
         this.fileName = fileName;
     }
+
+    public ScreenCFG(int rowIndex, int colIndex, String url, String fileName, User user){
+        this.rowIndex = rowIndex;
+        this.colIndex = colIndex;
+        this.user = user;
+        this.fileName = fileName;
+        this.url = url;
+    }
+
 
     public int getRowIndex() {
         return rowIndex;
@@ -34,12 +44,20 @@ public class ScreenCFG {
         this.colIndex = colIndex;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public List<DataPoint> getDataPoints() {
+        return dataPoints;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public void setDataPoints(List<DataPoint> dataPoints) {
+        this.dataPoints = dataPoints;
     }
 
     public String getFileName() {

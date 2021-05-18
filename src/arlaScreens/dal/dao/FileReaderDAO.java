@@ -13,20 +13,16 @@ import java.util.List;
 
 public class FileReaderDAO {
 
-    private static final String NAME = "src/files/MOCK_DATA1.xlsx";
 
-    public List<DataPoint> getExcelFile() throws IOException {
+    public List<DataPoint> getExcelFile(String url) throws IOException {
         ArrayList<DataPoint> data = new ArrayList<>();
 
-
-        FileInputStream file = new FileInputStream(new File(NAME));
+        FileInputStream file = new FileInputStream(new File(url));
         Workbook workbook = new XSSFWorkbook(file);
         DataFormatter dataFormatter = new DataFormatter();
         Iterator<Sheet> sheets = workbook.sheetIterator();
         while (sheets.hasNext()) {
             Sheet sg = sheets.next();
-            System.out.println("Sheet name is " + sg.getSheetName());
-            System.out.println("------------");
             Iterator<Row> iterator = sg.iterator();
 
             while (iterator.hasNext()) {
@@ -46,8 +42,7 @@ public class FileReaderDAO {
                     Cell cell = cellIterator.next();
                     value = Integer.parseInt(dataFormatter.formatCellValue(cell));
                 }
-
-                dp = new DataPoint(key, value);
+                dp = new DataPoint(key, value, url);
                 data.add(dp);
             }
             workbook.close();

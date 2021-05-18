@@ -27,8 +27,4 @@ public interface IArlaFoodsLogicFacade {
     Department getUserLogin(String username, String password) throws SQLException;
 
     Department getAdminLogin(String username, String password) throws SQLException;
-
-    List<DataPoint> getExcelFile() throws IOException;
-
-
 }

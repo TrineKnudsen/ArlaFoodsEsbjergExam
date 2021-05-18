@@ -1,28 +1,26 @@
 package arlaScreens.dal.dao;
 
+import arlaScreens.be.DataPoint;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.be.User;
 import arlaScreens.dal.JDBCConnectionPool;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class ScreenConfigDAO {
 
+    FileReaderDAO fileReaderDAO;
     private final JDBCConnectionPool connectionPool;
 
     public ScreenConfigDAO() throws IOException {
         connectionPool = JDBCConnectionPool.getInstance();
+        fileReaderDAO = new FileReaderDAO();
     }
 
     public List<ScreenCFG> getCFG(int depId) throws SQLException, IOException {
@@ -49,11 +47,13 @@ public class ScreenConfigDAO {
                 String url = rs.getString("url");
                 String fileName = rs.getString("FileType");
 
-
-
-                    User user = new User(id, name, type);
-                    ScreenCFG screenCFG = new ScreenCFG(rowIndex, colIndex, url, fileName, user);
-                    screenCFGList.add(screenCFG);
+                ScreenCFG screenCFG = null;
+                User user = new User(id, name, type);
+                if (url.endsWith(".xlsx")){
+                List<DataPoint> dataPoints = fileReaderDAO.getExcelFile(url);
+                   screenCFG = new ScreenCFG(rowIndex, colIndex, dataPoints, fileName, user);
+                }
+                screenCFGList.add(screenCFG);
                 }
             }
             return screenCFGList;
