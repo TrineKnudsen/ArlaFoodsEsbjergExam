@@ -43,7 +43,7 @@ public class DepartmentModel {
         return logicFacade.deleteDep(depToDelete);
     }
 
-    public List<ScreenCFG> getScreenCFGS(int depId) throws SQLException {
+    public List<ScreenCFG> getScreenCFGS(int depId) throws SQLException, IOException {
         screenCFGS = new ArrayList<>();
         screenCFGS.addAll(logicFacade.getScreenCFG(depId));
         return screenCFGS;

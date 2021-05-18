@@ -1,13 +1,18 @@
 package arlaScreens.gui.controller.dep;
 
+import arlaScreens.be.DataPoint;
 import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.gui.model.DepartmentModel;
+import arlaScreens.gui.model.FileModel;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
@@ -21,8 +26,10 @@ import java.util.ResourceBundle;
 
 public class DepController implements Initializable {
 
+    FileModel fileModel;
     DepartmentModel depModel;
     List<ScreenCFG> screenCFGList;
+    ObservableList<DataPoint> dataPoints;
 
     @FXML
     private GridPane grid;
@@ -39,23 +46,25 @@ public class DepController implements Initializable {
     public void getDep(Department dep) {
         try {
             depModel = new DepartmentModel();
+            fileModel = new FileModel();
             screenCFGList = new ArrayList<>();
             depname.setText(dep.getName());
             screenCFGList.addAll(depModel.getScreenCFGS(dep.getId()));
-            anchorpane.setPrefSize(Window.getWindows().size()-50, Window.getWindows().size()-50);
+            anchorpane.setPrefSize(Window.getWindows().size() - 50, Window.getWindows().size() - 50);
 
             grid = new GridPane();
 
             for (ScreenCFG screenCFG : screenCFGList) {
-                ImageView imageView = new ImageView(new Image(screenCFG.getImgUrl()));
-                GridPane.setConstraints(imageView, screenCFG.getColIndex(), screenCFG.getRowIndex());
-                GridPane.setConstraints(imageView, screenCFG.getColIndex(), screenCFG.getRowIndex());
-                grid.getChildren().addAll(imageView);
-                imageView.setFitHeight(400);
-                imageView.setFitWidth(790);
+                AnchorPane anchorPane = new AnchorPane();
+                anchorPane.getChildren().add(buildBarChart());
+                //ImageView imageView = new ImageView(new Image((InputStream) screenCFG.getImgUrl()));
+                GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
+                GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
+                grid.getChildren().addAll(anchorPane);
+                anchorPane.setPrefSize(400,790);
             }
 
-            anchorpane.setPrefSize(Window.getWindows().size()-50, Window.getWindows().size()-50);
+            anchorpane.setPrefSize(Window.getWindows().size() - 50, Window.getWindows().size() - 50);
             anchorpane.getChildren().add(grid);
             grid.setGridLinesVisible(true);
         } catch (IOException exception) {
@@ -63,6 +72,25 @@ public class DepController implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    private BarChart buildBarChart(){
+        dataPoints = fileModel.getExcelData();
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Workdays");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Amount");
+
+        BarChart barChart = new BarChart(xAxis, yAxis);
+        XYChart.Series dataSeries = new XYChart.Series();
+        dataSeries.setName("Production of cocio pr. day");
+
+        for (DataPoint dataPoint: dataPoints) {
+            dataSeries.getData().add(new XYChart.Data(dataPoint.getKey(), dataPoint.getValue()));
+            barChart.getData().add(dataSeries);
+        }
+        return barChart;
     }
 
     /**public void handleBtn(ActionEvent event){

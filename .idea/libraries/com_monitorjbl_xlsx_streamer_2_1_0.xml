@@ -1,0 +1,25 @@
+<component name="libraryTable">
+  <library name="com.monitorjbl:xlsx-streamer:2.1.0" type="repository">
+    <properties maven-id="com.monitorjbl:xlsx-streamer:2.1.0" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/xlsx-streamer-2.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-4.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-codec-1.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-collections4-4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-ooxml-4.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-compress-1.18.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/curvesapi-1.04.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/poi-ooxml-schemas-4.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xmlbeans-3.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xerces2-xsd11-2.11.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/org.eclipse.wst.xml.xpath2.processor-2.1.100.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/java-cup-10k.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/icu4j-4.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xml-resolver-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/xml-apis-1.4.01.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.25.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

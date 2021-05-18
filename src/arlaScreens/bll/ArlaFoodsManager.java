@@ -1,13 +1,7 @@
 package arlaScreens.bll;
 
-import arlaScreens.be.Admin;
-import arlaScreens.be.Department;
-import arlaScreens.be.User;
-import arlaScreens.be.ScreenCFG;
-import arlaScreens.dal.dao.AdminDAO;
-import arlaScreens.dal.dao.DepartmentDAO;
-import arlaScreens.dal.dao.LoginDAO;
-import arlaScreens.dal.dao.ScreenConfigDAO;
+import arlaScreens.be.*;
+import arlaScreens.dal.dao.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,12 +13,14 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
     private DepartmentDAO departmentDAO;
     private AdminDAO adminDAO;
     private ScreenConfigDAO cfgDAO;
+    private FileReaderDAO fileReaderDAO;
 
     public ArlaFoodsManager() throws IOException {
         loginDAO = new LoginDAO();
         departmentDAO = new DepartmentDAO();
         adminDAO = new AdminDAO();
         cfgDAO = new ScreenConfigDAO();
+        fileReaderDAO = new FileReaderDAO();
     }
 
     @Override
@@ -63,7 +59,7 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
     }
 
     @Override
-    public List<ScreenCFG> getScreenCFG(int depId) throws SQLException {
+    public List<ScreenCFG> getScreenCFG(int depId) throws SQLException, IOException {
         return cfgDAO.getCFG(depId);
     }
 
@@ -71,6 +67,11 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
     @Override
     public Department getAdminLogin(String username, String password) throws SQLException {
         return loginDAO.getAdminLogin(username, password);
+    }
+
+    @Override
+    public List<DataPoint> getExcelFile() throws IOException {
+        return fileReaderDAO.getExcelFile();
     }
 
     @Override

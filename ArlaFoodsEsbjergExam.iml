@@ -27,5 +27,6 @@
     <orderEntry type="library" name="com.jfoenix:jfoenix:9.0.10" level="project" />
     <orderEntry type="library" name="jfoenix-9.0.10" level="project" />
     <orderEntry type="library" name="org.openjfx:javafx-fxml:16" level="project" />
+    <orderEntry type="library" name="com.monitorjbl:xlsx-streamer:2.1.0" level="project" />
   </component>
 </module>
