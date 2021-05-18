@@ -13,7 +13,7 @@ import java.util.List;
 
 public class FileReaderDAO {
 
-    private static final String NAME = "src/pictures/MOCK_DATA(1).xlsx";
+    private static final String NAME = "src/files/MOCK_DATA1.xlsx";
 
     public List<DataPoint> getExcelFile() throws IOException {
         ArrayList<DataPoint> data = new ArrayList<>();

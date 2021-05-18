@@ -88,20 +88,9 @@ public class DepController implements Initializable {
 
         for (DataPoint dataPoint: dataPoints) {
             dataSeries.getData().add(new XYChart.Data(dataPoint.getKey(), dataPoint.getValue()));
-            barChart.getData().add(dataSeries);
+
         }
+        barChart.getData().add(dataSeries);
         return barChart;
     }
-
-    /**public void handleBtn(ActionEvent event){
-     try {
-     Parent MainParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/View/DepAdmin.fxml"));
-     Scene MainScene = new Scene(MainParent);
-     Stage addMovieStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-     addMovieStage.setScene(MainScene);
-     addMovieStage.show();
-     } catch (IOException ex){
-     ex.printStackTrace();
-     }
-     }**/
 }

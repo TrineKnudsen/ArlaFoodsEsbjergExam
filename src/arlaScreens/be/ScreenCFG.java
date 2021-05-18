@@ -6,11 +6,11 @@ public class ScreenCFG {
 
     private int rowIndex;
     private int colIndex;
-    private Workbook imgUrl;
+    private String imgUrl;
     private String fileName;
     private User user;
 
-    public ScreenCFG(int rowIndex, int colIndex, Workbook imgUrl, String fileName, User user) {
+    public ScreenCFG(int rowIndex, int colIndex, String imgUrl, String fileName, User user) {
         this.rowIndex = rowIndex;
         this.colIndex = colIndex;
         this.imgUrl = imgUrl;
@@ -34,11 +34,11 @@ public class ScreenCFG {
         this.colIndex = colIndex;
     }
 
-    public Workbook getImgUrl() {
+    public String getImgUrl() {
         return imgUrl;
     }
 
-    public void setImgUrl(Workbook imgUrl) {
+    public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
 

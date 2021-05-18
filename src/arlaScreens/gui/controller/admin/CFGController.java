@@ -56,13 +56,13 @@ public class CFGController implements Initializable {
 
     public void handleChoosefile(ActionEvent event){
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File("src/pictures/" )); //Sets the directory to the desktop
+        fileChooser.setInitialDirectory(new File("src/files/" )); //Sets the directory to the desktop
 
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Files",  "*.png", "*.jpg"));
     File selectedFile = fileChooser.showOpenDialog(null);
             if (selectedFile != null) {
-                chosenFile.setText("\\pictures\\" + selectedFile.getName());
+                chosenFile.setText("\\files\\" + selectedFile.getName());
             }
         lblid.setText(String.valueOf(getDepartment().getId()));
     }

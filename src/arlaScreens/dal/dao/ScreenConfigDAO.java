@@ -49,37 +49,16 @@ public class ScreenConfigDAO {
                 String url = rs.getString("url");
                 String fileName = rs.getString("FileType");
 
-                FileInputStream file = new FileInputStream(new File(url));
-                Workbook workbook = new XSSFWorkbook(file);
-                DataFormatter dataFormatter = new DataFormatter();
-                Iterator<Sheet> sheets = workbook.sheetIterator();
-                while (sheets.hasNext()) {
-                    Sheet sg = sheets.next();
-                    System.out.println("Sheet name is " + sg.getSheetName());
-                    System.out.println("------------");
-                    Iterator<Row> iterator = sg.iterator();
-                    while (iterator.hasNext()) {
-                        Row row = iterator.next();
-                        Iterator<Cell> cellIterator = row.iterator();
-                        while (cellIterator.hasNext()) {
-                            Cell cell = cellIterator.next();
-                            String cellValue = dataFormatter.formatCellValue(cell);
-                            //if (cell.getCellType() == CellType.STRING) {
-                            //
-                            System.out.println(cellValue + "\t");
-                        }
-                        System.out.println();
-                    }
-                    workbook.close();
+
 
                     User user = new User(id, name, type);
-                    ScreenCFG screenCFG = new ScreenCFG(rowIndex, colIndex, workbook, fileName, user);
+                    ScreenCFG screenCFG = new ScreenCFG(rowIndex, colIndex, url, fileName, user);
                     screenCFGList.add(screenCFG);
                 }
             }
             return screenCFGList;
         }
-    }
+
 
     public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String imgUrl, String fileName) throws SQLException {
         try (Connection con = connectionPool.checkOut()) {
