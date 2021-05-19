@@ -8,7 +8,6 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -32,14 +31,14 @@ public class AdminController implements Initializable {
     private DepartmentModel departmentModel;
     ObservableList<User> allDep;
 
-    @FXML
-    private JFXTextField nameField;
-    @FXML
-    private AnchorPane anchor;
-    @FXML
-    private TableView<User> deplst;
-    @FXML
-    private TableColumn<User, String> nameColumn;
+
+    public JFXTextField nameField;
+
+    public AnchorPane anchor;
+
+    public TableView<User> deplst;
+
+    public TableColumn<User, String> nameColumn;
 
 
     @Override
@@ -114,7 +113,7 @@ public class AdminController implements Initializable {
         loader.setLocation(getClass().getResource("/arlaScreens/gui/view/Main.fxml"));
         Parent mainWindowParent = loader.load();
         Scene mainScene = new Scene(mainWindowParent);
-        Stage window = (Stage) anchor.getScene().getWindow();
+        Stage window = (Stage)anchor.getScene().getWindow();
         window.setScene(mainScene);
         window.setTitle("Arla Foods-Esbjerg");
         window.show();

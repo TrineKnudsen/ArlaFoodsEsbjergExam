@@ -60,6 +60,5 @@ public class NewObjectController {
         depAdmin.setScene(mainWindowScene);
         depAdmin.setTitle("Admin");
         depAdmin.show();
-
     }
 }

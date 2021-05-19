@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="689.0" styleClass="bgImg" stylesheets="@../../../../Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.admin.AdminController">
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="689.0" stylesheets="@../../../../Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.admin.AdminController">
     <children>
-        <ImageView fitHeight="445.0" fitWidth="689.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.3;" styleClass="bgImg">
+        <ImageView fitHeight="445.0" fitWidth="689.0" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="bgImg">
             <image>
                 <Image url="@/pictures/ArlaLogo.png" />
             </image>
@@ -38,7 +31,7 @@
       </MenuBar>
       <TableView fx:id="deplst" layoutX="14.0" layoutY="67.0" prefHeight="200.0" prefWidth="310.0">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="289.6000122070312" text="Department" />
+          <TableColumn fx:id="nameColumn" prefWidth="290.0" text="Department" />
         </columns>
       </TableView>
       <Button layoutX="264.0" layoutY="274.0" maxWidth="63.0" minWidth="20.0" mnemonicParsing="false" onAction="#handleUpdateDepartment" prefHeight="26.0" prefWidth="63.0" text="Edit name">
@@ -46,7 +39,7 @@
             <Insets right="3.0" />
          </padding>
       </Button>
-      <Button layoutX="14.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleOpenCFG" text="Edit view" />
+      <Button layoutX="14.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleOpenCFG" prefHeight="20.0" prefWidth="50.0" text="Edit view" />
           <Button layoutX="14.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleDeleteDepartment" prefHeight="26.0" prefWidth="169.0" text="Delete department" />
       <Button layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleCreateDep" prefHeight="26.0" prefWidth="170.0" text="Add department or admin" />
       <JFXTextField fx:id="nameField" layoutX="14.0" layoutY="274.0" prefHeight="26.0" prefWidth="223.0" promptText="New department name" />
