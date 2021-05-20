@@ -2,6 +2,7 @@ package arlaScreens.dal.dao;
 
 import arlaScreens.be.DataPoint;
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -16,7 +17,7 @@ public class FileReaderDAO {
         ArrayList<DataPoint> data = new ArrayList<>();
 
         FileInputStream file = new FileInputStream(new File(url));
-        Workbook workbook = new XSSFWorkbook(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(file);
         DataFormatter dataFormatter = new DataFormatter();
         Iterator<Sheet> sheets = workbook.sheetIterator();
         while (sheets.hasNext()) {
@@ -48,26 +49,25 @@ public class FileReaderDAO {
         return data;
     }
 
-    public List<String> getCSVFile(String url) throws IOException {
-        try {
-            CSVReader reader = new CSVReader(new FileReader(url));
-            String[] nextLine;
-            while ((nextLine= reader.readNext()) != null){
-                if (nextLine != null)
+    public List<DataPoint> getCSVFile(String url) throws IOException, CsvValidationException {
+        List<DataPoint> data = new ArrayList<>();
+        CSVReader csvReader = new CSVReader(new FileReader(url));
+        String valkey[];
+        String key;
+        int value;
+        DataPoint dp;
 
-            }
+        BufferedReader br = new BufferedReader(new FileReader(url));
+        String line;
 
+        while ((line = br.readLine()) != null) {
+            valkey = line.split(",");
+            key = valkey[0];
+            value = Integer.parseInt(valkey[1]);
+            dp = new DataPoint(key, value, url);
+            data.add(dp);
         }
-
-        List<String[]> data = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(url))){
-            String line;
-            while ((line = br.readLine()) != null){
-                String[] values = line.split(",");
-                data.add(values);
-            }
-            return (List<String>) data;
-
-        }
+        csvReader.close();
+        return data;
     }
 }

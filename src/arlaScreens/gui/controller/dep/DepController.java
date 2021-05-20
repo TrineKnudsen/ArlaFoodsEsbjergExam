@@ -4,6 +4,7 @@ import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.gui.model.DepartmentModel;
 import arlaScreens.gui.util.DataFactory;
+import com.opencsv.exceptions.CsvValidationException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -63,6 +64,8 @@ public class DepController implements Initializable {
             exception.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } catch (CsvValidationException e) {
+            e.printStackTrace();
         }
     }
 }
