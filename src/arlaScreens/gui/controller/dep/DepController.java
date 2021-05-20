@@ -1,15 +1,11 @@
 package arlaScreens.gui.controller.dep;
 
-import arlaScreens.be.DataPoint;
 import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.gui.model.DepartmentModel;
+import arlaScreens.gui.util.DataFactory;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -26,7 +22,7 @@ public class DepController implements Initializable {
 
     DepartmentModel depModel;
     List<ScreenCFG> screenCFGList;
-    List<DataPoint> dataPoints;
+    DataFactory dataFactory;
 
     @FXML
     private GridPane grid;
@@ -42,6 +38,7 @@ public class DepController implements Initializable {
 
     public void getDep(Department dep) {
         try {
+            dataFactory = new DataFactory();
             depModel = new DepartmentModel();
             screenCFGList = new ArrayList<>();
             depname.setText(dep.getName());
@@ -52,7 +49,7 @@ public class DepController implements Initializable {
 
             for (ScreenCFG screenCFG : screenCFGList) {
                 AnchorPane anchorPane = new AnchorPane();
-                anchorPane.getChildren().add(buildBarChart(screenCFG));
+                anchorPane.getChildren().add(dataFactory.getShape(screenCFG));
                 //ImageView imageView = new ImageView(new Image((InputStream) screenCFG.getImgUrl()));
                 GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
                 GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
@@ -67,25 +64,5 @@ public class DepController implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }
-
-    private BarChart buildBarChart(ScreenCFG screenCFG){
-        dataPoints = screenCFG.getDataPoints();
-        CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Workdays");
-
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Amount");
-
-        BarChart barChart = new BarChart(xAxis, yAxis);
-        XYChart.Series dataSeries = new XYChart.Series();
-        dataSeries.setName("Production of cocio pr. day");
-
-        for (DataPoint dataPoint: dataPoints) {
-            dataSeries.getData().add(new XYChart.Data(dataPoint.getKey(), dataPoint.getValue()));
-
-        }
-        barChart.getData().add(dataSeries);
-        return barChart;
     }
 }

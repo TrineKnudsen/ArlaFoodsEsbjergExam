@@ -1,10 +1,10 @@
 package arlaScreens.gui.model;
 
 import arlaScreens.be.Department;
-import arlaScreens.be.User;
 import arlaScreens.be.ScreenCFG;
-import arlaScreens.bll.IArlaFoodsLogicFacade;
+import arlaScreens.be.User;
 import arlaScreens.bll.ArlaFoodsManager;
+import arlaScreens.bll.IArlaFoodsLogicFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -48,6 +48,4 @@ public class DepartmentModel {
         screenCFGS.addAll(logicFacade.getScreenCFG(depId));
         return screenCFGS;
     }
-
-
 }

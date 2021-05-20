@@ -1,6 +1,5 @@
 package arlaScreens.dal.dao;
 
-import arlaScreens.be.DataPoint;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.be.User;
 import arlaScreens.dal.JDBCConnectionPool;
@@ -45,20 +44,16 @@ public class ScreenConfigDAO {
                 int rowIndex = rs.getInt("RowIndex");
                 int colIndex = rs.getInt("ColumnIndex");
                 String url = rs.getString("url");
-                String fileName = rs.getString("FileType");
+                String dataType = rs.getString("FileType");
 
                 ScreenCFG screenCFG = null;
                 User user = new User(id, name, type);
-                if (url.endsWith(".xlsx")){
-                List<DataPoint> dataPoints = fileReaderDAO.getExcelFile(url);
-                   screenCFG = new ScreenCFG(rowIndex, colIndex, dataPoints, fileName, user);
-                }
+                screenCFG = new ScreenCFG(rowIndex, colIndex, dataType, url, user);
                 screenCFGList.add(screenCFG);
-                }
             }
-            return screenCFGList;
         }
-
+        return screenCFGList;
+    }
 
     public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String imgUrl, String fileName) throws SQLException {
         try (Connection con = connectionPool.checkOut()) {
