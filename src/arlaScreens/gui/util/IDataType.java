@@ -14,5 +14,5 @@ public interface IDataType {
 
     Chart drawCSV(ScreenCFG screenCFG) throws IOException, CsvValidationException;
 
-    File getPDF(ScreenCFG screenCFG);
+    File getWebPage(ScreenCFG screenCFG);
 }

@@ -4,12 +4,16 @@ import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.gui.model.DepartmentModel;
 import arlaScreens.gui.util.DataFactory;
+import arlaScreens.gui.util.DataType;
+import arlaScreens.gui.util.IDataType;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Window;
 
 import java.io.IOException;
@@ -24,6 +28,7 @@ public class DepController implements Initializable {
     DepartmentModel depModel;
     List<ScreenCFG> screenCFGList;
     DataFactory dataFactory;
+    IDataType iDataType;
 
     @FXML
     private GridPane grid;
@@ -39,6 +44,7 @@ public class DepController implements Initializable {
 
     public void getDep(Department dep) {
         try {
+            iDataType = new DataType();
             dataFactory = new DataFactory();
             depModel = new DepartmentModel();
             screenCFGList = new ArrayList<>();
@@ -49,10 +55,29 @@ public class DepController implements Initializable {
             grid = new GridPane();
 
             for (ScreenCFG screenCFG : screenCFGList) {
-                AnchorPane anchorPane = new AnchorPane();
-                anchorPane.getChildren().add(dataFactory.getShape(screenCFG));
-                GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
-                grid.getChildren().addAll(anchorPane);
+                String type = screenCFG.getType();
+
+                switch (type){
+                    case "barchart":
+                        AnchorPane anchorPane = new AnchorPane();
+                        anchorPane.getChildren().add(iDataType.drawExcel(screenCFG));
+                        GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
+                        grid.getChildren().add(anchorPane);
+                        break;
+                    case "linechart":
+                        anchorPane = new AnchorPane();
+                        anchorPane.getChildren().add(iDataType.drawCSV(screenCFG));
+                        GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
+                        grid.getChildren().add(anchorPane);
+                        break;
+                    case "webpage":
+                        WebView webView = new WebView();
+                        WebEngine webEngine = webView.getEngine();
+                        String url = dataFactory.getPDF(screenCFG).toURI().toURL().toString();
+                        webEngine.load(url);
+                        grid.getChildren().add(webView);
+                        break;
+                }
             }
 
             anchorpane.setPrefSize(Window.getWindows().size() - 50, Window.getWindows().size() - 50);

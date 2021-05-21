@@ -60,7 +60,7 @@ public class DataType implements IDataType {
     }
 
     @Override
-    public File getPDF(ScreenCFG screenCFG) {
-        return fileReaderDAO.getPDF(screenCFG.getUrl());
+    public File getWebPage(ScreenCFG screenCFG) {
+        return fileReaderDAO.getWebPage(screenCFG.getUrl());
     }
 }

@@ -28,11 +28,6 @@ public class DataFactory {
     }
 
     public File getPDF(ScreenCFG screenCFG){
-        String type = screenCFG.getType();
-
-        if (type.equalsIgnoreCase("webpage")){
-            return iDataType.getPDF(screenCFG);
-        }
-        return null;
+        return iDataType.getWebPage(screenCFG);
     }
 }

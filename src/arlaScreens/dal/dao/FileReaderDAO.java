@@ -73,7 +73,7 @@ public class FileReaderDAO {
         return data;
     }
 
-    public File getPDF(String url){
+    public File getWebPage(String url){
         File htmlFile = new File(url);
         return htmlFile;
     }
