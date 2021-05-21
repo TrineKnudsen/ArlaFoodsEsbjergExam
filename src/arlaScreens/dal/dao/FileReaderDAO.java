@@ -2,8 +2,10 @@ package arlaScreens.dal.dao;
 
 import arlaScreens.be.DataPoint;
 import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
@@ -41,7 +43,7 @@ public class FileReaderDAO {
                     Cell cell = cellIterator.next();
                     value = Integer.parseInt(dataFormatter.formatCellValue(cell));
                 }
-                dp = new DataPoint(key, value, url);
+                dp = new DataPoint(key, value);
                 data.add(dp);
             }
             workbook.close();
@@ -49,7 +51,7 @@ public class FileReaderDAO {
         return data;
     }
 
-    public List<DataPoint> getCSVFile(String url) throws IOException, CsvValidationException {
+    public List<DataPoint> getCSVFile(String url) throws IOException {
         List<DataPoint> data = new ArrayList<>();
         CSVReader csvReader = new CSVReader(new FileReader(url));
         String valkey[];
@@ -64,10 +66,15 @@ public class FileReaderDAO {
             valkey = line.split(",");
             key = valkey[0];
             value = Integer.parseInt(valkey[1]);
-            dp = new DataPoint(key, value, url);
+            dp = new DataPoint(key, value);
             data.add(dp);
         }
         csvReader.close();
         return data;
+    }
+
+    public File getPDF(String url){
+        File htmlFile = new File(url);
+        return htmlFile;
     }
 }

@@ -6,6 +6,7 @@ import arlaScreens.dal.dao.FileReaderDAO;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.scene.chart.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -56,5 +57,10 @@ public class DataType implements IDataType {
         }
         lineChart.getData().add(series);
         return lineChart;
+    }
+
+    @Override
+    public File getPDF(ScreenCFG screenCFG) {
+        return fileReaderDAO.getPDF(screenCFG.getUrl());
     }
 }

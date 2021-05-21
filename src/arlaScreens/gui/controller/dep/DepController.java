@@ -51,8 +51,6 @@ public class DepController implements Initializable {
             for (ScreenCFG screenCFG : screenCFGList) {
                 AnchorPane anchorPane = new AnchorPane();
                 anchorPane.getChildren().add(dataFactory.getShape(screenCFG));
-                //ImageView imageView = new ImageView(new Image((InputStream) screenCFG.getImgUrl()));
-                GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
                 GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
                 grid.getChildren().addAll(anchorPane);
             }

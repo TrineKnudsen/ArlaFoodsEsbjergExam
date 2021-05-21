@@ -1,0 +1,27 @@
+<component name="libraryTable">
+  <library name="org.openjfx:javafx-web:12-ea+6" type="repository">
+    <properties maven-id="org.openjfx:javafx-web:12-ea+6" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/javafx-web-12-ea+6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-web-12-ea+6-win.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-controls-12-ea+6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-controls-12-ea+6-win.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-graphics-12-ea+6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-graphics-12-ea+6-win.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-base-12-ea+6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-base-12-ea+6-win.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-media-12-ea+6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-media-12-ea+6-win.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <excluded>
+      <root url="jar://$PROJECT_DIR$/lib/javafx-graphics-12-ea+6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-base-12-ea+6-win.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-base-12-ea+6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-controls-12-ea+6-win.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-controls-12-ea+6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/javafx-graphics-12-ea+6-win.jar!/" />
+    </excluded>
+  </library>
+</component>

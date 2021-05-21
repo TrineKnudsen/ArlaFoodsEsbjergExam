@@ -5,6 +5,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.Chart;
 
+import java.io.File;
 import java.io.IOException;
 
 public interface IDataType {
@@ -13,4 +14,5 @@ public interface IDataType {
 
     Chart drawCSV(ScreenCFG screenCFG) throws IOException, CsvValidationException;
 
+    File getPDF(ScreenCFG screenCFG);
 }
