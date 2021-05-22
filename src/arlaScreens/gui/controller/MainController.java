@@ -59,7 +59,6 @@ public class MainController implements Initializable {
             depController.getDep(dep);
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-            primaryStage.setFullScreen(true);
             primaryStage.show();
         } else {
             ((Node)event.getSource()).getScene().getWindow().hide();

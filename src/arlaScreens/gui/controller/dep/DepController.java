@@ -56,16 +56,14 @@ public class DepController implements Initializable {
 
             for (ScreenCFG screenCFG : screenCFGList) {
                 String type = screenCFG.getType();
-
+                AnchorPane anchorPane = new AnchorPane();
                 switch (type){
                     case "barchart":
-                        AnchorPane anchorPane = new AnchorPane();
                         anchorPane.getChildren().add(iDataType.drawExcel(screenCFG));
                         GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
                         grid.getChildren().add(anchorPane);
                         break;
                     case "linechart":
-                        anchorPane = new AnchorPane();
                         anchorPane.getChildren().add(iDataType.drawCSV(screenCFG));
                         GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
                         grid.getChildren().add(anchorPane);
@@ -74,8 +72,11 @@ public class DepController implements Initializable {
                         WebView webView = new WebView();
                         WebEngine webEngine = webView.getEngine();
                         String url = dataFactory.getPDF(screenCFG).toURI().toURL().toString();
+
                         webEngine.load(url);
-                        grid.getChildren().add(webView);
+                        GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
+                        anchorPane.getChildren().add(webView);
+                        grid.getChildren().add(anchorPane);
                         break;
                 }
             }

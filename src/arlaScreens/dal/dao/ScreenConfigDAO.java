@@ -48,7 +48,7 @@ public class ScreenConfigDAO {
 
                 ScreenCFG screenCFG = null;
                 User user = new User(id, name, type);
-                screenCFG = new ScreenCFG(rowIndex, colIndex, dataType, url, user);
+                screenCFG = new ScreenCFG(colIndex, rowIndex, dataType, url, user);
                 screenCFGList.add(screenCFG);
             }
         }

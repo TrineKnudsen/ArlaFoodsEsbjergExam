@@ -8,7 +8,7 @@ public class ScreenCFG {
     private String type;
     private User user;
 
-    public ScreenCFG(int rowIndex, int colIndex, String type, String url, User user) {
+    public ScreenCFG(int colIndex, int rowIndex, String type, String url, User user) {
         this.rowIndex = rowIndex;
         this.colIndex = colIndex;
         this.type = type;
