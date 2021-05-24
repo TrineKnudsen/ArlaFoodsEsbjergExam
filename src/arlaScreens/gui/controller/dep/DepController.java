@@ -6,7 +6,6 @@ import arlaScreens.gui.model.DepartmentModel;
 import arlaScreens.gui.util.DataFactory;
 import arlaScreens.gui.util.DataType;
 import arlaScreens.gui.util.IDataType;
-import com.opencsv.exceptions.CsvValidationException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -39,7 +38,7 @@ public class DepController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        iDataType = new DataType();
     }
 
     public void getDep(Department dep) {
@@ -57,14 +56,14 @@ public class DepController implements Initializable {
             for (ScreenCFG screenCFG : screenCFGList) {
                 String type = screenCFG.getType();
                 AnchorPane anchorPane = new AnchorPane();
-                switch (type){
+                switch (type) {
                     case "barchart":
                         anchorPane.getChildren().add(iDataType.drawExcel(screenCFG));
                         GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
                         grid.getChildren().add(anchorPane);
                         break;
                     case "linechart":
-                        anchorPane.getChildren().add(iDataType.drawCSV(screenCFG));
+                        anchorPane.getChildren().add(iDataType.drawBarCSV(screenCFG));
                         GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
                         grid.getChildren().add(anchorPane);
                         break;
@@ -78,9 +77,14 @@ public class DepController implements Initializable {
                         anchorPane.getChildren().add(webView);
                         grid.getChildren().add(anchorPane);
                         break;
+                    case "piechart":
+                        anchorPane.getChildren().add(iDataType.drawPieCSV(screenCFG));
+                        GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
+                        grid.getChildren().add(anchorPane);
+                        break;
                 }
             }
-
+            
             anchorpane.setPrefSize(Window.getWindows().size() - 50, Window.getWindows().size() - 50);
             anchorpane.getChildren().add(grid);
             grid.setGridLinesVisible(true);
@@ -88,8 +92,6 @@ public class DepController implements Initializable {
             exception.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        } catch (CsvValidationException e) {
-            e.printStackTrace();
         }
     }
 }

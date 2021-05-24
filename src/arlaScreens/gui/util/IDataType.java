@@ -12,7 +12,11 @@ public interface IDataType {
 
     BarChart drawExcel(ScreenCFG screenCFG) throws IOException;
 
-    Chart drawCSV(ScreenCFG screenCFG) throws IOException, CsvValidationException;
+    Chart drawLineCSV(ScreenCFG screenCFG) throws IOException, CsvValidationException;
+
+    Chart drawPieCSV(ScreenCFG screenCFG) throws IOException;
+
+    Chart drawBarCSV(ScreenCFG screenCFG) throws IOException;
 
     File getWebPage(ScreenCFG screenCFG);
 }

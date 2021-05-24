@@ -22,7 +22,7 @@ public class DataFactory {
             case "barchart":
                 return iDataType.drawExcel(screenCFG);
             case "linechart":
-                return iDataType.drawCSV(screenCFG);
+                return iDataType.drawBarCSV(screenCFG);
         }
         return null;
     }

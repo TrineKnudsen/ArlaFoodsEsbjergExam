@@ -4,6 +4,8 @@ import arlaScreens.be.DataPoint;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.dal.dao.FileReaderDAO;
 import com.opencsv.exceptions.CsvValidationException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.chart.*;
 
 import java.io.File;
@@ -40,7 +42,7 @@ public class DataType implements IDataType {
     }
 
     @Override
-    public Chart drawCSV(ScreenCFG screenCFG) throws IOException, CsvValidationException {
+    public Chart drawLineCSV(ScreenCFG screenCFG) throws IOException, CsvValidationException {
         dataPoints = fileReaderDAO.getCSVFile(screenCFG.getUrl());
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Workdays");
@@ -60,7 +62,44 @@ public class DataType implements IDataType {
     }
 
     @Override
+    public Chart drawPieCSV(ScreenCFG screenCFG) throws IOException {
+        dataPoints = fileReaderDAO.getCSVFile(screenCFG.getUrl());
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        for (DataPoint dataPoint : dataPoints) {
+            pieChartData.add(new PieChart.Data(dataPoint.getKey(), dataPoint.getValue()));
+        }
+        PieChart pieChart = new PieChart(pieChartData);
+        pieChart.setClockwise(true);
+        pieChart.setLabelLineLength(50);
+        pieChart.setLabelsVisible(true);
+        return pieChart;
+    }
+
+    @Override
+    public Chart drawBarCSV(ScreenCFG screenCFG) throws IOException {
+        dataPoints = fileReaderDAO.getCSVFile(screenCFG.getUrl());
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("key");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("value");
+
+        BarChart barChart = new BarChart(xAxis, yAxis);
+        XYChart.Series dataSeries = new XYChart.Series();
+        dataSeries.setName("Production of cocio pr. day");
+
+        for (DataPoint dataPoint: dataPoints) {
+            dataSeries.getData().add(new XYChart.Data(dataPoint.getKey(), dataPoint.getValue()));
+        }
+        barChart.getData().add(dataSeries);
+        return barChart;
+    }
+
+
+    @Override
     public File getWebPage(ScreenCFG screenCFG) {
         return fileReaderDAO.getWebPage(screenCFG.getUrl());
     }
 }
+
+
