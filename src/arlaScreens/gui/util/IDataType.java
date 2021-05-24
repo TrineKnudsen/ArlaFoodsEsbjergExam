@@ -16,7 +16,5 @@ public interface IDataType {
 
     Chart drawPieCSV(ScreenCFG screenCFG) throws IOException;
 
-    Chart drawBarCSV(ScreenCFG screenCFG) throws IOException;
-
     File getWebPage(ScreenCFG screenCFG);
 }

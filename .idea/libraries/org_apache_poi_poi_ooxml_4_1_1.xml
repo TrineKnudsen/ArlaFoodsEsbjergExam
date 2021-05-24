@@ -14,5 +14,8 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <excluded>
+      <root url="jar://$PROJECT_DIR$/lib/curvesapi-1.06.jar!/" />
+    </excluded>
   </library>
 </component>

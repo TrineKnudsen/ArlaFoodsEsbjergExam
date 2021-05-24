@@ -6,6 +6,7 @@ import arlaScreens.gui.model.DepartmentModel;
 import arlaScreens.gui.util.DataFactory;
 import arlaScreens.gui.util.DataType;
 import arlaScreens.gui.util.IDataType;
+import com.opencsv.exceptions.CsvValidationException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -63,7 +64,7 @@ public class DepController implements Initializable {
                         grid.getChildren().add(anchorPane);
                         break;
                     case "linechart":
-                        anchorPane.getChildren().add(iDataType.drawBarCSV(screenCFG));
+                        anchorPane.getChildren().add(iDataType.drawLineCSV(screenCFG));
                         GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
                         grid.getChildren().add(anchorPane);
                         break;
@@ -92,6 +93,8 @@ public class DepController implements Initializable {
             exception.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } catch (CsvValidationException e) {
+            e.printStackTrace();
         }
     }
 }

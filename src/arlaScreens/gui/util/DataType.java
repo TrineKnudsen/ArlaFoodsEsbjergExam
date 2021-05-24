@@ -76,27 +76,6 @@ public class DataType implements IDataType {
     }
 
     @Override
-    public Chart drawBarCSV(ScreenCFG screenCFG) throws IOException {
-        dataPoints = fileReaderDAO.getCSVFile(screenCFG.getUrl());
-        CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("key");
-
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("value");
-
-        BarChart barChart = new BarChart(xAxis, yAxis);
-        XYChart.Series dataSeries = new XYChart.Series();
-        dataSeries.setName("Production of cocio pr. day");
-
-        for (DataPoint dataPoint: dataPoints) {
-            dataSeries.getData().add(new XYChart.Data(dataPoint.getKey(), dataPoint.getValue()));
-        }
-        barChart.getData().add(dataSeries);
-        return barChart;
-    }
-
-
-    @Override
     public File getWebPage(ScreenCFG screenCFG) {
         return fileReaderDAO.getWebPage(screenCFG.getUrl());
     }
