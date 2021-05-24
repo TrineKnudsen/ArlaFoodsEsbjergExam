@@ -30,5 +30,6 @@
     <orderEntry type="library" name="com.opencsv:opencsv:5.41" level="project" />
     <orderEntry type="library" name="org.openjfx:javafx-web:12-ea+6" level="project" />
     <orderEntry type="library" name="org.openjfx:javafx-fxml:12-ea+6" level="project" />
+    <orderEntry type="library" name="curvesapi-1.06" level="project" />
   </component>
 </module>
