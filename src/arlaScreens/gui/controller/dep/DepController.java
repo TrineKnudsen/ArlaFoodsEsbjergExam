@@ -71,8 +71,8 @@ public class DepController implements Initializable {
                     case "webpage":
                         WebView webView = new WebView();
                         WebEngine webEngine = webView.getEngine();
-                        String url = dataFactory.getPDF(screenCFG).toURI().toURL().toString();
-
+                        String url = iDataType.getWebPage(screenCFG).toURI().toURL().toExternalForm();
+                        System.out.println(url);
                         webEngine.load(url);
                         GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
                         anchorPane.getChildren().add(webView);
