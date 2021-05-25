@@ -22,9 +22,9 @@ public class ScreenConfigDAO {
         fileReaderDAO = new FileReaderDAO();
     }
 
-    public List<ScreenCFG> getCFG(int depId) throws SQLException, IOException {
+    public List<ScreenCFG> getCFG(int depId) throws SQLException {
         List<ScreenCFG> screenCFGList = new ArrayList<>();
-        String sql = "SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, ScreenCFG.FileType, Department.id, Department.depName, Department.IsAdmin " +
+        String sql = "SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, ScreenCFG.GraphType, Department.id, Department.depName, Department.IsAdmin " +
                 "FROM ScreenCFG " +
                 "INNER JOIN Department " +
                 "ON ScreenCFG.depId = Department.id " +
@@ -44,9 +44,9 @@ public class ScreenConfigDAO {
                 int rowIndex = rs.getInt("RowIndex");
                 int colIndex = rs.getInt("ColumnIndex");
                 String url = rs.getString("url");
-                String dataType = rs.getString("FileType");
+                String dataType = rs.getString("GraphType");
 
-                ScreenCFG screenCFG = null;
+                ScreenCFG screenCFG;
                 User user = new User(id, name, type);
                 screenCFG = new ScreenCFG(colIndex, rowIndex, dataType, url, user);
                 screenCFGList.add(screenCFG);
@@ -83,10 +83,10 @@ public class ScreenConfigDAO {
                 rowIndex = rs.getInt("RowIndex");
                 colIndex = rs.getInt("ColumnIndex");
                 imgUrl = rs.getString("url");
-                fileName = rs.getString("FileType");
+                fileName = rs.getString("GraphType");
 
                 User user = new User(depId, name, type);
-                //screenCFG = new ScreenCFG(rowIndex, colIndex, imgUrl, fileName, user);
+                screenCFG = new ScreenCFG(rowIndex, colIndex, imgUrl, fileName, user);
             }
             return screenCFG;
         }
