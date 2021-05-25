@@ -28,7 +28,7 @@ public class DataType implements IDataType {
         xAxis.setLabel("Workdays");
 
         NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Amount");
+        yAxis.setLabel("Amount in Liters");
 
         BarChart barChart = new BarChart(xAxis, yAxis);
         XYChart.Series dataSeries = new XYChart.Series();
@@ -45,14 +45,17 @@ public class DataType implements IDataType {
     public Chart drawLineCSV(ScreenCFG screenCFG) throws IOException, CsvValidationException {
         dataPoints = fileReaderDAO.getCSVFile(screenCFG.getUrl());
         CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Workdays");
+        xAxis.setLabel("Person");
 
         NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Amount");
+        yAxis.setLabel("Amount of work hours");
+
 
         LineChart lineChart = new LineChart(xAxis, yAxis);
 
+
         XYChart.Series series = new XYChart.Series();
+        series.setName("Overview of Work hours");
 
         for (DataPoint dataPoint : dataPoints){
             series.getData().add(new XYChart.Data(dataPoint.getKey(), dataPoint.getValue()));

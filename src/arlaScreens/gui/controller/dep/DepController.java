@@ -54,6 +54,7 @@ public class DepController implements Initializable {
 
             grid = new GridPane();
 
+
             for (ScreenCFG screenCFG : screenCFGList) {
                 String type = screenCFG.getType();
                 AnchorPane anchorPane = new AnchorPane();
