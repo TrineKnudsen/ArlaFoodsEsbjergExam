@@ -25,16 +25,16 @@ public class DataType implements IDataType {
     public BarChart drawExcel(ScreenCFG screenCFG) throws IOException {
         dataPoints = fileReaderDAO.getExcelFile(screenCFG.getUrl());
         CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Workdays");
 
         NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Amount in Liters");
 
         BarChart barChart = new BarChart(xAxis, yAxis);
         XYChart.Series dataSeries = new XYChart.Series();
         dataSeries.setName("Production of cocio pr. day");
 
         for (DataPoint dataPoint: dataPoints) {
+            xAxis.setLabel(dataPoint.getColumnA());
+            yAxis.setLabel(dataPoint.getColumnB());
             dataSeries.getData().add(new XYChart.Data(dataPoint.getKey(), dataPoint.getValue()));
         }
         barChart.getData().add(dataSeries);
@@ -45,11 +45,8 @@ public class DataType implements IDataType {
     public Chart drawLineCSV(ScreenCFG screenCFG) throws IOException, CsvValidationException {
         dataPoints = fileReaderDAO.getCSVFile(screenCFG.getUrl());
         CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Person");
 
         NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Amount of work hours");
-
 
         LineChart lineChart = new LineChart(xAxis, yAxis);
 
@@ -58,6 +55,8 @@ public class DataType implements IDataType {
         series.setName("Overview of Work hours");
 
         for (DataPoint dataPoint : dataPoints){
+            xAxis.setLabel(dataPoint.getColumnA());
+            yAxis.setLabel(dataPoint.getColumnB());
             series.getData().add(new XYChart.Data(dataPoint.getKey(), dataPoint.getValue()));
         }
         lineChart.getData().add(series);

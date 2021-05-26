@@ -9,6 +9,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -23,11 +24,13 @@ public class FileReaderDAO {
         DataFormatter dataFormatter = new DataFormatter();
         Iterator<Sheet> sheets = workbook.sheetIterator();
         while (sheets.hasNext()) {
-            Sheet sg = sheets.next();
-            Iterator<Row> iterator = sg.iterator();
+            Sheet sh = sheets.next();
+            Iterator<Row> iterator = sh.iterator();
 
             while (iterator.hasNext()) {
                 Row row = iterator.next();
+                String columnnA = String.valueOf(row.getCell(1));
+                String columnB = String.valueOf(row.getCell(2));
                 Iterator<Cell> cellIterator = row.iterator();
 
                 DataPoint dp;
@@ -43,7 +46,7 @@ public class FileReaderDAO {
                     Cell cell = cellIterator.next();
                     value = Integer.parseInt(dataFormatter.formatCellValue(cell));
                 }
-                dp = new DataPoint(key, value);
+                dp = new DataPoint(columnnA, columnB, key, value);
                 data.add(dp);
             }
             workbook.close();
@@ -52,21 +55,31 @@ public class FileReaderDAO {
     }
 
     public List<DataPoint> getCSVFile(String url) throws IOException {
+        WatchService watchService = FileSystems.getDefault().newWatchService();
+        Path path = Paths.get("/arlaScreens/files");
+        WatchKey watchKey = path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+
         List<DataPoint> data = new ArrayList<>();
         CSVReader csvReader = new CSVReader(new FileReader(url));
         String valkey[];
         String key;
         int value;
         DataPoint dp;
+        String columnA = "";
+        String columnB = "";
 
         BufferedReader br = new BufferedReader(new FileReader(url));
         String line;
 
         while ((line = br.readLine()) != null) {
             valkey = line.split(",");
+            while (line.length() <= 0){
+                columnA = valkey[0];
+                columnB = valkey[1];
+            }
             key = valkey[0];
             value = Integer.parseInt(valkey[1]);
-            dp = new DataPoint(key, value);
+            dp = new DataPoint(columnA, columnB, key, value);
             data.add(dp);
         }
         csvReader.close();
