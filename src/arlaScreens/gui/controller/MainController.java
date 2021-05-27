@@ -58,6 +58,7 @@ public class MainController implements Initializable {
             DepController depController = loader.getController();
             depController.getDep(dep);
             Scene scene = new Scene(root);
+            primaryStage.setTitle(dep.getName());
             primaryStage.setScene(scene);
             primaryStage.show();
         } else {
