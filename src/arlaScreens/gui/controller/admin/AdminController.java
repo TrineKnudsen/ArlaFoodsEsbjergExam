@@ -34,7 +34,6 @@ import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
 
-
     private final String ERROR_HEADER = "Error occurred!";
     private DepartmentModel departmentModel;
     private ObservableList<User> allDep;
@@ -71,22 +70,63 @@ public class AdminController implements Initializable {
         }
     }
 
-    public void handleCreateDep(ActionEvent actionEvent) {
+    @FXML
+    private void getSelectedCFG(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/arlaScreens/gui/view/admin/NewObject.fxml"));
-            Parent parent = loader.load();
-            Stage stage= new Stage();
-            stage.setTitle("Add new department or admin");
-            stage.setScene(new Scene(parent));
-            stage.setResizable(false);
-            stage.show();
-        } catch (Exception ex){
-            UserError.displayError(ERROR_HEADER, "Try again");
+            screenCFGList.addAll(departmentModel.getScreenCFGS(deplst.getSelectionModel().getSelectedItem().getId()));
+            Label typelbl;
+            AnchorPane anchorPane = null;
+            GridPane gridPane = new GridPane();
+            if (!gridPane.getChildren().isEmpty() && !anchorPane.getChildren().isEmpty()) {
+                gridPane.getChildren().clear();
+                anchorCFG.getChildren().clear();
+            } else {
+                for (ScreenCFG screenCFG : screenCFGList) {
+                    anchorPane = new AnchorPane();
+                    typelbl = new Label();
+                    String type = screenCFG.getType();
+                    typelbl.setText(type);
+                    anchorPane.getChildren().add(typelbl);
+                    gridPane.getChildren().add(anchorPane);
+                    GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
+                }
+                anchorCFG.getChildren().add(gridPane);
+            }
+        } catch (Exception ex) {
+            UserError.displayError(ERROR_HEADER, "Couldn't load configuration");
         }
     }
 
-    public void handleUpdateDepartment(ActionEvent actionEvent){
+    private void openScreen(String url, String windowName) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(url));
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle(windowName);
+            stage.setScene(new Scene(parent));
+            stage.setResizable(false);
+            stage.show();
+        } catch (Exception ex) {
+            UserError.displayError(ERROR_HEADER, "Can't take you to this window");
+        }
+    }
+
+    @FXML
+    private void handleCreateDep(ActionEvent actionEvent) {
+        openScreen("/arlaScreens/gui/view/admin/NewObject.fxml", "Add new department or admin");
+    }
+
+    @FXML
+    private void handleOpenCFG(ActionEvent event) {
+        Department chosenDep = deplst.getSelectionModel().getSelectedItem();
+        if (chosenDep != null) {
+            openScreen("/arlaScreens/gui/view/admin/EditCFG.fxml", "Screen Configuration for " +chosenDep.getName());
+        } else UserError.displayError(ERROR_HEADER, "Choose department to add screen configuration to");
+    }
+
+    @FXML
+    private void handleUpdateDepartment(ActionEvent actionEvent) {
         try {
             int chosenDep = deplst.getSelectionModel().getSelectedItem().getId();
             String updatedDep = nameField.getText().trim();
@@ -94,12 +134,13 @@ public class AdminController implements Initializable {
             if (updatedDep != null) {
                 departmentModel.updateDep(chosenDep, updatedDep);
             }
-        } catch (Exception ex){
+        } catch (Exception ex) {
             UserError.displayError(ERROR_HEADER, "Choose department to edit");
         }
     }
 
-    public void handleDeleteDepartment(ActionEvent actionEvent) {
+    @FXML
+    private void handleDeleteDepartment(ActionEvent actionEvent) {
         User depToDelete = deplst.getSelectionModel().getSelectedItem();
         try {
             if (depToDelete != null) {
@@ -114,25 +155,8 @@ public class AdminController implements Initializable {
         }
     }
 
-    public void handleOpenCFG(ActionEvent event) {
-        try {
-            Department chosenDep = deplst.getSelectionModel().getSelectedItem();
-            if (chosenDep != null) {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/arlaScreens/gui/view/admin/EditCFG.fxml"));
-                Parent parent = loader.load();
-                Stage stage= new Stage();
-                stage.setTitle("Screen Configuration for " +chosenDep.getName());
-                stage.setScene(new Scene(parent));
-                stage.setResizable(false);
-                stage.show();
-            }
-        } catch (Exception ex){
-            UserError.displayError(ERROR_HEADER, "Choose department to edit its configuration");
-        }
-    }
-
-    public void handleLogout(ActionEvent actionEvent) {
+    @FXML
+    private void handleLogout(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/arlaScreens/gui/view/Main.fxml"));
@@ -142,40 +166,14 @@ public class AdminController implements Initializable {
             window.setScene(mainScene);
             window.setTitle("Arla Foods-Esbjerg");
             window.show();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             UserError.displayError(ERROR_HEADER, "Wasn't able to log out");
         }
     }
 
-    public void handleExit(ActionEvent actionEvent) {
+    @FXML
+    private void handleExit(ActionEvent actionEvent) {
         Platform.exit();
         System.exit(0);
-    }
-
-    public void getSelectedCFG(MouseEvent event) {
-        try {
-            screenCFGList.addAll(departmentModel.getScreenCFGS(deplst.getSelectionModel().getSelectedItem().getId()));
-            Label typelbl;
-            AnchorPane anchorPane = null;
-            GridPane gridPane = new GridPane();
-            if (!gridPane.getChildren().isEmpty() && !anchorPane.getChildren().isEmpty()) {
-                gridPane.getChildren().clear();
-                anchorCFG.getChildren().clear();
-            }
-            else {
-                for (ScreenCFG screenCFG : screenCFGList) {
-                    anchorPane = new AnchorPane();
-                    typelbl = new Label();
-                    String type = screenCFG.getType();
-                    typelbl.setText(type);
-                    anchorPane.getChildren().add(typelbl);
-                    gridPane.getChildren().add(anchorPane);
-                    GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
-                }
-                anchorCFG.getChildren().add(gridPane);
-            }
-        } catch (Exception ex){
-            UserError.displayError(ERROR_HEADER, "Couldn't load configuration");
-        }
     }
 }

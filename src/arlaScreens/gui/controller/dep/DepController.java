@@ -41,7 +41,6 @@ public class DepController implements Initializable {
 
     public void getDep(Department dep) {
         try {
-
             iDataType = new DataType();
             dataFactory = new DataFactory();
             depModel = new DepartmentModel();

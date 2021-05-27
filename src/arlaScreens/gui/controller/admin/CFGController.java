@@ -12,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -37,16 +36,11 @@ public class CFGController implements Initializable {
     @FXML
     private JFXComboBox graphlst;
     @FXML
-    private Label deplbl;
-    @FXML
     private Button chosenFile;
-    @FXML
-    private Label lblid;
     @FXML
     private AnchorPane anchor;
     @FXML
     private Button closeBtn;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -60,7 +54,6 @@ public class CFGController implements Initializable {
         try {
             this.dep = dep;
             adminModel = new AdminModel();
-            deplbl.setText(dep.getName());
         } catch (IOException | SQLException exception) {
             exception.printStackTrace();
         }
@@ -70,9 +63,9 @@ public class CFGController implements Initializable {
         return dep;
     }
 
-    public void handleChoosefile(ActionEvent event) {
+    @FXML
+    private void handleChoosefile(ActionEvent event) {
         try {
-            lblid.setText(String.valueOf(getDepartment().getName()));
             String selectedgraph = graphlst.getSelectionModel().getSelectedItem().toString();
             FileChooser fileChooser = new FileChooser();
             fileChooser.setInitialDirectory(new File("src/files/")); //Sets the directory to the desktop
@@ -93,24 +86,25 @@ public class CFGController implements Initializable {
         }
     }
 
-
-    public void handleSave(ActionEvent event) {
+    @FXML
+    private void handleSave(ActionEvent event) {
         try {
             String selectedFile = chosenFile.getText().trim();
             int row = Integer.parseInt(rowField.getText().trim());
             int column = Integer.parseInt(columnField.getText().trim());
             String url = chosenFile.getText().trim();
-            String filetype = graphlst.getSelectionModel().getSelectedItem().toString();
+            String graphType = graphlst.getSelectionModel().getSelectedItem().toString();
 
             if (selectedFile != null) {
-                adminModel.createCFG(dep.getId(), row, column, url, filetype);
+                adminModel.createCFG(dep.getId(), row, column, url, graphType);
             }
         } catch (Exception ex){
             UserError.displayError(ERROR_HEADER, "Check values");
         }
     }
 
-    public void handleBack(ActionEvent actionEvent){
+    @FXML
+    private void handleBack(ActionEvent actionEvent){
         try {
             Stage stage = (Stage) closeBtn.getScene().getWindow();
             stage.close();
@@ -120,7 +114,8 @@ public class CFGController implements Initializable {
         }
     }
 
-    public void handleLogout(ActionEvent actionEvent){
+    @FXML
+    private void handleLogout(ActionEvent actionEvent){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/arlaScreens/gui/view/Main.fxml"));
@@ -131,12 +126,13 @@ public class CFGController implements Initializable {
             window.setTitle("Arla Foods-Esbjerg");
             window.show();
         } catch (Exception ex){
-            UserError.displayError(ERROR_HEADER, "Try again");
+            UserError.displayError(ERROR_HEADER, "Can't log you out");
         }
 
     }
 
-    public void handleClose(ActionEvent actionEvent) {
+    @FXML
+    private void handleClose(ActionEvent actionEvent) {
         Platform.exit();
         System.exit(0);
     }

@@ -41,7 +41,8 @@ public class NewObjectController {
         }
     }
 
-    public void handleSaveUser(ActionEvent actionEvent) {
+    @FXML
+    private void handleSaveUser(ActionEvent actionEvent) {
         try {
             String depName = depNameTxt.getText().trim();
             String username = txtFieldUsername.getText().trim();
@@ -59,7 +60,8 @@ public class NewObjectController {
         }
     }
 
-    public void handleBack(ActionEvent actionEvent) {
+    @FXML
+    private void handleBack(ActionEvent actionEvent) {
         try {
             Stage stage = (Stage) closeBtn.getScene().getWindow();
             stage.close();
