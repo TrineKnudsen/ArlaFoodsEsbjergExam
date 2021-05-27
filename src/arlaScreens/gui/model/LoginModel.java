@@ -24,7 +24,7 @@ public class LoginModel {
         return logicFacade.getUserLogin(username, password);
     }
 
-    public Department getAdminLogin(String username, String password) throws SQLException {
+    public Admin getAdminLogin(String username, String password) throws SQLException {
         return logicFacade.getAdminLogin(username, password);
     }
 }

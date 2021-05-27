@@ -1,8 +1,8 @@
 package arlaScreens.gui.controller.admin;
 
+import arlaScreens.be.Admin;
 import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
-import arlaScreens.be.User;
 import arlaScreens.bll.util.UserError;
 import arlaScreens.gui.model.DepartmentModel;
 import arlaScreens.gui.util.DataType;
@@ -36,7 +36,7 @@ public class AdminController implements Initializable {
 
     private final String ERROR_HEADER = "Error occurred!";
     private DepartmentModel departmentModel;
-    private ObservableList<User> allDep;
+    private ObservableList<Department> allDep;
     List<ScreenCFG> screenCFGList;
     IDataType iDataType;
 
@@ -45,9 +45,9 @@ public class AdminController implements Initializable {
     @FXML
     private AnchorPane anchorCFG;
     @FXML
-    private TableView<User> deplst;
+    private TableView<Department> deplst;
     @FXML
-    private TableColumn<User, String> nameColumn;
+    private TableColumn<Department, String> nameColumn;
     @FXML
     private AnchorPane anchor;
 
@@ -55,7 +55,7 @@ public class AdminController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-    public void getAdmin(Department admin) {
+    public void getAdmin(Admin admin) {
         admin.getId();
         try {
             departmentModel = new DepartmentModel();
@@ -97,6 +97,36 @@ public class AdminController implements Initializable {
         }
     }
 
+    @FXML
+    private void handleUpdateDepartment(ActionEvent actionEvent) {
+        try {
+            int chosenDep = deplst.getSelectionModel().getSelectedItem().getId();
+            String updatedDep = nameField.getText().trim();
+
+            if (updatedDep != null) {
+                departmentModel.updateDep(chosenDep, updatedDep);
+            }
+        } catch (Exception ex) {
+            UserError.displayError(ERROR_HEADER, "Choose department to edit");
+        }
+    }
+
+    @FXML
+    private void handleDeleteDepartment(ActionEvent actionEvent) {
+        Department depToDelete = deplst.getSelectionModel().getSelectedItem();
+        try {
+            if (depToDelete != null) {
+                departmentModel.deleteDep(depToDelete);
+                deplst.getItems().remove(depToDelete);
+            } else {
+                String message = "Choose the department you wish to delete";
+                UserError.displayError(ERROR_HEADER, message);
+            }
+        } catch (Exception e) {
+            UserError.displayError(ERROR_HEADER, e.getMessage());
+        }
+    }
+
     private void openScreen(String url, String windowName) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -123,36 +153,6 @@ public class AdminController implements Initializable {
         if (chosenDep != null) {
             openScreen("/arlaScreens/gui/view/admin/EditCFG.fxml", "Screen Configuration for " +chosenDep.getName());
         } else UserError.displayError(ERROR_HEADER, "Choose department to add screen configuration to");
-    }
-
-    @FXML
-    private void handleUpdateDepartment(ActionEvent actionEvent) {
-        try {
-            int chosenDep = deplst.getSelectionModel().getSelectedItem().getId();
-            String updatedDep = nameField.getText().trim();
-
-            if (updatedDep != null) {
-                departmentModel.updateDep(chosenDep, updatedDep);
-            }
-        } catch (Exception ex) {
-            UserError.displayError(ERROR_HEADER, "Choose department to edit");
-        }
-    }
-
-    @FXML
-    private void handleDeleteDepartment(ActionEvent actionEvent) {
-        User depToDelete = deplst.getSelectionModel().getSelectedItem();
-        try {
-            if (depToDelete != null) {
-                departmentModel.deleteDep(depToDelete);
-                deplst.getItems().remove(depToDelete);
-            } else {
-                String message = "Choose the department you wish to delete";
-                UserError.displayError(ERROR_HEADER, message);
-            }
-        } catch (Exception e) {
-            UserError.displayError(ERROR_HEADER, e.getMessage());
-        }
     }
 
     @FXML

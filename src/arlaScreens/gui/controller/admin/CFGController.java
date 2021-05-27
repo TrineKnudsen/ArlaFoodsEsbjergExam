@@ -66,15 +66,15 @@ public class CFGController implements Initializable {
     @FXML
     private void handleChoosefile(ActionEvent event) {
         try {
-            String selectedgraph = graphlst.getSelectionModel().getSelectedItem().toString();
+            String selectedGraph = graphlst.getSelectionModel().getSelectedItem().toString();
             FileChooser fileChooser = new FileChooser();
             fileChooser.setInitialDirectory(new File("src/files/")); //Sets the directory to the desktop
 
-            if (selectedgraph == "piechart" || selectedgraph == "linechart") {
+            if (selectedGraph == "piechart" || selectedGraph == "linechart") {
                 fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Files", "*.csv"));
-            } else if (selectedgraph == "barchart") {
+            } else if (selectedGraph == "barchart") {
                 fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Files", "*.xlsx"));
-            } else if (selectedgraph == "webpage") {
+            } else if (selectedGraph == "webpage") {
                 fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Files", "*.html"));
             }
             File selectedFile = fileChooser.showOpenDialog(null);

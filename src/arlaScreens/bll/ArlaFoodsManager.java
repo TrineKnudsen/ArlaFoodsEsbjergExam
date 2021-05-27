@@ -29,7 +29,7 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
     }
 
     @Override
-    public List<User> getAllDep() throws SQLException {
+    public List<Department> getAllDep() throws SQLException {
         return departmentDAO.getAllDep();
     }
 
@@ -39,7 +39,7 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
     }
 
     @Override
-    public User createDep(String username, String password, String depName) throws SQLException {
+    public Department createDep(String username, String password, String depName) throws SQLException {
         return departmentDAO.createDep(username, password, depName);
     }
 
@@ -64,7 +64,7 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
     }
 
     @Override
-    public Department getAdminLogin(String username, String password) throws SQLException {
+    public Admin getAdminLogin(String username, String password) throws SQLException {
         return loginDAO.getAdminLogin(username, password);
     }
 
@@ -75,6 +75,6 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
 
     @Override
     public Department getUserLogin(String username, String password) throws SQLException {
-        return loginDAO.getUserLogin(username, password);
+        return loginDAO.getDepLogin(username, password);
     }
 }

@@ -1,7 +1,6 @@
 package arlaScreens.dal.dao;
 
 import arlaScreens.be.Department;
-import arlaScreens.be.User;
 import arlaScreens.dal.JDBCConnectionPool;
 
 import java.io.IOException;
@@ -18,20 +17,19 @@ public class DepartmentDAO {
         connectionPool = JDBCConnectionPool.getInstance();
     }
 
-    public List<User> getAllDep() throws SQLException {
-        List<User> allDeps = new ArrayList<>();
+    public List<Department> getAllDep() throws SQLException {
+        List<Department> allDeps = new ArrayList<>();
         Connection connection = connectionPool.checkOut();
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("SELECT id, depName, IsAdmin " +
                     "FROM Department");
 
-
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String depName = resultSet.getString("depName");
-                int type = resultSet.getInt("IsAdmin");
+                int isAdmin = resultSet.getInt("IsAdmin");
 
-                User dep = new User(id, depName, type);
+                Department dep = new Department(id, depName, isAdmin);
                 allDeps.add(dep);
             }
         }
@@ -49,18 +47,20 @@ public class DepartmentDAO {
         }
     }
 
-    public User createDep(String username, String password, String depName) throws SQLException {
+    public Department createDep(String username, String password, String depName) throws SQLException {
+        int isAdmin = 0;
         int id = getNextAvailableDepartmentID();
-        String sql = "INSERT INTO Department(id, Username, Password, depName) VALUES(?,?,?,?);";
+        String sql = "INSERT INTO Department(id, Username, Password, isAdmin, depName) VALUES(?,?,?,?,?);";
         try (Connection con = connectionPool.checkOut()) {
             PreparedStatement st = con.prepareStatement(sql);
             st.setInt(1, id);
             st.setString(2, username);
             st.setString(3, password);
-            st.setString(4, depName);
+            st.setInt(4, isAdmin);
+            st.setString(5, depName);
             st.executeUpdate();
 
-            User dep = new User(id, depName, 0);
+            Department dep = new Department(id, depName, isAdmin);
             return dep;
         }
     }
@@ -91,7 +91,7 @@ public class DepartmentDAO {
     }**/
 
     private int getNextAvailableDepartmentID() throws SQLException {
-        List<User> allDepartments = getAllDep();
+        List<Department> allDepartments = getAllDep();
         if (allDepartments == null || allDepartments.isEmpty()) {
             return 1;
         }
@@ -107,7 +107,7 @@ public class DepartmentDAO {
         return id;
     }
 
-    public Department deleteDepartment (Department depToDelete) throws SQLException {
+    public Department deleteDepartment(Department depToDelete) throws SQLException {
         try (Connection con = connectionPool.checkOut()){
             PreparedStatement statement = con.prepareStatement("DELETE FROM Department WHERE id =?;");
             statement.setInt(1, depToDelete.getId());
@@ -119,5 +119,4 @@ public class DepartmentDAO {
         }
         return null;
     }
-
 }

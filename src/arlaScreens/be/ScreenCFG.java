@@ -6,13 +6,13 @@ public class ScreenCFG {
     private int colIndex;
     private String url;
     private String type;
-    private User user;
+    private Department department;
 
-    public ScreenCFG(int colIndex, int rowIndex, String type, String url, User user) {
+    public ScreenCFG(int colIndex, int rowIndex, String type, String url, Department department) {
         this.rowIndex = rowIndex;
         this.colIndex = colIndex;
         this.type = type;
-        this.user = user;
+        this.department = department;
         this.url = url;
     }
 
@@ -48,11 +48,11 @@ public class ScreenCFG {
         this.type = type;
     }
 
-    public User getUser() {
-        return user;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setDepartment(Department de) {
+        this.department = de;
     }
 }

@@ -1,7 +1,7 @@
 package arlaScreens.gui.model;
 
+import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
-import arlaScreens.be.User;
 import arlaScreens.bll.ArlaFoodsManager;
 import arlaScreens.bll.IArlaFoodsLogicFacade;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class AdminModel {
 
     private IArlaFoodsLogicFacade logicFacade;
-    private List<User> allDeps;
+    private List<Department> allDeps;
 
     public AdminModel() throws IOException, SQLException {
         logicFacade = new ArlaFoodsManager();
@@ -33,7 +33,7 @@ public class AdminModel {
         return logicFacade.getCFG(depid);
     }
 
-    public List<User> getAllDep() throws SQLException {
+    public List<Department> getAllDep() throws SQLException {
         allDeps = new ArrayList<>();
         allDeps.addAll(logicFacade.getAllDep());
 

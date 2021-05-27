@@ -1,14 +1,39 @@
 package arlaScreens.be;
 
-public class Admin extends Department{
+public class Admin {
 
+    private int id;
+    private String name;
+    private int isAdmin;
     private String username;
     private String password;
 
-    public Admin(int id, String name, int type, String username, String password) {
-        super(id, name, type);
+    public Admin(int id, String name, int isAdmin, String username, String password) {
+        this.id = id;
+        this.name = name;
+        this.isAdmin = isAdmin;
         this.username = username;
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     public String getUsername() {

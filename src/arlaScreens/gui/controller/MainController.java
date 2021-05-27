@@ -1,5 +1,6 @@
 package arlaScreens.gui.controller;
 
+import arlaScreens.be.Admin;
 import arlaScreens.be.Department;
 import arlaScreens.bll.util.UserError;
 import arlaScreens.gui.controller.admin.AdminController;
@@ -15,8 +16,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,18 +25,13 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
+    private LoginModel loginModel;
+
     private final String ERROR_HEADER = "Error occurred!";
     @FXML
     public PasswordField txtFieldPassword;
     @FXML
     public TextField txtFieldUsername;
-    @FXML
-    private LoginModel loginModel;
-    @FXML
-    private GridPane gridPane;
-    @FXML
-    private AnchorPane anchor;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -51,12 +45,11 @@ public class MainController implements Initializable {
     /**
      * Metoden til login knappen. Metoden henter et login fra databasen ud fra det input brugeren har indtastet i txtFieldUsername og txtFieldPassword.
      * @param event
-     * @throws IOException
      * @throws SQLException
      */
-    public void handleBtnLogin(ActionEvent event) throws IOException, SQLException {
+    public void handleBtnLogin(ActionEvent event) throws SQLException {
         Department dep = loginModel.getUserLogin(txtFieldUsername.getText().trim(), txtFieldPassword.getText().trim());
-        Department admin = loginModel.getAdminLogin(txtFieldUsername.getText().trim(), txtFieldPassword.getText().trim());
+        Admin admin = loginModel.getAdminLogin(txtFieldUsername.getText().trim(), txtFieldPassword.getText().trim());
         try {
         if (dep != null){
             ((Node)event.getSource()).getScene().getWindow().hide();
@@ -79,7 +72,6 @@ public class MainController implements Initializable {
             AdminController adminController = loader.getController();
             adminController.getAdmin(admin);
             Scene scene = new Scene(root);
-
             primaryStage.setScene(scene);
             primaryStage.show();
         }}

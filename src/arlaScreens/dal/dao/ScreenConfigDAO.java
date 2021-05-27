@@ -1,7 +1,7 @@
 package arlaScreens.dal.dao;
 
+import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
-import arlaScreens.be.User;
 import arlaScreens.dal.JDBCConnectionPool;
 
 import java.io.IOException;
@@ -45,8 +45,8 @@ public class ScreenConfigDAO {
                 String url = rs.getString("url");
                 String dataType = rs.getString("GraphType");
 
-                User user = new User(id, name, type);
-                screenCFG = new ScreenCFG(colIndex, rowIndex, dataType, url, user);
+                Department department = new Department(id, name, type);
+                screenCFG = new ScreenCFG(colIndex, rowIndex, dataType, url, department);
             }
             return screenCFG;
         }
@@ -70,15 +70,15 @@ public class ScreenConfigDAO {
 
                 int id = rs.getInt("id");
                 String name = rs.getString("depName");
-                int type = rs.getInt("IsAdmin");
+                int isAdmin = rs.getInt("IsAdmin");
                 int rowIndex = rs.getInt("RowIndex");
                 int colIndex = rs.getInt("ColumnIndex");
                 String url = rs.getString("url");
                 String dataType = rs.getString("GraphType");
 
                 ScreenCFG screenCFG;
-                User user = new User(id, name, type);
-                screenCFG = new ScreenCFG(colIndex, rowIndex, dataType, url, user);
+                Department department = new Department(id, name, isAdmin);
+                screenCFG = new ScreenCFG(colIndex, rowIndex, dataType, url, department);
                 screenCFGList.add(screenCFG);
             }
         }
@@ -115,8 +115,8 @@ public class ScreenConfigDAO {
                 imgUrl = rs.getString("url");
                 fileName = rs.getString("GraphType");
 
-                User user = new User(depId, name, type);
-                screenCFG = new ScreenCFG(rowIndex, colIndex, imgUrl, fileName, user);
+                Department department = new Department(depId, name, type);
+                screenCFG = new ScreenCFG(rowIndex, colIndex, imgUrl, fileName, department);
             }
             return screenCFG;
         }

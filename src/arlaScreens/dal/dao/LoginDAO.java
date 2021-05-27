@@ -2,7 +2,6 @@ package arlaScreens.dal.dao;
 
 import arlaScreens.be.Admin;
 import arlaScreens.be.Department;
-import arlaScreens.be.User;
 import arlaScreens.bll.util.CustomError;
 import arlaScreens.dal.JDBCConnectionPool;
 
@@ -37,7 +36,7 @@ public class LoginDAO {
         } return true;
     }
 
-    public Department getUserLogin(String username, String password) throws SQLException{
+    public Department getDepLogin(String username, String password) throws SQLException{
         String sql = "SELECT id, depName, IsAdmin " +
                 "FROM Department " +
                 "WHERE Username = ? AND Password = ?";
@@ -47,29 +46,29 @@ public class LoginDAO {
             statement.setString(2, password);
             statement.execute();
 
-            User user = null;
+            Department department = null;
             ResultSet resultSet = statement.getResultSet();
             while (resultSet.next()) {
                 int depId = resultSet.getInt("id");
-                int type = resultSet.getInt("IsAdmin");
+                int isAdmin = resultSet.getInt("IsAdmin");
                 String depName = resultSet.getString("depName");
-                user = new User(depId, depName, type);
+                department = new Department(depId, depName, isAdmin);
             }
-            return user;
+            return department;
         }
     }
 
-    public Department getAdminLogin(String username, String password) throws SQLException {
+    public Admin getAdminLogin(String username, String password) throws SQLException {
         String sqlAdmin = "SELECT id, IsAdmin FROM Admin WHERE Username = ? AND Password = ?";
         try (Connection connection = connectionPool.checkOut()) {
-            PreparedStatement statement1 = connection.prepareStatement(sqlAdmin);
-            statement1.setString(1, username);
-            statement1.setString(2, password);
-            statement1.execute();
+            PreparedStatement statement = connection.prepareStatement(sqlAdmin);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            statement.execute();
 
             Admin admin = null;
 
-            ResultSet resultSetAdmin = statement1.getResultSet();
+            ResultSet resultSetAdmin = statement.getResultSet();
 
             while (resultSetAdmin.next()) {
                 int id = resultSetAdmin.getInt("id");
