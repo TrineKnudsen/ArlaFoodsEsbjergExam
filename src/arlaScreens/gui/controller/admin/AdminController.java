@@ -4,7 +4,6 @@ import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.be.User;
 import arlaScreens.bll.util.UserError;
-import arlaScreens.gui.model.AdminModel;
 import arlaScreens.gui.model.DepartmentModel;
 import arlaScreens.gui.util.DataType;
 import arlaScreens.gui.util.IDataType;
@@ -15,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -39,7 +37,6 @@ public class AdminController implements Initializable {
 
     private final String ERROR_HEADER = "Error occurred!";
     private DepartmentModel departmentModel;
-    private AdminModel adminModel;
     private ObservableList<User> allDep;
     List<ScreenCFG> screenCFGList;
     IDataType iDataType;
@@ -55,44 +52,51 @@ public class AdminController implements Initializable {
     @FXML
     private AnchorPane anchor;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 
     public void getAdmin(Department admin) {
         admin.getId();
         try {
             departmentModel = new DepartmentModel();
-            screenCFGList = new ArrayList<>();
-            iDataType = new DataType();
-
             allDep = departmentModel.getAllDep();
             deplst.setItems(allDep);
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            screenCFGList = new ArrayList<>();
+            iDataType = new DataType();
+
         } catch (IOException | SQLException exception) {
             exception.printStackTrace();
         }
     }
 
-    public void handleCreateDep(ActionEvent actionEvent) throws IOException {
-        Parent mainWindowParent = FXMLLoader.load(getClass().getResource("/arlaScreens/gui/view/admin/NewObject.fxml"));
-        Scene mainWindowScene = new Scene(mainWindowParent);
-        Stage adminStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        adminStage.setScene(mainWindowScene);
-        adminStage.setTitle("Admin controls - new admin");
-        adminStage.show();
+    public void handleCreateDep(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/arlaScreens/gui/view/admin/NewObject.fxml"));
+            Parent parent = loader.load();
+            Stage stage= new Stage();
+            stage.setTitle("Add new department or admin");
+            stage.setScene(new Scene(parent));
+            stage.setResizable(false);
+            stage.show();
+        } catch (Exception ex){
+            UserError.displayError(ERROR_HEADER, "Try again");
+        }
     }
 
-    public void handleUpdateDepartment(ActionEvent actionEvent) throws SQLException {
-        int chosenDep = deplst.getSelectionModel().getSelectedItem().getId();
-        String updatedDep = nameField.getText().trim();
+    public void handleUpdateDepartment(ActionEvent actionEvent){
+        try {
+            int chosenDep = deplst.getSelectionModel().getSelectedItem().getId();
+            String updatedDep = nameField.getText().trim();
 
-        if (updatedDep != null) {
-            departmentModel.updateDep(chosenDep, updatedDep);
+            if (updatedDep != null) {
+                departmentModel.updateDep(chosenDep, updatedDep);
+            }
+        } catch (Exception ex){
+            UserError.displayError(ERROR_HEADER, "Choose department to edit");
         }
-
     }
 
     public void handleDeleteDepartment(ActionEvent actionEvent) {
@@ -110,31 +114,37 @@ public class AdminController implements Initializable {
         }
     }
 
-    public void handleOpenCFG(ActionEvent event) throws IOException {
-        Department chosenDep = deplst.getSelectionModel().getSelectedItem();
-
-        if (chosenDep != null) {
-            ((Node) event.getSource()).getScene().getWindow().hide();
-            Stage primaryStage = new Stage();
-            FXMLLoader loader = new FXMLLoader();
-            Parent root = loader.load(getClass().getResource("/arlaScreens/gui/view/admin/EditCFG.fxml").openStream());
-            CFGController cfgController = loader.getController();
-            cfgController.setDepartment(chosenDep);
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show();
+    public void handleOpenCFG(ActionEvent event) {
+        try {
+            Department chosenDep = deplst.getSelectionModel().getSelectedItem();
+            if (chosenDep != null) {
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/arlaScreens/gui/view/admin/EditCFG.fxml"));
+                Parent parent = loader.load();
+                Stage stage= new Stage();
+                stage.setTitle("Screen Configuration for " +chosenDep.getName());
+                stage.setScene(new Scene(parent));
+                stage.setResizable(false);
+                stage.show();
+            }
+        } catch (Exception ex){
+            UserError.displayError(ERROR_HEADER, "Choose department to edit its configuration");
         }
     }
 
-    public void handleLogout(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/arlaScreens/gui/view/Main.fxml"));
-        Parent mainWindowParent = loader.load();
-        Scene mainScene = new Scene(mainWindowParent);
-        Stage window = (Stage) anchor.getScene().getWindow();
-        window.setScene(mainScene);
-        window.setTitle("Arla Foods-Esbjerg");
-        window.show();
+    public void handleLogout(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/arlaScreens/gui/view/Main.fxml"));
+            Parent mainWindowParent = loader.load();
+            Scene mainScene = new Scene(mainWindowParent);
+            Stage window = (Stage) anchor.getScene().getWindow();
+            window.setScene(mainScene);
+            window.setTitle("Arla Foods-Esbjerg");
+            window.show();
+        }catch (Exception ex){
+            UserError.displayError(ERROR_HEADER, "Wasn't able to log out");
+        }
     }
 
     public void handleExit(ActionEvent actionEvent) {
@@ -142,36 +152,30 @@ public class AdminController implements Initializable {
         System.exit(0);
     }
 
-    public void getSelectedCFG(MouseEvent event) throws SQLException, IOException {
-        screenCFGList.addAll(departmentModel.getScreenCFGS(deplst.getSelectionModel().getSelectedItem().getId()));
-        Label typelbl =null;
-        AnchorPane anchorPane = null;
-        GridPane gridPane = new GridPane();
-        if (!gridPane.getChildren().isEmpty() && !anchorPane.getChildren().isEmpty()) {
-            typelbl.setText("");
-            gridPane.getChildren().remove(anchorPane);
-            anchorCFG.getChildren().remove(gridPane);
-            anchorPane.getChildren().remove(typelbl);
-            GridPane.clearConstraints(anchorPane);
-            anchorPane.getChildren().removeAll(typelbl);
-            gridPane.getChildren().removeAll(anchorPane);
-            anchorCFG.getChildren().removeAll(gridPane);
-            gridPane.getChildren().clear();
-            anchorPane.getChildren().clear();
-            anchorCFG.getChildren().clear();
-        }
-
-        else {
-            for (ScreenCFG screenCFG : screenCFGList) {
-                anchorPane = new AnchorPane();
-                typelbl = new Label();
-                String type = screenCFG.getType();
-                typelbl.setText(type);
-                anchorPane.getChildren().add(typelbl);
-                gridPane.getChildren().add(anchorPane);
-                GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
+    public void getSelectedCFG(MouseEvent event) {
+        try {
+            screenCFGList.addAll(departmentModel.getScreenCFGS(deplst.getSelectionModel().getSelectedItem().getId()));
+            Label typelbl;
+            AnchorPane anchorPane = null;
+            GridPane gridPane = new GridPane();
+            if (!gridPane.getChildren().isEmpty() && !anchorPane.getChildren().isEmpty()) {
+                gridPane.getChildren().clear();
+                anchorCFG.getChildren().clear();
             }
-            anchorCFG.getChildren().add(gridPane);
+            else {
+                for (ScreenCFG screenCFG : screenCFGList) {
+                    anchorPane = new AnchorPane();
+                    typelbl = new Label();
+                    String type = screenCFG.getType();
+                    typelbl.setText(type);
+                    anchorPane.getChildren().add(typelbl);
+                    gridPane.getChildren().add(anchorPane);
+                    GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
+                }
+                anchorCFG.getChildren().add(gridPane);
+            }
+        } catch (Exception ex){
+            UserError.displayError(ERROR_HEADER, "Couldn't load configuration");
         }
     }
 }

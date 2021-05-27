@@ -34,8 +34,6 @@ public class DepController implements Initializable {
     private GridPane grid;
     @FXML
     private AnchorPane anchorpane;
-    @FXML
-    private Label depname;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,7 +51,6 @@ public class DepController implements Initializable {
 
             grid = new GridPane();
 
-
             for (ScreenCFG screenCFG : screenCFGList) {
                 String type = screenCFG.getType();
                 AnchorPane anchorPane = new AnchorPane();
@@ -61,7 +58,6 @@ public class DepController implements Initializable {
                 typelbl.setText(type);
                 anchorPane.getChildren().add(typelbl);
                 GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
-
                 switch (type) {
                     case "barchart":
                         anchorPane.getChildren().add(iDataType.drawExcel(screenCFG));

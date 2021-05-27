@@ -88,7 +88,7 @@ public class ScreenConfigDAO {
     public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String imgUrl, String fileName) throws SQLException {
         try (Connection con = connectionPool.checkOut()) {
             PreparedStatement st1 = con.prepareStatement("INSERT INTO ScreenCFG(depId, RowIndex, "
-                    + "ColumnIndex, [url], FileType) VALUES(?,?,?,?,?)");
+                    + "ColumnIndex, [url], GraphType) VALUES(?,?,?,?,?)");
             st1.setInt(1, depId);
             st1.setInt(2, rowIndex);
             st1.setInt(3, colIndex);
@@ -96,7 +96,7 @@ public class ScreenConfigDAO {
             st1.setString(5, fileName);
             st1.executeUpdate();
 
-            PreparedStatement st2 = con.prepareStatement("SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, ScreenCFG.FileType, Department.id, Department.depName, Department.IsAdmin " +
+            PreparedStatement st2 = con.prepareStatement("SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, ScreenCFG.GraphType, Department.id, Department.depName, Department.IsAdmin " +
                     "FROM ScreenCFG " +
                     "INNER JOIN Department " +
                     "ON ScreenCFG.depId = Department.id " +
