@@ -32,11 +32,4 @@ public class AdminModel {
     public ScreenCFG getCFG(int depid) throws SQLException {
         return logicFacade.getCFG(depid);
     }
-
-    public List<Department> getAllDep() throws SQLException {
-        allDeps = new ArrayList<>();
-        allDeps.addAll(logicFacade.getAllDep());
-
-        return allDeps;
-    }
 }

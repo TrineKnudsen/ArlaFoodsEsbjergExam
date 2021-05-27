@@ -16,10 +16,6 @@ public class LoginModel {
         logicFacade = new ArlaFoodsManager();
     }
 
-    public boolean checkAdminLogin(String username, String password) throws SQLException {
-        return logicFacade.checkLogin(username, password);
-    }
-
     public Department getUserLogin(String username, String password) throws SQLException {
         return logicFacade.getUserLogin(username, password);
     }

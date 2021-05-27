@@ -24,11 +24,6 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
     }
 
     @Override
-    public boolean checkLogin(String username, String password) throws SQLException {
-        return loginDAO.checkAdminLogin(username, password);
-    }
-
-    @Override
     public List<Department> getAllDep() throws SQLException {
         return departmentDAO.getAllDep();
     }

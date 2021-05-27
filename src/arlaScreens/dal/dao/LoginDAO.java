@@ -18,24 +18,6 @@ public class LoginDAO {
         connectionPool = JDBCConnectionPool.getInstance();
     }
 
-    public boolean checkAdminLogin(String username, String password) throws SQLException {
-        try (Connection connection = connectionPool.checkOut()) {
-            String sql = "SELECT Username, Password FROM [Admin] where Username='" + username + "' AND Password='" + password + "'";
-            Statement statement = connection.createStatement();
-
-            if(statement.execute(sql)){
-               ResultSet resultSet = statement.getResultSet();
-             if (resultSet.next()) {
-                 System.out.println("Login successful");
-                 return true;
-             } else {
-                 System.out.println("Admin Login failed");
-             }
-                  return false;
-               }
-        } return true;
-    }
-
     public Department getDepLogin(String username, String password) throws SQLException{
         String sql = "SELECT id, depName, IsAdmin " +
                 "FROM Department " +
@@ -72,8 +54,8 @@ public class LoginDAO {
 
             while (resultSetAdmin.next()) {
                 int id = resultSetAdmin.getInt("id");
-                int type = resultSetAdmin.getInt("ISAdmin");
-                admin = new Admin(id, "Admin", type, username, password);
+                int isAdmin = resultSetAdmin.getInt("ISAdmin");
+                admin = new Admin(id, "Admin", isAdmin);
             }
             return admin;
         }

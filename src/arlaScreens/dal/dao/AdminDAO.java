@@ -29,7 +29,7 @@ public class AdminDAO {
             st.setInt(4, isAdmin);
             st.executeUpdate();
 
-            Admin admin = new Admin(id, "Admin", isAdmin, username, password);
+            Admin admin = new Admin(id, "Admin", isAdmin);
             return admin;
         }
     }
@@ -55,17 +55,14 @@ public class AdminDAO {
         List<Admin> allAdmins = new ArrayList<>();
         Connection connection = connectionPool.checkOut();
         try (Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT id, IsAdmin, username, password " +
-                    "FROM Admin");
+            ResultSet resultSet = statement.executeQuery("SELECT id, IsAdmin FROM Admin");
 
             Admin admin;
             while (resultSet.next()) {
                 int isAdmin = resultSet.getInt("IsAdmin");
                 int id = resultSet.getInt("id");
-                String username = resultSet.getString("username");
-                String password = resultSet.getString("password");
 
-                admin = new Admin(id, "Admin", isAdmin, username, password);
+                admin = new Admin(id, "Admin", isAdmin);
                 allAdmins.add(admin);
             }
             return allAdmins;

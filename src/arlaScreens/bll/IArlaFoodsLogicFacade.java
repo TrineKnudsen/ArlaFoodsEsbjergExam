@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface IArlaFoodsLogicFacade {
 
-    boolean checkLogin(String username, String password) throws SQLException;
-
     List<Department> getAllDep() throws SQLException;
 
     void updateDep(int chosenDep, String updatedDep) throws SQLException;
