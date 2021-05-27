@@ -68,7 +68,8 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setTitle(dep.getName());
             primaryStage.setScene(scene);
-            primaryStage.setMaxHeight(689);
+            primaryStage.setHeight(900);
+            primaryStage.setMaxHeight(1080);
             primaryStage.show();
         } else {
             ((Node)event.getSource()).getScene().getWindow().hide();
