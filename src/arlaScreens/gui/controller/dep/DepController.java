@@ -2,11 +2,11 @@ package arlaScreens.gui.controller.dep;
 
 import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
+import arlaScreens.bll.util.UserError;
 import arlaScreens.gui.model.DepartmentModel;
 import arlaScreens.gui.util.DataFactory;
 import arlaScreens.gui.util.DataType;
 import arlaScreens.gui.util.IDataType;
-import com.opencsv.exceptions.CsvValidationException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -25,13 +25,12 @@ import java.util.ResourceBundle;
 
 public class DepController implements Initializable {
 
+    private final String ERROR_HEADER = "Error occurred";
     DepartmentModel depModel;
     List<ScreenCFG> screenCFGList;
     DataFactory dataFactory;
     IDataType iDataType;
 
-    @FXML
-    private GridPane grid;
     @FXML
     private AnchorPane anchorpane;
 
@@ -42,6 +41,7 @@ public class DepController implements Initializable {
 
     public void getDep(Department dep) {
         try {
+
             iDataType = new DataType();
             dataFactory = new DataFactory();
             depModel = new DepartmentModel();
@@ -49,14 +49,28 @@ public class DepController implements Initializable {
             screenCFGList.addAll(depModel.getScreenCFGS(dep.getId()));
             anchorpane.setPrefSize(Window.getWindows().size() - 50, Window.getWindows().size() - 50);
 
-            grid = new GridPane();
+            anchorpane.getChildren().add(depSetup());
 
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    private GridPane depSetup(){
+        anchorpane.setMaxHeight(689);
+        GridPane grid = new GridPane();
+        grid.setMaxHeight(689);
+        grid.setGridLinesVisible(true);
+        try {
             for (ScreenCFG screenCFG : screenCFGList) {
                 String type = screenCFG.getType();
                 AnchorPane anchorPane = new AnchorPane();
                 Label typelbl = new Label();
                 typelbl.setText(type);
                 anchorPane.getChildren().add(typelbl);
+                anchorPane.setMaxHeight(689/2);
                 GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
                 switch (type) {
                     case "barchart":
@@ -70,6 +84,7 @@ public class DepController implements Initializable {
                     case "webpage":
                         WebView webView = new WebView();
                         WebEngine webEngine = webView.getEngine();
+                        webView.setMaxHeight(689/2);
                         String url = iDataType.getWebPage(screenCFG).toURI().toURL().toExternalForm();
                         webEngine.load(url);
                         anchorPane.getChildren().add(webView);
@@ -81,16 +96,9 @@ public class DepController implements Initializable {
                         break;
                 }
             }
-
-            anchorpane.setPrefSize(Window.getWindows().size() - 50, Window.getWindows().size() - 50);
-            anchorpane.getChildren().add(grid);
-            grid.setGridLinesVisible(true);
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (CsvValidationException e) {
-            e.printStackTrace();
+        } catch (Exception ex){
+            UserError.displayError(ERROR_HEADER, "Couldn't set up department");
         }
+        return grid;
     }
 }

@@ -60,6 +60,7 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
             primaryStage.setTitle(dep.getName());
             primaryStage.setScene(scene);
+            primaryStage.setMaxHeight(689);
             primaryStage.show();
         } else {
             ((Node)event.getSource()).getScene().getWindow().hide();
@@ -69,6 +70,7 @@ public class MainController implements Initializable {
             AdminController adminController = loader.getController();
             adminController.getAdmin(admin);
             Scene scene = new Scene(root);
+
             primaryStage.setScene(scene);
             primaryStage.show();
         }
