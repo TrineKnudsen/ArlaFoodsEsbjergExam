@@ -69,7 +69,6 @@ public class MainController implements Initializable {
             adminController.getAdmin(admin);
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-            primaryStage.setFullScreen(true);
             primaryStage.show();
         }
     }

@@ -16,7 +16,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="624.0" stylesheets="@../../../../Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.admin.AdminController">
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.admin.AdminController">
     <children>
         <ImageView fitHeight="455.0" fitWidth="624.0" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="bgImg">
             <image>
@@ -60,6 +60,6 @@
                </stops>
             </RadialGradient>
          </unFocusColor></JFXTextField>
-      <AnchorPane fx:id="anchorCFG" layoutX="339.0" layoutY="67.0" prefHeight="200.0" prefWidth="254.0" />
+      <AnchorPane fx:id="anchorCFG" layoutX="334.0" layoutY="67.0" prefHeight="200.0" prefWidth="268.0" />
     </children>
 </AnchorPane>

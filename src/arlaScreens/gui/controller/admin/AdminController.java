@@ -62,17 +62,15 @@ public class AdminController implements Initializable {
     }
 
     public void getAdmin(Department admin) {
-        admin.getName();
+        admin.getId();
         try {
             departmentModel = new DepartmentModel();
-            adminModel = new AdminModel();
             screenCFGList = new ArrayList<>();
             iDataType = new DataType();
 
             allDep = departmentModel.getAllDep();
             deplst.setItems(allDep);
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            getScreens();
         } catch (IOException | SQLException exception) {
             exception.printStackTrace();
         }
@@ -144,41 +142,36 @@ public class AdminController implements Initializable {
         System.exit(0);
     }
 
-    public void getScreens() throws SQLException {
-        GridPane gridPane = null;
-        AnchorPane anchorPane = null;
-        screenCFGList = new ArrayList<>();
-        while (allDep.listIterator().hasNext()) {
-            anchorPane = new AnchorPane();
-            gridPane = new GridPane();
-            screenCFGList.add(adminModel.getCFG(allDep.listIterator().next().getId()));
-
-            for (ScreenCFG screencfg:screenCFGList) {
-                anchorPane = new AnchorPane();
-                Label label = new Label();
-                String type = screencfg.getType();
-                label.setText(type);
-                anchorPane.getChildren().add(label);
-                GridPane.setConstraints(anchorPane, screencfg.getColIndex(), screencfg.getRowIndex());
-                gridPane.getChildren().add(anchorPane);
-                gridPane.setGridLinesVisible(true);
-            }
-        }
-        anchorCFG.getChildren().addAll(anchorPane);
-    }
-
     public void getSelectedCFG(MouseEvent event) throws SQLException, IOException {
-        GridPane gridPane = new GridPane();
-        screenCFGList = new ArrayList<>();
         screenCFGList.addAll(departmentModel.getScreenCFGS(deplst.getSelectionModel().getSelectedItem().getId()));
-        for (ScreenCFG screenCFG:screenCFGList){
-            AnchorPane anchorPane = new AnchorPane();
-            Label typeLbl = new Label();
-            String type = screenCFG.getType();
-            typeLbl.setText(type);
-            anchorPane.getChildren().add(typeLbl);
-            gridPane.getChildren().add(anchorPane);
+        Label typelbl =null;
+        AnchorPane anchorPane = null;
+        GridPane gridPane = new GridPane();
+        if (!gridPane.getChildren().isEmpty() && !anchorPane.getChildren().isEmpty()) {
+            typelbl.setText("");
+            gridPane.getChildren().remove(anchorPane);
+            anchorCFG.getChildren().remove(gridPane);
+            anchorPane.getChildren().remove(typelbl);
+            GridPane.clearConstraints(anchorPane);
+            anchorPane.getChildren().removeAll(typelbl);
+            gridPane.getChildren().removeAll(anchorPane);
+            anchorCFG.getChildren().removeAll(gridPane);
+            gridPane.getChildren().clear();
+            anchorPane.getChildren().clear();
+            anchorCFG.getChildren().clear();
         }
-        anchorCFG.getChildren().add(gridPane);
+
+        else {
+            for (ScreenCFG screenCFG : screenCFGList) {
+                anchorPane = new AnchorPane();
+                typelbl = new Label();
+                String type = screenCFG.getType();
+                typelbl.setText(type);
+                anchorPane.getChildren().add(typelbl);
+                gridPane.getChildren().add(anchorPane);
+                GridPane.setConstraints(anchorPane, screenCFG.getColIndex(), screenCFG.getRowIndex());
+            }
+            anchorCFG.getChildren().add(gridPane);
+        }
     }
 }
