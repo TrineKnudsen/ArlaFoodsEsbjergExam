@@ -1,6 +1,7 @@
 package arlaScreens.gui.controller;
 
 import arlaScreens.be.Department;
+import arlaScreens.bll.util.UserError;
 import arlaScreens.gui.controller.admin.AdminController;
 import arlaScreens.gui.controller.dep.DepController;
 import arlaScreens.gui.model.LoginModel;
@@ -25,6 +26,7 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
+    private final String ERROR_HEADER = "Error occurred!";
     @FXML
     public PasswordField txtFieldPassword;
     @FXML
@@ -46,10 +48,16 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Metoden til login knappen. Metoden henter et login fra databasen ud fra det input brugeren har indtastet i txtFieldUsername og txtFieldPassword.
+     * @param event
+     * @throws IOException
+     * @throws SQLException
+     */
     public void handleBtnLogin(ActionEvent event) throws IOException, SQLException {
         Department dep = loginModel.getUserLogin(txtFieldUsername.getText().trim(), txtFieldPassword.getText().trim());
         Department admin = loginModel.getAdminLogin(txtFieldUsername.getText().trim(), txtFieldPassword.getText().trim());
-
+        try {
         if (dep != null){
             ((Node)event.getSource()).getScene().getWindow().hide();
             Stage primaryStage = new Stage();
@@ -73,6 +81,9 @@ public class MainController implements Initializable {
 
             primaryStage.setScene(scene);
             primaryStage.show();
+        }}
+        catch(Exception e ) {
+            UserError.displayError(ERROR_HEADER, "Wrong username or password");
         }
     }
 
