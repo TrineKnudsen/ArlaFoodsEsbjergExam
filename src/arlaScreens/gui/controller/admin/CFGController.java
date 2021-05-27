@@ -54,7 +54,7 @@ public class CFGController implements Initializable {
             this.dep = dep;
             adminModel = new AdminModel();
             deplbl.setText(dep.getName());
-        } catch (IOException exception) {
+        } catch (IOException | SQLException exception) {
             exception.printStackTrace();
         }
     }

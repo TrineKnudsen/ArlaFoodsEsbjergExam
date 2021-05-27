@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="689.0" stylesheets="@../../../../Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.admin.AdminController">
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="624.0" stylesheets="@../../../../Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.admin.AdminController">
     <children>
-        <ImageView fitHeight="445.0" fitWidth="689.0" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="bgImg">
+        <ImageView fitHeight="455.0" fitWidth="624.0" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="bgImg">
             <image>
                 <Image url="@/pictures/ArlaLogo.png" />
             </image>
         </ImageView>
-        <Label layoutX="300.0" layoutY="14.0" text="Welcome!" AnchorPane.topAnchor="14.0">
+        <Label layoutX="280.0" layoutY="15.0" text="Welcome!" AnchorPane.topAnchor="15.0">
             <font>
                 <Font size="20.0" />
             </font>
@@ -29,7 +38,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TableView fx:id="deplst" layoutX="14.0" layoutY="67.0" prefHeight="200.0" prefWidth="310.0">
+      <TableView fx:id="deplst" layoutX="14.0" layoutY="67.0" onMouseClicked="#getSelectedCFG" prefHeight="200.0" prefWidth="310.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="290.0" text="Department" />
         </columns>
@@ -39,9 +48,18 @@
             <Insets right="3.0" />
          </padding>
       </Button>
-      <Button layoutX="14.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleOpenCFG" prefHeight="20.0" prefWidth="50.0" text="Edit view" />
+      <Button layoutX="14.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleOpenCFG" prefHeight="26.0" prefWidth="102.0" text="Edit view" />
           <Button layoutX="14.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleDeleteDepartment" prefHeight="26.0" prefWidth="169.0" text="Delete department" />
       <Button layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleCreateDep" prefHeight="26.0" prefWidth="170.0" text="Add department or admin" />
-      <JFXTextField fx:id="nameField" layoutX="14.0" layoutY="274.0" prefHeight="26.0" prefWidth="223.0" promptText="New department name" />
+      <JFXTextField fx:id="nameField" alignment="CENTER" focusColor="#405aa8" layoutX="14.0" layoutY="274.0" prefHeight="26.0" prefWidth="223.0" promptText="New department name">
+         <unFocusColor>
+            <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </unFocusColor></JFXTextField>
+      <AnchorPane fx:id="anchorCFG" layoutX="339.0" layoutY="67.0" prefHeight="200.0" prefWidth="254.0" />
     </children>
 </AnchorPane>

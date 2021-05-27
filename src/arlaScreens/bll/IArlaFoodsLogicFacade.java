@@ -27,4 +27,6 @@ public interface IArlaFoodsLogicFacade {
     Department getUserLogin(String username, String password) throws SQLException;
 
     Department getAdminLogin(String username, String password) throws SQLException;
+
+    ScreenCFG getCFG(int depid) throws SQLException;
 }

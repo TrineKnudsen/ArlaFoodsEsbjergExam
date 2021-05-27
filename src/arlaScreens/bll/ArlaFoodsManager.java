@@ -60,12 +60,17 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
 
     @Override
     public List<ScreenCFG> getScreenCFG(int depId) throws SQLException, IOException {
-        return cfgDAO.getCFG(depId);
+        return cfgDAO.getCFGList(depId);
     }
 
     @Override
     public Department getAdminLogin(String username, String password) throws SQLException {
         return loginDAO.getAdminLogin(username, password);
+    }
+
+    @Override
+    public ScreenCFG getCFG(int depid) throws SQLException {
+        return cfgDAO.getCFG(depid);
     }
 
     @Override

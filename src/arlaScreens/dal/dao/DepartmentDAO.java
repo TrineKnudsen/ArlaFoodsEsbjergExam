@@ -2,7 +2,6 @@ package arlaScreens.dal.dao;
 
 import arlaScreens.be.Department;
 import arlaScreens.be.User;
-import arlaScreens.be.ScreenCFG;
 import arlaScreens.dal.JDBCConnectionPool;
 
 import java.io.IOException;
@@ -26,19 +25,17 @@ public class DepartmentDAO {
             ResultSet resultSet = statement.executeQuery("SELECT id, depName, IsAdmin " +
                     "FROM Department");
 
-            ScreenCFG screenCFG = null;
-            User dep = null;
+
             while (resultSet.next()) {
-                int type = resultSet.getInt("IsAdmin");
                 int id = resultSet.getInt("id");
                 String depName = resultSet.getString("depName");
+                int type = resultSet.getInt("IsAdmin");
 
-
-                dep = new User(id, depName, type);
+                User dep = new User(id, depName, type);
                 allDeps.add(dep);
             }
-            return allDeps;
         }
+        return allDeps;
     }
 
     public void updateDep(int chosenUser, String updatedName) throws SQLException {

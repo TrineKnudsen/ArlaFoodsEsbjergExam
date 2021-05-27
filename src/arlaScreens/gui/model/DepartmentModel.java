@@ -27,7 +27,7 @@ public class DepartmentModel {
         allDeps.addAll(logicFacade.getAllDep());
     }
 
-    public ObservableList<User> getAllDep() throws SQLException {
+    public ObservableList<User> getAllDep() {
         return allDeps;
     }
 

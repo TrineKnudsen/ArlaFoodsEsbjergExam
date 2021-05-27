@@ -22,7 +22,37 @@ public class ScreenConfigDAO {
         fileReaderDAO = new FileReaderDAO();
     }
 
-    public List<ScreenCFG> getCFG(int depId) throws SQLException {
+    public ScreenCFG getCFG(int depid) throws SQLException {
+        String sql = "SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, ScreenCFG.GraphType, Department.id, Department.depName, Department.IsAdmin " +
+                "FROM ScreenCFG " +
+                "INNER JOIN Department " +
+                "ON ScreenCFG.depId = Department.id " +
+                "WHERE depId = ?";
+        try (Connection con = connectionPool.checkOut()) {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setInt(1, depid);
+            st.execute();
+
+            ScreenCFG screenCFG = null;
+            ResultSet rs = st.getResultSet();
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                String name = rs.getString("depName");
+                int type = rs.getInt("IsAdmin");
+                int rowIndex = rs.getInt("RowIndex");
+                int colIndex = rs.getInt("ColumnIndex");
+                String url = rs.getString("url");
+                String dataType = rs.getString("GraphType");
+
+                User user = new User(id, name, type);
+                screenCFG = new ScreenCFG(colIndex, rowIndex, dataType, url, user);
+            }
+            return screenCFG;
+        }
+    }
+
+    public List<ScreenCFG> getCFGList(int depId) throws SQLException {
         List<ScreenCFG> screenCFGList = new ArrayList<>();
         String sql = "SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, ScreenCFG.GraphType, Department.id, Department.depName, Department.IsAdmin " +
                 "FROM ScreenCFG " +
