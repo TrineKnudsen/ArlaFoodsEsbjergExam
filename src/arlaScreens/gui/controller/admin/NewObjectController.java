@@ -66,7 +66,7 @@ public class NewObjectController {
             Stage stage = (Stage) closeBtn.getScene().getWindow();
             stage.close();
         }catch (Exception ex){
-            UserError.displayError(ERROR_HEADER, "Can't take you back to previous site");
+            UserError.displayError(ERROR_HEADER, "Can't take you back to previous page");
         }
     }
 }

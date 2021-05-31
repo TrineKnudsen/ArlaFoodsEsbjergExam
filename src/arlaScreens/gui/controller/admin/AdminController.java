@@ -93,6 +93,7 @@ public class AdminController implements Initializable {
                 anchorCFG.getChildren().add(gridPane);
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
             UserError.displayError(ERROR_HEADER, "Couldn't load configuration");
         }
     }

@@ -3,6 +3,7 @@ package arlaScreens.gui.controller.dep;
 import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.bll.util.UserError;
+import arlaScreens.gui.controller.util.WatchService;
 import arlaScreens.gui.model.DepartmentModel;
 import arlaScreens.gui.controller.util.DataFactory;
 import arlaScreens.gui.controller.util.DataType;
@@ -19,7 +20,6 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,30 +32,19 @@ public class DepController implements Initializable {
     List<ScreenCFG> screenCFGList;
     DataFactory dataFactory;
     IDataType iDataType;
-    WatchService watchService = FileSystems.getDefault().newWatchService();
-    Path path = Paths.get("/arlaScreens/files");
-    WatchKey watchKey = path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
 
     @FXML
     private AnchorPane anchorpane;
 
-    public DepController() throws IOException {
+    public DepController() {
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         iDataType = new DataType();
-
-        WatchService watchService;
-        try {
-            watchService = FileSystems.getDefault().newWatchService();
-            Path path = Paths.get("/arlaScreens/files");
-            WatchKey watchKey = path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        WatchService watchService = new WatchService();
+        watchService.start();
 
     }
 
