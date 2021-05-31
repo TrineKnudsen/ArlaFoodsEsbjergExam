@@ -53,9 +53,6 @@ public class FileReaderDAO {
     }
 
     public List<DataPoint> getCSVFile(String url) throws IOException {
-        //WatchService watchService = FileSystems.getDefault().newWatchService();
-        //Path path = Paths.get("/arlaScreens/files");
-        //WatchKey watchKey = path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
 
         List<DataPoint> data = new ArrayList<>();
         CSVReader csvReader = new CSVReader(new FileReader(url));

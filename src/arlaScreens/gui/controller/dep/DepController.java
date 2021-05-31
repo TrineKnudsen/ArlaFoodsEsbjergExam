@@ -10,6 +10,7 @@ import arlaScreens.gui.util.IDataType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.web.WebEngine;
@@ -18,6 +19,7 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +32,31 @@ public class DepController implements Initializable {
     List<ScreenCFG> screenCFGList;
     DataFactory dataFactory;
     IDataType iDataType;
+    WatchService watchService = FileSystems.getDefault().newWatchService();
+    Path path = Paths.get("/arlaScreens/files");
+    WatchKey watchKey = path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
 
     @FXML
     private AnchorPane anchorpane;
 
+    public DepController() throws IOException {
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         iDataType = new DataType();
+
+        WatchService watchService;
+        try {
+            watchService = FileSystems.getDefault().newWatchService();
+            Path path = Paths.get("/arlaScreens/files");
+            WatchKey watchKey = path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void getDep(Department dep) {
@@ -99,5 +119,12 @@ public class DepController implements Initializable {
             UserError.displayError(ERROR_HEADER, "Couldn't set up department");
         }
         return grid;
+    }
+
+    public void handleUpdate(MouseEvent mouseEvent) {
+
+    }
+
+    public void handleReset(MouseEvent mouseEvent) {
     }
 }
