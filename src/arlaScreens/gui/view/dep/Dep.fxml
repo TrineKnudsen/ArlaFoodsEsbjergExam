@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorpane" maxHeight="1080.0" maxWidth="1920.0" onMousePressed="#handleUpdate" onMouseReleased="#handleReset" prefHeight="689.0" prefWidth="926.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.dep.DepController">
+<AnchorPane fx:id="anchorpane" maxHeight="1080.0" maxWidth="1920.0"  prefHeight="689.0" prefWidth="926.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.dep.DepController">
    <children>
       <GridPane fx:id="grid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="689.0" prefWidth="926.0">
         <columnConstraints>

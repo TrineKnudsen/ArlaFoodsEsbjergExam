@@ -32,20 +32,18 @@ public class DepController implements Initializable {
     List<ScreenCFG> screenCFGList;
     DataFactory dataFactory;
     IDataType iDataType;
+    WatchService watchService = new WatchService();
 
     @FXML
     private AnchorPane anchorpane;
 
     public DepController() {
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         iDataType = new DataType();
-        WatchService watchService = new WatchService();
         watchService.start();
-
     }
 
     public void getDep(Department dep) {
@@ -108,12 +106,5 @@ public class DepController implements Initializable {
             UserError.displayError(ERROR_HEADER, "Couldn't set up department");
         }
         return grid;
-    }
-
-    public void handleUpdate(MouseEvent mouseEvent) {
-
-    }
-
-    public void handleReset(MouseEvent mouseEvent) {
     }
 }

@@ -30,7 +30,6 @@ public class NewObjectController {
     private final String ERROR_HEADER = "Error occurred";
     private AdminModel adminModel;
     private DepartmentModel departmentModel;
-    private CustomError error = new CustomError();
 
     public NewObjectController(){
         try {

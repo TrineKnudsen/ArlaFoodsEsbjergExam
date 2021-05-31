@@ -70,6 +70,21 @@ public class AdminController implements Initializable {
         }
     }
 
+    private void openScreen(String url, String windowName) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(url));
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle(windowName);
+            stage.setScene(new Scene(parent));
+            stage.setResizable(false);
+            stage.show();
+        } catch (Exception ex) {
+            UserError.displayError(ERROR_HEADER, "Can't take you to this window");
+        }
+    }
+
     @FXML
     private void getSelectedCFG(MouseEvent event) {
         try {
@@ -96,6 +111,11 @@ public class AdminController implements Initializable {
             ex.printStackTrace();
             UserError.displayError(ERROR_HEADER, "Couldn't load configuration");
         }
+    }
+
+    @FXML
+    private void handleCreateDep(ActionEvent actionEvent) {
+        openScreen("/arlaScreens/gui/view/admin/NewObject.fxml", "Add new department or admin");
     }
 
     @FXML
@@ -126,26 +146,6 @@ public class AdminController implements Initializable {
         } catch (Exception e) {
             UserError.displayError(ERROR_HEADER, e.getMessage());
         }
-    }
-
-    private void openScreen(String url, String windowName) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource(url));
-            Parent parent = loader.load();
-            Stage stage = new Stage();
-            stage.setTitle(windowName);
-            stage.setScene(new Scene(parent));
-            stage.setResizable(false);
-            stage.show();
-        } catch (Exception ex) {
-            UserError.displayError(ERROR_HEADER, "Can't take you to this window");
-        }
-    }
-
-    @FXML
-    private void handleCreateDep(ActionEvent actionEvent) {
-        openScreen("/arlaScreens/gui/view/admin/NewObject.fxml", "Add new department or admin");
     }
 
     @FXML
