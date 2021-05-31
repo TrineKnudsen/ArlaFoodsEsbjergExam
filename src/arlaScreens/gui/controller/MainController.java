@@ -55,7 +55,7 @@ public class MainController implements Initializable {
             ((Node)event.getSource()).getScene().getWindow().hide();
             Stage primaryStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
-            Parent root = loader.load(getClass().getResource("/arlaScreens/gui/view/dep/Dep1.fxml").openStream());
+            Parent root = loader.load(getClass().getResource("/arlaScreens/gui/view/dep/Dep.fxml").openStream());
             DepController depController = loader.getController();
             depController.getDep(dep);
             Scene scene = new Scene(root);

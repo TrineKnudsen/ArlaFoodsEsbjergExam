@@ -14,12 +14,10 @@ import java.util.List;
 
 public class ScreenConfigDAO {
 
-    FileReaderDAO fileReaderDAO;
     private final JDBCConnectionPool connectionPool;
 
     public ScreenConfigDAO() throws IOException {
         connectionPool = JDBCConnectionPool.getInstance();
-        fileReaderDAO = new FileReaderDAO();
     }
 
     public ScreenCFG getCFG(int depid) throws SQLException {
@@ -54,7 +52,8 @@ public class ScreenConfigDAO {
 
     public List<ScreenCFG> getCFGList(int depId) throws SQLException {
         List<ScreenCFG> screenCFGList = new ArrayList<>();
-        String sql = "SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, ScreenCFG.GraphType, Department.id, Department.depName, Department.IsAdmin " +
+        String sql = "SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, " +
+                "ScreenCFG.GraphType, Department.id, Department.depName, Department.IsAdmin " +
                 "FROM ScreenCFG " +
                 "INNER JOIN Department " +
                 "ON ScreenCFG.depId = Department.id " +

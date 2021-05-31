@@ -1,7 +1,10 @@
 package arlaScreens.bll;
 
-import arlaScreens.be.*;
-import arlaScreens.dal.dao.*;
+import arlaScreens.be.Admin;
+import arlaScreens.be.Department;
+import arlaScreens.be.ScreenCFG;
+import arlaScreens.dal.DalManager;
+import arlaScreens.dal.IDalManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -9,67 +12,59 @@ import java.util.List;
 
 public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
 
-    private LoginDAO loginDAO;
-    private DepartmentDAO departmentDAO;
-    private AdminDAO adminDAO;
-    private ScreenConfigDAO cfgDAO;
-    private FileReaderDAO fileReaderDAO;
+    IDalManager dalManager;
 
     public ArlaFoodsManager() throws IOException {
-        loginDAO = new LoginDAO();
-        departmentDAO = new DepartmentDAO();
-        adminDAO = new AdminDAO();
-        cfgDAO = new ScreenConfigDAO();
-        fileReaderDAO = new FileReaderDAO();
+        dalManager = new DalManager();
     }
 
     @Override
     public List<Department> getAllDep() throws SQLException {
-        return departmentDAO.getAllDep();
+        return dalManager.getAllDep();
     }
 
     @Override
     public void updateDep(int chosenDep, String updatedDep) throws SQLException {
-        departmentDAO.updateDep(chosenDep, updatedDep);
+        dalManager.updateDep(chosenDep, updatedDep);
     }
 
     @Override
     public Department createDep(String username, String password, String depName) throws SQLException {
-        return departmentDAO.createDep(username, password, depName);
+        return dalManager.createDep(username, password, depName);
     }
 
     @Override
     public Department deleteDep(Department department) throws SQLException {
-        return departmentDAO.deleteDepartment(department);
+        return dalManager.deleteDepartment(department);
     }
 
     @Override
     public Admin createAdmin(String username, String password) throws SQLException {
-        return adminDAO.createAdmin(username, password);
+        return dalManager.createAdmin(username, password);
     }
 
     @Override
     public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String imgUrl, String fileName) throws SQLException {
-        return cfgDAO.createCFG(depId, rowIndex, colIndex, imgUrl, fileName);
+        return dalManager.createCFG(depId, rowIndex, colIndex, imgUrl, fileName);
     }
 
     @Override
     public List<ScreenCFG> getScreenCFG(int depId) throws SQLException, IOException {
-        return cfgDAO.getCFGList(depId);
+        return dalManager.getCFGList(depId);
     }
 
     @Override
     public Admin getAdminLogin(String username, String password) throws SQLException {
-        return loginDAO.getAdminLogin(username, password);
+        return dalManager.getAdminLogin(username, password);
     }
 
     @Override
     public ScreenCFG getCFG(int depid) throws SQLException {
-        return cfgDAO.getCFG(depid);
+        return dalManager.getCFG(depid);
     }
 
     @Override
     public Department getUserLogin(String username, String password) throws SQLException {
-        return loginDAO.getDepLogin(username, password);
+        return dalManager.getDepLogin(username, password);
     }
 }

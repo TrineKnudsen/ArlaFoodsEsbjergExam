@@ -34,7 +34,7 @@ public class AdminDAO {
         }
     }
 
-    private int getNextAvailableAdmintID() throws SQLException {
+    public int getNextAvailableAdmintID() throws SQLException {
         List<Admin> allAdmins = getAllAdmin();
         if (allAdmins == null || allAdmins.isEmpty()) {
             return 1;

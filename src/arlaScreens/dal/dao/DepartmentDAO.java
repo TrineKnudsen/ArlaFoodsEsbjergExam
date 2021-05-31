@@ -65,31 +65,6 @@ public class DepartmentDAO {
         }
     }
 
-    /**public User createDep(String username, String password, String depName) throws SQLException {
-        String sql = "INSERT INTO Login(username, password) VALUES(?,?);";
-        String sql2 = "INSERT INTO Department(depName, depLoginId) VALUES(?, (SELECT MAX(id) FROM [Login]));";
-        try (Connection con = connectionPool.checkOut()) {
-            PreparedStatement st = con.prepareStatement(sql);
-            st.setString(1, username);
-            st.setString(2, password);
-            st.executeUpdate();
-
-            PreparedStatement st2 = con.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
-            st2.setString(1, depName);
-            st2.executeUpdate();
-
-//            User dep = null;
-//            ResultSet rs = st2.getGeneratedKeys();
-            int id = getNextAvailableDepartmentID();
-//            while (rs.next()){
-//                id = rs.getInt(1);
-//
-//                dep = new User(id, depName, 0);
-//            }
-            return new User(id, depName, 0);
-        }
-    }**/
-
     private int getNextAvailableDepartmentID() throws SQLException {
         List<Department> allDepartments = getAllDep();
         if (allDepartments == null || allDepartments.isEmpty()) {

@@ -1,8 +1,8 @@
-package arlaScreens.gui.util;
+package arlaScreens.gui.controller.util;
 
 import arlaScreens.be.DataPoint;
 import arlaScreens.be.ScreenCFG;
-import arlaScreens.dal.dao.FileReaderDAO;
+import arlaScreens.bll.util.FileReader;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,16 +14,16 @@ import java.util.List;
 
 public class DataType implements IDataType {
 
-    FileReaderDAO fileReaderDAO;
+    FileReader fileReader;
     private List<DataPoint> dataPoints;
 
     public DataType(){
-        fileReaderDAO = new FileReaderDAO();
+        fileReader = new FileReader();
     }
 
     @Override
     public BarChart drawExcel(ScreenCFG screenCFG) throws IOException {
-        dataPoints = fileReaderDAO.getExcelFile(screenCFG.getUrl());
+        dataPoints = fileReader.getExcelFile(screenCFG.getUrl());
         CategoryAxis xAxis = new CategoryAxis();
 
         NumberAxis yAxis = new NumberAxis();
@@ -43,7 +43,7 @@ public class DataType implements IDataType {
 
     @Override
     public Chart drawLineCSV(ScreenCFG screenCFG) throws IOException, CsvValidationException {
-        dataPoints = fileReaderDAO.getCSVFile(screenCFG.getUrl());
+        dataPoints = fileReader.getCSVFile(screenCFG.getUrl());
         CategoryAxis xAxis = new CategoryAxis();
 
         NumberAxis yAxis = new NumberAxis();
@@ -65,7 +65,7 @@ public class DataType implements IDataType {
 
     @Override
     public Chart drawPieCSV(ScreenCFG screenCFG) throws IOException {
-        dataPoints = fileReaderDAO.getCSVFile(screenCFG.getUrl());
+        dataPoints = fileReader.getCSVFile(screenCFG.getUrl());
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
         for (DataPoint dataPoint : dataPoints) {
             pieChartData.add(new PieChart.Data(dataPoint.getKey(), dataPoint.getValue()));
@@ -79,7 +79,7 @@ public class DataType implements IDataType {
 
     @Override
     public File getWebPage(ScreenCFG screenCFG) {
-        return fileReaderDAO.getWebPage(screenCFG.getUrl());
+        return fileReader.getWebPage(screenCFG.getUrl());
     }
 }
 

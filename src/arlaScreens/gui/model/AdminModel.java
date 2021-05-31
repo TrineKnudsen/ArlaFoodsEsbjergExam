@@ -28,8 +28,4 @@ public class AdminModel {
     public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String imgUrl, String fileName) throws SQLException {
         return logicFacade.createCFG(depId, rowIndex, colIndex, imgUrl, fileName);
     }
-
-    public ScreenCFG getCFG(int depid) throws SQLException {
-        return logicFacade.getCFG(depid);
-    }
 }

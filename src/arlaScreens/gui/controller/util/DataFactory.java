@@ -1,4 +1,4 @@
-package arlaScreens.gui.util;
+package arlaScreens.gui.controller.util;
 
 import arlaScreens.be.ScreenCFG;
 import com.opencsv.exceptions.CsvValidationException;
