@@ -21,6 +21,12 @@ public class DataType implements IDataType {
         fileReader = new FileReader();
     }
 
+    /**
+     * Metode til at bruge en excel fil til at bygge et barchart.
+     * @param screenCFG
+     * @return
+     * @throws IOException
+     */
     @Override
     public BarChart drawExcel(ScreenCFG screenCFG) throws IOException {
         dataPoints = fileReader.getExcelFile(screenCFG.getUrl());
@@ -41,6 +47,13 @@ public class DataType implements IDataType {
         return barChart;
     }
 
+    /**
+     * Metode til at bruge en CSV-fil til at bygge et linechart.
+     * @param screenCFG
+     * @return
+     * @throws IOException
+     * @throws CsvValidationException
+     */
     @Override
     public Chart drawLineCSV(ScreenCFG screenCFG) throws IOException, CsvValidationException {
         dataPoints = fileReader.getCSVFile(screenCFG.getUrl());
@@ -63,6 +76,12 @@ public class DataType implements IDataType {
         return lineChart;
     }
 
+    /**
+     * Metode til at bruge en CSV fil til at bygge et piechart.
+     * @param screenCFG
+     * @return
+     * @throws IOException
+     */
     @Override
     public Chart drawPieCSV(ScreenCFG screenCFG) throws IOException {
         dataPoints = fileReader.getCSVFile(screenCFG.getUrl());
@@ -77,6 +96,11 @@ public class DataType implements IDataType {
         return pieChart;
     }
 
+    /**
+     * Metode til at returnere html-filen.
+     * @param screenCFG
+     * @return
+     */
     @Override
     public File getWebPage(ScreenCFG screenCFG) {
         return fileReader.getWebPage(screenCFG.getUrl());
