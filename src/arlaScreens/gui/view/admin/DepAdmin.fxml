@@ -18,7 +18,7 @@
 
 <AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="455.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arlaScreens.gui.controller.admin.AdminController">
     <children>
-        <ImageView fitHeight="455.0" fitWidth="624.0" opacity="0.9" pickOnBounds="true" preserveRatio="true" styleClass="bgImg">
+        <ImageView fitHeight="455.0" fitWidth="624.0" opacity="0.6" pickOnBounds="true" preserveRatio="true" styleClass="bgImg">
             <image>
                 <Image url="@/pictures/ArlaLogo.png" />
             </image>
