@@ -61,6 +61,10 @@ public class DepController implements Initializable {
         }
     }
 
+    /**
+     * Metode der opsætter view til den afdeling brugeren logger ind på
+     * @return
+     */
     private GridPane depSetup(){
         anchorpane.setMaxHeight(689);
         GridPane grid = new GridPane();

@@ -70,6 +70,11 @@ public class AdminController implements Initializable {
         }
     }
 
+    /**
+     * Metode til at åbne en ny skærm
+     * @param url
+     * @param windowName
+     */
     private void openScreen(String url, String windowName) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -84,6 +89,11 @@ public class AdminController implements Initializable {
             UserError.displayError(ERROR_HEADER, "Can't take you to this window");
         }
     }
+
+    /**
+     * Metode der viser den valgte skærmkonfiguration
+     * @param event
+     */
 
     @FXML
     private void getSelectedCFG(MouseEvent event) {
@@ -113,11 +123,20 @@ public class AdminController implements Initializable {
         }
     }
 
+    /**
+     * Metode der benyttes ved tryk på knappen til at lave en ny afdeling
+     * @param actionEvent
+     */
+
     @FXML
     private void handleCreateDep(ActionEvent actionEvent) {
         openScreen("/arlaScreens/gui/view/admin/NewObject.fxml", "Add new department or admin");
     }
 
+    /**
+     * Metode der benyttes ved tryk på knappen til at opdatere en afdeling
+     * @param actionEvent
+     */
     @FXML
     private void handleUpdateDepartment(ActionEvent actionEvent) {
         try {
@@ -131,6 +150,11 @@ public class AdminController implements Initializable {
             UserError.displayError(ERROR_HEADER, "Choose department to edit");
         }
     }
+
+    /**
+     * Metode der benyttes ved tryk på knappen til at slette en department
+     * @param actionEvent
+     */
 
     @FXML
     private void handleDeleteDepartment(ActionEvent actionEvent) {
@@ -148,6 +172,10 @@ public class AdminController implements Initializable {
         }
     }
 
+    /**
+     * Metode der benyttes ved tryk på at redigere en skærmkonfiguration
+     * @param event
+     */
     @FXML
     private void handleOpenCFG(ActionEvent event) {
         Department chosenDep = deplst.getSelectionModel().getSelectedItem();
@@ -156,6 +184,10 @@ public class AdminController implements Initializable {
         } else UserError.displayError(ERROR_HEADER, "Choose department to add screen configuration to");
     }
 
+    /**
+     * Metode der benyttes ved tryk på log ud knapper
+     * @param actionEvent
+     */
     @FXML
     private void handleLogout(ActionEvent actionEvent) {
         try {
@@ -172,6 +204,10 @@ public class AdminController implements Initializable {
         }
     }
 
+    /**
+     * Metode der benyttes ved tryk på exit
+     * @param actionEvent
+     */
     @FXML
     private void handleExit(ActionEvent actionEvent) {
         Platform.exit();

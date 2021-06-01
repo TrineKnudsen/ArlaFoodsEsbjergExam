@@ -17,6 +17,13 @@ public class AdminDAO {
         connectionPool = JDBCConnectionPool.getInstance();
     }
 
+    /**
+     * Metode der trækker data fra databasen, til at lave en ny admin
+     * @param username
+     * @param password
+     * @return
+     * @throws SQLException
+     */
     public Admin createAdmin(String username, String password) throws SQLException {
         int isAdmin = 1;
         int id = getNextAvailableAdmintID();
@@ -33,6 +40,12 @@ public class AdminDAO {
             return admin;
         }
     }
+
+    /**
+     * Metode der giver en ny admin det næste tilgængelige ID
+     * @return
+     * @throws SQLException
+     */
 
     public int getNextAvailableAdmintID() throws SQLException {
         List<Admin> allAdmins = getAllAdmin();
@@ -51,6 +64,11 @@ public class AdminDAO {
         return id;
     }
 
+    /**
+     * Metode der returnerer en liste af alle admins
+     * @return
+     * @throws SQLException
+     */
     public List<Admin> getAllAdmin() throws SQLException {
         List<Admin> allAdmins = new ArrayList<>();
         Connection connection = connectionPool.checkOut();

@@ -63,6 +63,10 @@ public class CFGController implements Initializable {
         return dep;
     }
 
+    /**
+     * Metode der benyttes når admin skal vælge fil til skærmkonfiguration
+     * @param event
+     */
     @FXML
     private void handleChoosefile(ActionEvent event) {
         try {
@@ -86,6 +90,10 @@ public class CFGController implements Initializable {
         }
     }
 
+    /**
+     * Metode der gemmer en skærmkonfiguration
+     * @param event
+     */
     @FXML
     private void handleSave(ActionEvent event) {
         try {
@@ -103,6 +111,10 @@ public class CFGController implements Initializable {
         }
     }
 
+    /**
+     * Metode, der får brugeren tilbage til forrige vindue
+     * @param actionEvent
+     */
     @FXML
     private void handleBack(ActionEvent actionEvent){
         try {
@@ -114,6 +126,10 @@ public class CFGController implements Initializable {
         }
     }
 
+    /**
+     * Metode der logger brugeren ud
+     * @param actionEvent
+     */
     @FXML
     private void handleLogout(ActionEvent actionEvent){
         try {
@@ -131,6 +147,10 @@ public class CFGController implements Initializable {
 
     }
 
+    /**
+     * Metode der lukker programmet
+     * @param actionEvent
+     */
     @FXML
     private void handleClose(ActionEvent actionEvent) {
         Platform.exit();

@@ -40,6 +40,10 @@ public class NewObjectController {
         }
     }
 
+    /**
+     * Metode der gemmer en ny admin eller afdeling
+     * @param actionEvent
+     */
     @FXML
     private void handleSaveUser(ActionEvent actionEvent) {
         try {
@@ -59,6 +63,10 @@ public class NewObjectController {
         }
     }
 
+    /**
+     * Metode, der får brugeren tilbage til forrige vindue
+     * @param actionEvent
+     */
     @FXML
     private void handleBack(ActionEvent actionEvent) {
         try {

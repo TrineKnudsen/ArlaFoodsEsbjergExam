@@ -18,6 +18,14 @@ public class LoginDAO {
         connectionPool = JDBCConnectionPool.getInstance();
     }
 
+    /**
+     * Metode til at logge ind på en afdeling
+     * @param username
+     * @param password
+     * @return
+     * @throws SQLException
+     */
+
     public Department getDepLogin(String username, String password) throws SQLException{
         String sql = "SELECT id, depName, IsAdmin " +
                 "FROM Department " +
@@ -39,6 +47,14 @@ public class LoginDAO {
             return department;
         }
     }
+
+    /**
+     * Metode der logger en admin ind
+     * @param username
+     * @param password
+     * @return
+     * @throws SQLException
+     */
 
     public Admin getAdminLogin(String username, String password) throws SQLException {
         String sqlAdmin = "SELECT id, IsAdmin FROM Admin WHERE Username = ? AND Password = ?";

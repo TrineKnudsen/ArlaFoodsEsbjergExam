@@ -20,6 +20,13 @@ public class ScreenConfigDAO {
         connectionPool = JDBCConnectionPool.getInstance();
     }
 
+    /**
+     * Metode der returnerer en skærmkonfiguration
+     * @param depid
+     * @return
+     * @throws SQLException
+     */
+
     public ScreenCFG getCFG(int depid) throws SQLException {
         String sql = "SELECT ScreenCFG.url, ScreenCFG.ColumnIndex, ScreenCFG.RowIndex, ScreenCFG.GraphType, Department.id, Department.depName, Department.IsAdmin " +
                 "FROM ScreenCFG " +
@@ -49,6 +56,13 @@ public class ScreenConfigDAO {
             return screenCFG;
         }
     }
+
+    /**
+     * Metode det returnerer en liste af skærmkonfigurationer
+     * @param depId
+     * @return
+     * @throws SQLException
+     */
 
     public List<ScreenCFG> getCFGList(int depId) throws SQLException {
         List<ScreenCFG> screenCFGList = new ArrayList<>();
@@ -83,6 +97,17 @@ public class ScreenConfigDAO {
         }
         return screenCFGList;
     }
+
+    /**
+     * Metode der laver en ny skærmkonfiguration
+     * @param depId
+     * @param rowIndex
+     * @param colIndex
+     * @param imgUrl
+     * @param fileName
+     * @return
+     * @throws SQLException
+     */
 
     public ScreenCFG createCFG(int depId, int rowIndex, int colIndex, String imgUrl, String fileName) throws SQLException {
         try (Connection con = connectionPool.checkOut()) {

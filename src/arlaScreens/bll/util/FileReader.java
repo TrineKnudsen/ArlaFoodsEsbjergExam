@@ -18,6 +18,13 @@ import java.util.List;
 
 public class FileReader {
 
+    /**
+     * Metode til at læse en Excel fil
+     * @param url
+     * @return
+     * @throws IOException
+     */
+
     public List<DataPoint> getExcelFile(String url) throws IOException {
         ArrayList<DataPoint> data = new ArrayList<>();
 
@@ -55,6 +62,13 @@ public class FileReader {
         return data;
     }
 
+    /**
+     * Metode til at læse en CSV fil
+     * @param url
+     * @return
+     * @throws IOException
+     */
+
     public List<DataPoint> getCSVFile(String url) throws IOException {
         List<DataPoint> data = new ArrayList<>();
         CSVReader csvReader = new CSVReader(new java.io.FileReader(url));
@@ -76,6 +90,12 @@ public class FileReader {
         csvReader.close();
         return data;
     }
+
+    /**
+     * Metode til at læse en hjemmeside
+     * @param url
+     * @return
+     */
 
     public File getWebPage(String url) {
         File htmlFile = new File(url);

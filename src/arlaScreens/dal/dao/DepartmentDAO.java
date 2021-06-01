@@ -17,6 +17,11 @@ public class DepartmentDAO {
         connectionPool = JDBCConnectionPool.getInstance();
     }
 
+    /**
+     * Metode der returnerer en liste af alle afdelinger
+     * @return
+     * @throws SQLException
+     */
     public List<Department> getAllDep() throws SQLException {
         List<Department> allDeps = new ArrayList<>();
         Connection connection = connectionPool.checkOut();
@@ -36,6 +41,12 @@ public class DepartmentDAO {
         return allDeps;
     }
 
+    /**
+     * Metode der trækker data fra databasen for at opdatere en afdeling
+     * @param chosenUser
+     * @param updatedName
+     * @throws SQLException
+     */
     public void updateDep(int chosenUser, String updatedName) throws SQLException {
         try (Connection con = connectionPool.checkOut()) {
             String sql = "UPDATE Department SET depName = ? WHERE id = ?;";
@@ -46,6 +57,15 @@ public class DepartmentDAO {
             preparedStatement.execute();
         }
     }
+
+    /**
+     * Metode der trækker data fra databasen for at lave en ny afdeling
+     * @param username
+     * @param password
+     * @param depName
+     * @return
+     * @throws SQLException
+     */
 
     public Department createDep(String username, String password, String depName) throws SQLException {
         int isAdmin = 0;
@@ -65,6 +85,12 @@ public class DepartmentDAO {
         }
     }
 
+    /**
+     * Metode, der giver en ny afdeling det næste tilgængelige ID
+     * @return
+     * @throws SQLException
+     */
+
     public int getNextAvailableDepartmentID() throws SQLException {
         List<Department> allDepartments = getAllDep();
         if (allDepartments == null || allDepartments.isEmpty()) {
@@ -81,6 +107,13 @@ public class DepartmentDAO {
         }
         return id;
     }
+
+    /**
+     * Metode der trækker data fra databasen til at slette en afdeling
+     * @param depToDelete
+     * @return
+     * @throws SQLException
+     */
 
     public Department deleteDepartment(Department depToDelete) throws SQLException {
         try (Connection con = connectionPool.checkOut()){
