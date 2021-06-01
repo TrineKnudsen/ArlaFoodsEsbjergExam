@@ -65,7 +65,7 @@ public class DepartmentDAO {
         }
     }
 
-    private int getNextAvailableDepartmentID() throws SQLException {
+    public int getNextAvailableDepartmentID() throws SQLException {
         List<Department> allDepartments = getAllDep();
         if (allDepartments == null || allDepartments.isEmpty()) {
             return 1;

@@ -49,7 +49,7 @@ public class ArlaFoodsManager implements IArlaFoodsLogicFacade {
     }
 
     @Override
-    public List<ScreenCFG> getScreenCFG(int depId) throws SQLException, IOException {
+    public List<ScreenCFG> getScreenCFG(int depId) throws SQLException {
         return dalManager.getCFGList(depId);
     }
 

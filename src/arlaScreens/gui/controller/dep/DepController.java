@@ -3,11 +3,10 @@ package arlaScreens.gui.controller.dep;
 import arlaScreens.be.Department;
 import arlaScreens.be.ScreenCFG;
 import arlaScreens.bll.util.UserError;
-import arlaScreens.gui.controller.util.WatchService;
-import arlaScreens.gui.model.DepartmentModel;
-import arlaScreens.gui.controller.util.DataFactory;
 import arlaScreens.gui.controller.util.DataType;
 import arlaScreens.gui.controller.util.IDataType;
+import arlaScreens.gui.controller.util.WatchService;
+import arlaScreens.gui.model.DepartmentModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -30,7 +29,6 @@ public class DepController implements Initializable {
     private final String ERROR_HEADER = "Error occurred";
     DepartmentModel depModel;
     List<ScreenCFG> screenCFGList;
-    DataFactory dataFactory;
     IDataType iDataType;
     WatchService watchService = new WatchService();
 
@@ -49,7 +47,6 @@ public class DepController implements Initializable {
     public void getDep(Department dep) {
         try {
             iDataType = new DataType();
-            dataFactory = new DataFactory();
             depModel = new DepartmentModel();
             screenCFGList = new ArrayList<>();
             screenCFGList.addAll(depModel.getScreenCFGS(dep.getId()));

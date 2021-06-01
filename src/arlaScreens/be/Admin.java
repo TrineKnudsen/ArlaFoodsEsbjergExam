@@ -31,4 +31,9 @@ public class Admin {
     public void setIsAdmin(int isAdmin) {
         this.isAdmin = isAdmin;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
